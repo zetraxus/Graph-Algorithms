@@ -7,16 +7,22 @@
 
 #include <vector>
 
+typedef std::pair<unsigned, unsigned > uuPair;
+
 class Graph {
 
-    unsigned vertex;
-    unsigned edge;
-    std::vector<std::vector<int> > edgesList;
+    unsigned verticesCount;
+    unsigned edgesCount;
+    std::vector<std::vector<uuPair> > edgesList;
+
+public:
+    void setVerticesCount(unsigned int verticesCount);
+    void setEdgesCount(unsigned int edgesCount);
 
 public:
     Graph();
-    Graph(unsigned vertex, unsigned edge, std::vector<std::vector<int> > edgesList);
-    void addEdge(unsigned v1, unsigned v2);
+
+    void addEdge(unsigned v1, unsigned v2, unsigned value);
 };
 
 

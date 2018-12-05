@@ -3,4 +3,4 @@ project(AAL)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(AAL main.cpp)
+add_executable(AAL main.cpp in_out.cpp in_out.h)

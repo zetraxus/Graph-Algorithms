@@ -1,6 +1,10 @@
 #include <iostream>
+#include "in_out.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+
+    Graph* graph = new Graph();
+    read_data(graph);
+
     return 0;
 }
