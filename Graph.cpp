@@ -3,13 +3,14 @@
 //
 
 #include "Graph.h"
+#include "Vertex.h"
 
 Graph::Graph(){
     verticesCount = 0;
     edgesCount = 0;
 }
 
-void Graph::setVerticesCount(unsigned int verticesCount) {
+void Graph::setVerticesCount(unsigned verticesCount) {
     this->verticesCount = verticesCount;
     vertices.resize(verticesCount);
 
@@ -28,6 +29,10 @@ void Graph::addEdge(unsigned v1, unsigned v2, unsigned value) {
     ++edgesCount;
 }
 
-unsigned int Graph::getVerticesCount() const {
+unsigned Graph::getVerticesCount() const {
     return verticesCount;
+}
+
+Vertex* Graph::getVertex(int index){
+    return vertices[index];
 }

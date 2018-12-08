@@ -8,6 +8,6 @@
 #include "Graph.h"
 
 void preDFS (Graph* graph);
-//void DFS (Graph* graph, unsigned vertex);
+void DFS (Graph* graph, Vertex* vertex, const unsigned connectedComponents);
 
 #endif //AAL_ALGORITHMS_H

@@ -13,7 +13,7 @@ class Graph {
 
     unsigned verticesCount;
     unsigned edgesCount;
-    unsigned connectedComponents = 0;
+    int connectedComponents = -1;
 
     std::vector<Vertex*> vertices;
 
@@ -25,7 +25,10 @@ public:
 
     void setVerticesCount(unsigned int verticesCount);
 
-    unsigned int getVerticesCount() const;
+    unsigned getVerticesCount() const;
+
+    Vertex* getVertex(int index);
+
 };
 
 
