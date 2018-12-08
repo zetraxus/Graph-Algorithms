@@ -11,20 +11,19 @@ Graph::Graph(){
 
 void Graph::setVerticesCount(unsigned int verticesCount) {
     this->verticesCount = verticesCount;
-    edgesList.resize(verticesCount);
-}
-
-void Graph::setEdgesCount(unsigned int edgesCount) {
-    this->edgesCount = edgesCount;
+    vertices.resize(verticesCount);
 }
 
 void Graph::addEdge(unsigned v1, unsigned v2, unsigned value) {
-    uuPair pair1, pair2;    // undirected graph
-    pair1 = std::make_pair(v1, value);
-    pair1 = std::make_pair(v2, value);
+    Vertex* vertex1 = vertices[v1];
+    Vertex* vertex2 = vertices[v2];
 
-    edgesList[v1].push_back(pair2);
-    edgesList[v2].push_back(pair1);
+    vertex1->addEdge(vertex2, value);
+    vertex2->addEdge(vertex1, value); //undirected graph
 
     ++edgesCount;
+}
+
+unsigned int Graph::getVerticesCount() const {
+    return verticesCount;
 }

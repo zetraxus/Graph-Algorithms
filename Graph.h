@@ -6,23 +6,26 @@
 #define AAL_GRAPH_H
 
 #include <vector>
-
-typedef std::pair<unsigned, unsigned > uuPair;
+#include "Vertex.h"
+//typedef std::pair<unsigned, unsigned > uuPair;
 
 class Graph {
 
     unsigned verticesCount;
     unsigned edgesCount;
-    std::vector<std::vector<uuPair> > edgesList;
+    unsigned connectedComponents = 0;
+
+    std::vector<Vertex*> vertices;
 
 public:
-    void setVerticesCount(unsigned int verticesCount);
-    void setEdgesCount(unsigned int edgesCount);
 
-public:
     Graph();
 
     void addEdge(unsigned v1, unsigned v2, unsigned value);
+
+    void setVerticesCount(unsigned int verticesCount);
+
+    unsigned int getVerticesCount() const;
 };
 
 

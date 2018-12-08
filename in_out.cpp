@@ -11,7 +11,6 @@ void read_data(Graph *graph) {
     std::cin >> vertices >> edges;
 
     graph->setVerticesCount(vertices);
-    graph->setEdgesCount(edges);
 
     for (int i = 0; i < edges; ++i) {
         std::cin >> v1 >> v2 >> edgeValue;
