@@ -21,6 +21,11 @@ public:
     Vertex(unsigned int id);
 
     void addEdge (Vertex* vertex, unsigned value);
+
+    unsigned getDegree(){
+        return connectedVertex.size();
+    }
+
 };
 
 #endif //AAL_VERTEX_H

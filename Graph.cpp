@@ -12,6 +12,10 @@ Graph::Graph(){
 void Graph::setVerticesCount(unsigned int verticesCount) {
     this->verticesCount = verticesCount;
     vertices.resize(verticesCount);
+
+    for (int i = 0; i < verticesCount; ++i){
+        vertices[i] = new Vertex(i);
+    }
 }
 
 void Graph::addEdge(unsigned v1, unsigned v2, unsigned value) {
