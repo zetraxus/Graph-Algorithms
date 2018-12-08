@@ -11,6 +11,6 @@ void DFS(Graph *graph);
 
 void DFSVisit(Graph *graph, Vertex *vertex, const unsigned connectedComponents);
 
-unsigned BFS(Graph *graph, Vertex* start);
+unsigned BFS(ConnectedComponent *connectedComponent, Vertex* start);
 
 #endif //AAL_ALGORITHMS_H

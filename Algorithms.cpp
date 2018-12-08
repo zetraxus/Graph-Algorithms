@@ -18,7 +18,7 @@ void DFS(Graph *graph) {
         }
     }
 
-    graph->setConnectedComponents(connectedComponents+1);
+    graph->setConnectedComponentsCount(connectedComponents+1);
 
     for (unsigned i = 0; i < graph->getVerticesCount(); ++i) {
         graph->addToConnectedComponentList(graph->getVertex(i), graph->getVertex(i)->getConnectedComponentID());
@@ -35,8 +35,8 @@ void DFSVisit(Graph *graph, Vertex *vertex, const unsigned connectedComponents) 
     vertex->setColour(Vertex::BLACK);
 }
 
-unsigned BFS(Graph *graph, Vertex* start) {
-    
+unsigned BFS(ConnectedComponent *connectedComponent, Vertex* start) {
+
 }
 
 

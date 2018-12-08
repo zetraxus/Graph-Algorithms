@@ -9,10 +9,11 @@ void computeConnectedComponents(Graph* graph){
 
 void computeDiameterGraph(Graph* graph){
 
-    for(unsigned i = 0 ; i < graph->getConnectedComponents(); ++i){
+    for(unsigned i = 0 ; i < graph->getConnectedComponentsCount(); ++i){
         unsigned diameter = 0;
+        ConnectedComponent* analyzed = graph-> getConnectedComponentsVector(i);
         for (unsigned j = 0; j < graph-> getConnectedComponentsSize(i); ++j){
-            unsigned candidate = BFS(graph, graph->getVertexFromConnectedComponentsList(i,j));
+            unsigned candidate = BFS(analyzed, analyzed->getVertex(j));
             if (candidate > diameter)
                 diameter = candidate;
         }

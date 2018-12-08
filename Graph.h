@@ -8,15 +8,15 @@
 #include <vector>
 #include <iostream>
 #include "Vertex.h"
+#include "ConnectedComponent.h"
 
 class Graph {
 
     unsigned verticesCount;
     unsigned edgesCount;
-    unsigned connectedComponents = 0;
 
     std::vector<Vertex*> vertices;
-    std::vector<std::vector<Vertex*> > connectedComponentsList;
+    std::vector<ConnectedComponent* > connectedComponentsVector;
 
 public:
 
@@ -30,15 +30,17 @@ public:
 
     Vertex* getVertex(int index);
 
-    void setConnectedComponents(int connectedComponents);
+    void setConnectedComponentsCount(unsigned connectedComponents);
 
     void addToConnectedComponentList(Vertex* vertex, unsigned connectedComponentID);
 
-    unsigned getConnectedComponents() const;
+    unsigned long getConnectedComponentsCount() const;
 
-    Vertex* getVertexFromConnectedComponentsList(unsigned connectedComponent, unsigned index);
+//    Vertex* getVertexFromConnectedComponentsList(unsigned connectedComponent, unsigned index);
 
     unsigned getConnectedComponentsSize(unsigned index) const;
+
+    ConnectedComponent* getConnectedComponentsVector(unsigned index) const;
 };
 
 
