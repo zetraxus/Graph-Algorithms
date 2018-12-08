@@ -6,16 +6,17 @@
 #define AAL_GRAPH_H
 
 #include <vector>
+#include <iostream>
 #include "Vertex.h"
-//typedef std::pair<unsigned, unsigned > uuPair;
 
 class Graph {
 
     unsigned verticesCount;
     unsigned edgesCount;
-    int connectedComponents = -1;
+    unsigned connectedComponents = 0;
 
     std::vector<Vertex*> vertices;
+    std::vector<std::vector<Vertex*> > connectedComponentsList;
 
 public:
 
@@ -29,6 +30,15 @@ public:
 
     Vertex* getVertex(int index);
 
+    void setConnectedComponents(int connectedComponents);
+
+    void addToConnectedComponentList(Vertex* vertex, unsigned connectedComponentID);
+
+    unsigned getConnectedComponents() const;
+
+    Vertex* getVertexFromConnectedComponentsList(unsigned connectedComponent, unsigned index);
+
+    unsigned getConnectedComponentsSize(unsigned index) const;
 };
 
 

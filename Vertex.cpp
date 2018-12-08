@@ -34,3 +34,7 @@ Vertex* Vertex::getNeighbour(unsigned index) {
 unsigned int Vertex::getConnectedComponentID() const {
     return connectedComponentID;
 }
+
+unsigned int Vertex::getId() const {
+    return id;
+}

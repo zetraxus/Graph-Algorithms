@@ -36,3 +36,24 @@ unsigned Graph::getVerticesCount() const {
 Vertex* Graph::getVertex(int index){
     return vertices[index];
 }
+
+void Graph::setConnectedComponents(int connectedComponents) {
+    Graph::connectedComponents = connectedComponents;
+    connectedComponentsList.resize(connectedComponents);
+}
+
+void Graph::addToConnectedComponentList(Vertex *vertex, unsigned connectedComponentID) {
+    connectedComponentsList[connectedComponentID].push_back(vertex);
+}
+
+unsigned Graph::getConnectedComponents() const {
+    return connectedComponents;
+}
+
+Vertex* Graph::getVertexFromConnectedComponentsList(unsigned connectedComponent, unsigned index) {
+    return connectedComponentsList[connectedComponent][index];
+}
+
+unsigned Graph::getConnectedComponentsSize(unsigned index) const{
+    return connectedComponentsList[index].size();
+}

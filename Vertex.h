@@ -46,6 +46,9 @@ public:
     Vertex* getNeighbour(unsigned index);
 
     unsigned int getConnectedComponentID() const;
+
+    unsigned int getId() const;
+
 };
 
 #endif //AAL_VERTEX_H
