@@ -17,6 +17,7 @@ void computeDiameterGraph(Graph* graph){
             if (candidate > diameter)
                 diameter = candidate;
         }
+//        std::cout << std::endl << diameter;
     }
 }
 

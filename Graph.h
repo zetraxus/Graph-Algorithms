@@ -36,8 +36,6 @@ public:
 
     unsigned long getConnectedComponentsCount() const;
 
-//    Vertex* getVertexFromConnectedComponentsList(unsigned connectedComponent, unsigned index);
-
     unsigned getConnectedComponentsSize(unsigned index) const;
 
     ConnectedComponent* getConnectedComponentsVector(unsigned index) const;

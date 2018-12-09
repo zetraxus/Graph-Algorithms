@@ -38,3 +38,11 @@ unsigned int Vertex::getConnectedComponentID() const {
 unsigned int Vertex::getId() const {
     return id;
 }
+
+unsigned int Vertex::getDistance() const {
+    return distance;
+}
+
+void Vertex::setDistance(unsigned int distance) {
+    Vertex::distance = distance;
+}

@@ -1,6 +1,8 @@
 //
 // Created by adam on 07.12.18.
 //
+#include <climits>
+#include <queue>
 #include "Algorithms.h"
 
 void DFS(Graph *graph) {
@@ -23,9 +25,10 @@ void DFS(Graph *graph) {
     for (unsigned i = 0; i < graph->getVerticesCount(); ++i) {
         graph->addToConnectedComponentList(graph->getVertex(i), graph->getVertex(i)->getConnectedComponentID());
     }
+
 }
 
-void DFSVisit(Graph *graph, Vertex *vertex, const unsigned connectedComponents) {
+void DFSVisit(Graph *graph, Vertex *vertex, unsigned connectedComponents) {
     vertex->setColour(Vertex::GREY);
     vertex->setConnectedComponentID(connectedComponents);
     for (unsigned i = 0; i < vertex->getDegree(); ++i) {
@@ -36,7 +39,35 @@ void DFSVisit(Graph *graph, Vertex *vertex, const unsigned connectedComponents) 
 }
 
 unsigned BFS(ConnectedComponent *connectedComponent, Vertex* start) {
+    for (int i = 0 ; i < connectedComponent->getSize(); ++i){
+        connectedComponent->getVertex(i)->setDistance(UINT_MAX);
+        connectedComponent->getVertex(i)->setColour(Vertex::WHITE);
+    }
 
+    start->setColour(Vertex::GREY);
+    start->setDistance(0);
+
+    std::queue<Vertex*> queue;
+    queue.push(start);
+    Vertex* analyzed;
+    unsigned lastAnalysedVertexDistance = 0;
+    while(!queue.empty()){
+        analyzed = queue.front();
+
+        for (int i = 0 ; i < analyzed->getDegree(); ++i){
+            if (analyzed->getNeighbour(i)->getColour() == Vertex::WHITE){
+                analyzed->getNeighbour(i)->setColour(Vertex::GREY);
+                analyzed->getNeighbour(i)->setDistance(analyzed->getDistance() + 1);
+                queue.push(analyzed->getNeighbour(i));
+            }
+        }
+
+        queue.pop();
+        analyzed->setColour(Vertex::BLACK);
+        lastAnalysedVertexDistance = analyzed->getDistance();
+    }
+
+    return lastAnalysedVertexDistance;
 }
 
 

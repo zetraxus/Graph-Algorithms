@@ -39,6 +39,8 @@ Vertex* Graph::getVertex(int index){
 
 void Graph::setConnectedComponentsCount(unsigned connectedComponentsCount) {
     connectedComponentsVector.resize(connectedComponentsCount);
+    for (int i = 0 ; i <connectedComponentsCount; ++i)
+        connectedComponentsVector[i] = new ConnectedComponent();
 }
 
 void Graph::addToConnectedComponentList(Vertex *vertex, unsigned connectedComponentID) {
@@ -48,10 +50,6 @@ void Graph::addToConnectedComponentList(Vertex *vertex, unsigned connectedCompon
 unsigned long Graph::getConnectedComponentsCount() const {
     return connectedComponentsVector.size();
 }
-
-//Vertex* Graph::getVertexFromConnectedComponentsList(unsigned connectedComponent, unsigned index) {
-//    return connectedComponentsVector[connectedComponent][index];
-//}
 
 unsigned Graph::getConnectedComponentsSize(unsigned index) const{
     return connectedComponentsVector[index]->getSize();

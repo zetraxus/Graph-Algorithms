@@ -12,7 +12,7 @@ class ConnectedComponent {
     std::vector<Vertex*> vertices;
 
 public:
-    ConnectedComponent();
+
     void add(Vertex* vertex);
     Vertex* getVertex(unsigned index);
     unsigned getSize();
