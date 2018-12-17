@@ -44,7 +44,7 @@ public:
 
     void setConnectedComponentID(unsigned int connectedComponentID);
 
-    Vertex* getNeighbour(unsigned index);
+    Vertex *getNeighbour(unsigned index);
 
     unsigned int getConnectedComponentID() const;
 

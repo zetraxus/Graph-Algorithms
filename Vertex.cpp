@@ -6,7 +6,7 @@
 
 Vertex::Vertex(unsigned id) : id(id) {}
 
-void Vertex::addEdge(Vertex* vertex, unsigned value) {
+void Vertex::addEdge(Vertex *vertex, unsigned value) {
     vuPair edge = std::make_pair(vertex, value);
     connectedVertex.push_back(edge);
 }
@@ -27,7 +27,7 @@ void Vertex::setConnectedComponentID(unsigned int connectedComponentID) {
     Vertex::connectedComponentID = connectedComponentID;
 }
 
-Vertex* Vertex::getNeighbour(unsigned index) {
+Vertex *Vertex::getNeighbour(unsigned index) {
     return connectedVertex[index].first;
 }
 

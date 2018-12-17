@@ -9,12 +9,14 @@
 #include "Vertex.h"
 
 class ConnectedComponent {
-    std::vector<Vertex*> vertices;
+    std::vector<Vertex *> vertices;
 
 public:
 
-    void add(Vertex* vertex);
-    Vertex* getVertex(unsigned index);
+    void add(Vertex *vertex);
+
+    Vertex *getVertex(unsigned index);
+
     unsigned getSize();
 };
 

@@ -7,7 +7,7 @@
 
 #include "Graph.h"
 
-void read_data(Graph* graph);
+void read_data(Graph *graph);
 
 
 #endif //AAL_IN_OUT_H

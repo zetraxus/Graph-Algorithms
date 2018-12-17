@@ -15,12 +15,14 @@ class Graph {
     unsigned verticesCount;
     unsigned edgesCount;
 
-    std::vector<Vertex*> vertices;
-    std::vector<ConnectedComponent* > connectedComponentsVector;
+    std::vector<Vertex *> vertices;
+    std::vector<ConnectedComponent *> connectedComponentsVector;
 
 public:
 
     Graph();
+
+    Graph(unsigned int verticesCount, unsigned int edgesCount);
 
     void addEdge(unsigned v1, unsigned v2, unsigned value);
 
@@ -28,17 +30,17 @@ public:
 
     unsigned getVerticesCount() const;
 
-    Vertex* getVertex(int index);
+    Vertex *getVertex(int index);
 
     void setConnectedComponentsCount(unsigned connectedComponents);
 
-    void addToConnectedComponentList(Vertex* vertex, unsigned connectedComponentID);
+    void addToConnectedComponentList(Vertex *vertex, unsigned connectedComponentID);
 
     unsigned long getConnectedComponentsCount() const;
 
     unsigned getConnectedComponentsSize(unsigned index) const;
 
-    ConnectedComponent* getConnectedComponentsVector(unsigned index) const;
+    ConnectedComponent *getConnectedComponentsVector(unsigned index) const;
 };
 
 

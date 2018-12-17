@@ -9,10 +9,10 @@ void ConnectedComponent::add(Vertex *vertex) {
     vertices.push_back(vertex);
 }
 
-Vertex* ConnectedComponent::getVertex(unsigned index) {
+Vertex *ConnectedComponent::getVertex(unsigned index) {
     return vertices[index];
 }
 
-unsigned ConnectedComponent::getSize(){
+unsigned ConnectedComponent::getSize() {
     return vertices.size();
 }
