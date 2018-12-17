@@ -10,6 +10,8 @@
 #include "Vertex.h"
 #include "ConnectedComponent.h"
 
+const unsigned MAXEDGEVALUE = 100;
+
 class Graph {
 
     unsigned verticesCount;

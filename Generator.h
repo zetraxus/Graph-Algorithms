@@ -8,15 +8,26 @@
 
 #include "Graph.h"
 
+const unsigned GRAPHCOUNT = 800;
+const unsigned MINIMUMVERTICESCOUNT= 10;
+const unsigned GRAPHSONSTEP = 100;
+const unsigned GRAPHSTEPSIZE = 10;
+
+const bool DENSE = true;
+const bool SPARSE = false;
+
 class Generator {
     unsigned graphsCount;
+    unsigned minimumVerticesCount;
+    unsigned stepSize;
+    unsigned graphsOnStep;
     Graph** graphs;
 
 public:
 
-    Generator(unsigned int graphsCount);
+    Generator(unsigned graphs= GRAPHCOUNT, unsigned minimumVertices = MINIMUMVERTICESCOUNT, unsigned step = GRAPHSONSTEP, unsigned graphsOnStep= GRAPHSONSTEP);
 
-    Graph* generateGraph();
+    Graph* generateGraph(bool isDense, unsigned verticesCount);
 
     void generateAll();
 

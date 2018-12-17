@@ -22,6 +22,7 @@ void computeDiameterGraph(Graph* graph) {
 
 int main() {
 
+    srand(time(NULL));
     Graph* graph = new Graph();
     read_data(graph);
 
