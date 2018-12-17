@@ -66,3 +66,22 @@ unsigned Graph::getConnectedComponentsSize(unsigned index) const {
 ConnectedComponent* Graph::getConnectedComponentsVector(unsigned index) const {
     return connectedComponentsVector[index];
 }
+
+unsigned int Graph::getEdgesCount() const {
+    return edgesCount;
+}
+
+std::string Graph::toString(){
+    std::string result = std::to_string(verticesCount) + SPACE + std::to_string(edgesCount) + NEWLINE;
+
+    for(int i = 0 ; i < verticesCount; ++i){
+        const std::vector<vuPair>& neighbour = vertices[i]->getConnectedVertex();
+        for(int j = 0 ; j < neighbour.size(); ++j){
+            if (neighbour[j].first->getId() > i){
+                result += std::to_string(i) + SPACE + std::to_string(neighbour[j].first->getId()) + SPACE + std::to_string(neighbour[j].second) + NEWLINE;
+            }
+        }
+    }
+
+    return result;
+}

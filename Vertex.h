@@ -54,6 +54,8 @@ public:
 
     void setDistance(unsigned int distance);
 
+    const std::vector<vuPair>& getConnectedVertex() const;
+
 };
 
 #endif //AAL_VERTEX_H

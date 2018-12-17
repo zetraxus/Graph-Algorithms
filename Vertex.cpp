@@ -46,3 +46,7 @@ unsigned int Vertex::getDistance() const {
 void Vertex::setDistance(unsigned int distance) {
     Vertex::distance = distance;
 }
+
+const std::vector<vuPair>& Vertex::getConnectedVertex() const {
+    return connectedVertex;
+}

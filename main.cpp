@@ -1,6 +1,7 @@
 
 #include "in_out.h"
 #include "Algorithms.h"
+#include "Generator.h"
 
 void computeConnectedComponents(Graph* graph) {
     DFS(graph);
@@ -23,11 +24,20 @@ void computeDiameterGraph(Graph* graph) {
 int main() {
 
     srand(time(NULL));
-    Graph* graph = new Graph();
-    read_data(graph);
+    Generator* generator = new Generator();
 
-    computeConnectedComponents(graph);
-    computeDiameterGraph(graph);
+    generator->generateAll();
+//    Graph** graphs = generator->getGraphs();
+//    for (int i = 0 ; i < 20; ++i){
+//        std::cout<< graphs[i]->getVerticesCount() << " - " << graphs[i]->getEdgesCount();
+//    }
+//    Graph* graph = new Graph();
+//    read_data(graph);
+//    std::cout<< graph->toString();
+
+//
+//    computeConnectedComponents(graph);
+//    computeDiameterGraph(graph);
 
     return 0;
 }

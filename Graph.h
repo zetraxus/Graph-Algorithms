@@ -11,6 +11,8 @@
 #include "ConnectedComponent.h"
 
 const unsigned MAXEDGEVALUE = 100;
+const std::string SPACE = " ";
+const std::string NEWLINE ="\n";
 
 class Graph {
 
@@ -32,6 +34,8 @@ public:
 
     unsigned getVerticesCount() const;
 
+    unsigned int getEdgesCount() const;
+
     Vertex* getVertex(int index);
 
     void setConnectedComponentsCount(unsigned connectedComponents);
@@ -43,6 +47,8 @@ public:
     unsigned getConnectedComponentsSize(unsigned index) const;
 
     ConnectedComponent* getConnectedComponentsVector(unsigned index) const;
+
+    std::string toString();
 };
 
 

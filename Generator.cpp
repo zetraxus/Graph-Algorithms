@@ -3,6 +3,9 @@
 //
 
 #include "Generator.h"
+#include <iostream>
+#include <fstream>
+
 
 Graph** Generator::getGraphs() {
     return graphs;
@@ -10,9 +13,9 @@ Graph** Generator::getGraphs() {
 
 Graph* Generator::generateGraph(bool isDense, unsigned verticesCount) {
     unsigned maxVertices = verticesCount * (verticesCount - 1) / 2;
-    unsigned edges = rand() % (maxVertices / 2);
+    unsigned edges = rand() % (maxVertices / 4);
     if (isDense == true)
-        edges += maxVertices / 2;
+        edges += maxVertices * 3/4;
     Graph* newGraph = new Graph(verticesCount, edges);
 
     std::vector<std::pair<unsigned, unsigned> > temp;
@@ -34,19 +37,34 @@ Graph* Generator::generateGraph(bool isDense, unsigned verticesCount) {
 }
 
 void Generator::generateAll() {
-    graphs = new Graph* [graphsCount];
     unsigned vertices = minimumVerticesCount;
 
+    Graph* generated;
+    std::string outputFileName;
+    std::ofstream outputFile;
+
     for (int i = 0; i < graphsCount; ++i) {
+
+        if(i% graphsOnStep == 0){
+            if(outputFile.is_open())
+                outputFile.close();
+            outputFileName = "input" + std::to_string(i%100);
+            outputFile.open(outputFileName);
+            if(!outputFile.is_open())
+                std::cout <<"ERROR_OPEN_FILE.";
+        }
         if (i % graphsOnStep == 0 && i != 0)
             vertices *= stepSize;
         if (i % graphsOnStep < graphsOnStep / 2)
-            graphs[i] = generateGraph(DENSE, minimumVerticesCount + vertices);
+            generated = generateGraph(DENSE, minimumVerticesCount + vertices);
         else
-            graphs[i] = generateGraph(SPARSE, minimumVerticesCount + vertices);
+            generated = generateGraph(SPARSE, minimumVerticesCount + vertices);
+
+        outputFile << generated->toString() + NEWLINE;
+
     }
 
 }
 
 Generator::Generator(unsigned graphs, unsigned minimumVertices, unsigned step, unsigned graphsOnStep) : graphsCount(
-        graphsCount), minimumVerticesCount(minimumVerticesCount), stepSize(step), graphsOnStep(graphsOnStep) {}
+        graphs), minimumVerticesCount(minimumVertices), stepSize(step), graphsOnStep(graphsOnStep) {}
