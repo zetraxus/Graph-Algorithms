@@ -2,9 +2,10 @@
 // Created by adam on 07.12.18.
 //
 #include <queue>
+#include <climits>
 #include "Algorithms.h"
 
-void DFS(Graph *graph) {
+void DFS(Graph* graph) {
 
     for (unsigned i = 0; i < graph->getVerticesCount(); ++i) {
         graph->getVertex(i)->setColour(Vertex::WHITE);
@@ -27,7 +28,7 @@ void DFS(Graph *graph) {
 
 }
 
-void DFSVisit(Graph *graph, Vertex *vertex, unsigned connectedComponents) {
+void DFSVisit(Graph* graph, Vertex* vertex, unsigned connectedComponents) {
     vertex->setColour(Vertex::GREY);
     vertex->setConnectedComponentID(connectedComponents);
     for (unsigned i = 0; i < vertex->getDegree(); ++i) {
@@ -37,7 +38,7 @@ void DFSVisit(Graph *graph, Vertex *vertex, unsigned connectedComponents) {
     vertex->setColour(Vertex::BLACK);
 }
 
-unsigned BFS(ConnectedComponent *connectedComponent, Vertex *start) {
+unsigned BFS(ConnectedComponent* connectedComponent, Vertex* start) {
     for (int i = 0; i < connectedComponent->getSize(); ++i) {
         connectedComponent->getVertex(i)->setDistance(UINT_MAX);
         connectedComponent->getVertex(i)->setColour(Vertex::WHITE);
@@ -46,9 +47,9 @@ unsigned BFS(ConnectedComponent *connectedComponent, Vertex *start) {
     start->setColour(Vertex::GREY);
     start->setDistance(0);
 
-    std::queue<Vertex *> queue;
+    std::queue<Vertex*> queue;
     queue.push(start);
-    Vertex *analyzed;
+    Vertex* analyzed;
     unsigned lastAnalysedVertexDistance = 0;
     while (!queue.empty()) {
         analyzed = queue.front();

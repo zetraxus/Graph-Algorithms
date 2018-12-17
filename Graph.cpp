@@ -28,8 +28,8 @@ void Graph::setVerticesCount(unsigned verticesCount) {
 }
 
 void Graph::addEdge(unsigned v1, unsigned v2, unsigned value) {
-    Vertex *vertex1 = vertices[v1];
-    Vertex *vertex2 = vertices[v2];
+    Vertex* vertex1 = vertices[v1];
+    Vertex* vertex2 = vertices[v2];
 
     vertex1->addEdge(vertex2, value);
     vertex2->addEdge(vertex1, value); //undirected graph
@@ -41,7 +41,7 @@ unsigned Graph::getVerticesCount() const {
     return verticesCount;
 }
 
-Vertex *Graph::getVertex(int index) {
+Vertex* Graph::getVertex(int index) {
     return vertices[index];
 }
 
@@ -51,7 +51,7 @@ void Graph::setConnectedComponentsCount(unsigned connectedComponentsCount) {
         connectedComponentsVector[i] = new ConnectedComponent();
 }
 
-void Graph::addToConnectedComponentList(Vertex *vertex, unsigned connectedComponentID) {
+void Graph::addToConnectedComponentList(Vertex* vertex, unsigned connectedComponentID) {
     connectedComponentsVector[connectedComponentID]->add(vertex);
 }
 
@@ -63,6 +63,6 @@ unsigned Graph::getConnectedComponentsSize(unsigned index) const {
     return connectedComponentsVector[index]->getSize();
 }
 
-ConnectedComponent *Graph::getConnectedComponentsVector(unsigned index) const {
+ConnectedComponent* Graph::getConnectedComponentsVector(unsigned index) const {
     return connectedComponentsVector[index];
 }

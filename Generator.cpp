@@ -6,12 +6,12 @@
 
 Generator::Generator(unsigned int graphsCount) : graphsCount(graphsCount) {}
 
-Graph **Generator::getGraphs() {
+Graph** Generator::getGraphs() {
     return graphs;
 }
 
-Graph *Generator::generateGraph() {
-    Graph *newGraph = new Graph();
+Graph* Generator::generateGraph() {
+    Graph* newGraph = new Graph();
 }
 
 void Generator::generateAll() {

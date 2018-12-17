@@ -9,7 +9,7 @@
 
 class Vertex;
 
-typedef std::pair<Vertex *, unsigned> vuPair; //connected vertex and value of edge
+typedef std::pair<Vertex*, unsigned> vuPair; //connected vertex and value of edge
 
 class Vertex {
 
@@ -34,7 +34,7 @@ public:
 
     Vertex(unsigned int id);
 
-    void addEdge(Vertex *vertex, unsigned value);
+    void addEdge(Vertex* vertex, unsigned value);
 
     unsigned long getDegree();
 
@@ -44,7 +44,7 @@ public:
 
     void setConnectedComponentID(unsigned int connectedComponentID);
 
-    Vertex *getNeighbour(unsigned index);
+    Vertex* getNeighbour(unsigned index);
 
     unsigned int getConnectedComponentID() const;
 

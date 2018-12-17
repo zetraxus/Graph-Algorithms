@@ -7,10 +7,10 @@
 
 #include "Graph.h"
 
-void DFS(Graph *graph);
+void DFS(Graph* graph);
 
-void DFSVisit(Graph *graph, Vertex *vertex, const unsigned connectedComponents);
+void DFSVisit(Graph* graph, Vertex* vertex, const unsigned connectedComponents);
 
-unsigned BFS(ConnectedComponent *connectedComponent, Vertex *start);
+unsigned BFS(ConnectedComponent* connectedComponent, Vertex* start);
 
 #endif //AAL_ALGORITHMS_H

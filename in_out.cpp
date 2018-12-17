@@ -5,7 +5,7 @@
 #include <iostream>
 #include "in_out.h"
 
-void read_data(Graph *graph) {
+void read_data(Graph* graph) {
     unsigned vertices, edges, v1, v2, edgeValue;
 
     std::cin >> vertices >> edges;

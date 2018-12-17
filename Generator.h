@@ -10,17 +10,17 @@
 
 class Generator {
     unsigned graphsCount;
-    Graph **graphs;
+    Graph** graphs;
 
 public:
 
     Generator(unsigned int graphsCount);
 
-    Graph *generateGraph();
+    Graph* generateGraph();
 
     void generateAll();
 
-    Graph **getGraphs();
+    Graph** getGraphs();
 
 };
 

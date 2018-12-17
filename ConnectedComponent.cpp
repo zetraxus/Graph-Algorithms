@@ -5,11 +5,11 @@
 #include <iostream>
 #include "ConnectedComponent.h"
 
-void ConnectedComponent::add(Vertex *vertex) {
+void ConnectedComponent::add(Vertex* vertex) {
     vertices.push_back(vertex);
 }
 
-Vertex *ConnectedComponent::getVertex(unsigned index) {
+Vertex* ConnectedComponent::getVertex(unsigned index) {
     return vertices[index];
 }
 
