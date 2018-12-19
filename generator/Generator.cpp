@@ -49,13 +49,12 @@ void Generator::generateAll() {
                 inputFile.close();
             }
 
-            if (i % graphsOnStep == 0){
-                inputFileName = directory + "/input" + std::to_string(vertices) + ".dense";
-                outputFileName = directory + "/output" + std::to_string(vertices) + ".dense";
-            }
-            else{
-                inputFileName = directory + "/input" + std::to_string(vertices) + ".sparse";
-                outputFileName = directory + "/output" + std::to_string(vertices) + ".sparse";
+            if (i % graphsOnStep == 0) {
+                inputFileName = directory + INPUT + std::to_string(vertices) + FNEXTENSTIONDENSE;
+                outputFileName = directory + OUTPUT + std::to_string(vertices) + FNEXTENSTIONDENSE;
+            } else {
+                inputFileName = directory + INPUT + std::to_string(vertices) + FNEXTENSTIONSPARSE;
+                outputFileName = directory + OUTPUT + std::to_string(vertices) + FNEXTENSTIONSPARSE;
             }
 
             std::cout << inputFileName << std::endl;
@@ -67,7 +66,7 @@ void Generator::generateAll() {
             inputFile.open(inputFileName);
 
             if (!inputFile.is_open()) {
-                std::cerr << "ERROR_OPEN_FILE " << inputFileName << std::endl;
+                std::cerr << ERRORFILEOPEN << inputFileName << std::endl;
             }
         }
         if (i % graphsOnStep < graphsOnStep / 2)
@@ -81,8 +80,10 @@ void Generator::generateAll() {
     inputFile.close();
 }
 
-Generator::Generator(unsigned graphs, unsigned minimumVertices, unsigned step, unsigned graphsOnStep, std::string directoryName) : graphsCount(
-        graphs), minimumVerticesCount(minimumVertices), stepSize(step), graphsOnStep(graphsOnStep), directory(directoryName) {}
+Generator::Generator(unsigned graphs, unsigned minimumVertices, unsigned step, unsigned graphsOnStep,
+                     std::string directoryName) : graphsCount(
+        graphs), minimumVerticesCount(minimumVertices), stepSize(step), graphsOnStep(graphsOnStep),
+                                                  directory(directoryName) {}
 
 unsigned int Generator::getGraphsCount() const {
     return graphsCount;

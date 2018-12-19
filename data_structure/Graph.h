@@ -11,8 +11,6 @@
 #include "ConnectedComponent.h"
 
 const unsigned MAXEDGEVALUE = 100;
-const std::string SPACE = " ";
-const std::string NEWLINE = "\n";
 
 class Graph {
 

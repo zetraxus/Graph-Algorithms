@@ -3,6 +3,7 @@
 //
 
 #include "Graph.h"
+#include "../messages/Messages.h"
 
 Graph::Graph() {
     verticesCount = 0;
@@ -18,7 +19,7 @@ Graph::Graph(unsigned int verticesCount) : verticesCount(verticesCount) {
     }
 }
 
-Graph::~Graph(){
+Graph::~Graph() {
     for (auto& i : vertices)
         delete i;
     for (auto& i : connectedComponentsVector)

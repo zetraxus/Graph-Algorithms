@@ -1,4 +1,3 @@
-
 #include <fstream>
 #include "in_out/in_out.h"
 #include "generator/Generator.h"
@@ -28,33 +27,33 @@ int main() {
     Generator* generator = new Generator();
     generator->generateAll();
 
-    unsigned files = 2* generator->getGraphsCount()/generator->getGraphsOnStep();
-    unsigned graphsInFile = generator->getGraphsOnStep()/2;
-    std::vector<std::string> inputFilesNames = generator->getInputFileNames();
-    std::vector<std::string> outputFilesNames = generator->getOutputFileNames();
+    const unsigned files = 2 * generator->getGraphsCount() / generator->getGraphsOnStep();
+    const unsigned graphsInFile = generator->getGraphsOnStep() / 2;
+    const std::vector<std::string> inputFilesNames = generator->getInputFileNames();
+    const std::vector<std::string> outputFilesNames = generator->getOutputFileNames();
     std::fstream inputFile;
     std::ofstream outputFile;
     unsigned diameter;
 
-    for(int i = 0 ; i < files; ++i){
+    for (int i = 0; i < files; ++i) {
         inputFile.open(inputFilesNames[i]);
         outputFile.open(outputFilesNames[i]);
 
-        if(!inputFile.is_open())
-            std::cerr<< "Error in opening file " << inputFilesNames[i] << std::endl;
-        if(!outputFile.is_open()){
-            std::cerr<< "Error in opening file " << outputFilesNames[i] << std::endl;
+        if (!inputFile.is_open())
+            std::cerr << ERRORFILEOPEN << inputFilesNames[i] << std::endl;
+        if (!outputFile.is_open()) {
+            std::cerr << ERRORFILEOPEN << outputFilesNames[i] << std::endl;
         }
-        for (int j = 0; j < graphsInFile; ++j){
+        for (int j = 0; j < graphsInFile; ++j) {
             Graph* graph = new Graph();
             read_data(graph, inputFile);
 
             computeConnectedComponents(graph);
             diameter = computeDiameterGraph(graph);
 
-            outputFile << "GRAPH_" << j << ":" << NEWLINE;
+            outputFile << GRAPHDESCRIPTION << j << ":" << NEWLINE;
             outputFile << diameter << NEWLINE;
-            outputFile << graph->getConnectedComponentsCount() <<NEWLINE;
+            outputFile << graph->getConnectedComponentsCount() << NEWLINE;
 
             delete graph;
         }
