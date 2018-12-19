@@ -31,7 +31,6 @@ int main() {
     unsigned graphsInFile = generator->getGraphsOnStep()/2;
     std::vector<std::string> inputFilesNames = generator->getFileNames();
     std::fstream inputFile;
-    std::string temp;
 
     for(int i = 0 ; i < files; ++i){
         inputFile.open(inputFilesNames[i], std::ios::in | std::ios::out);
@@ -41,13 +40,13 @@ int main() {
             Graph* graph = new Graph();
             read_data(graph, inputFile);
 
+            // do algorithms
+
+            delete graph;
         }
         inputFile.close();
     }
-
-//    std::cout<< graph->toString();
-
-//
+    
 //    computeConnectedComponents(graph);
 //    computeDiameterGraph(graph);
 

@@ -9,15 +9,6 @@ Graph::Graph() {
     edgesCount = 0;
 }
 
-Graph::Graph(unsigned int verticesCount, unsigned int edgesCount) : verticesCount(verticesCount),
-                                                                    edgesCount(edgesCount) {
-    vertices.resize(verticesCount);
-
-    for (int i = 0; i < verticesCount; ++i) {
-        vertices[i] = new Vertex(i);
-    }
-}
-
 Graph::Graph(unsigned int verticesCount) : verticesCount(verticesCount) {
     edgesCount = 0;
     vertices.resize(verticesCount);
@@ -25,6 +16,16 @@ Graph::Graph(unsigned int verticesCount) : verticesCount(verticesCount) {
     for (int i = 0; i < verticesCount; ++i) {
         vertices[i] = new Vertex(i);
     }
+}
+
+Graph::~Graph(){
+    for (auto& i : vertices)
+        delete i;
+    for (auto& i : connectedComponentsVector)
+        delete i;
+
+    verticesCount = 0;
+    edgesCount = 0;
 }
 
 void Graph::setVerticesCount(unsigned verticesCount) {
