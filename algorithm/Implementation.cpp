@@ -3,7 +3,7 @@
 //
 #include <queue>
 #include <climits>
-#include "Algorithms.h"
+#include "Implementation.h"
 
 void DFS(Graph* graph) {
 
@@ -70,5 +70,31 @@ unsigned BFS(ConnectedComponent* connectedComponent, Vertex* start) {
     return lastAnalysedVertexDistance;
 }
 
+const std::vector< std::vector<unsigned> > getAllSubsets(unsigned setSize) {
+    std::vector<int> set;
+    for(int i = 0 ; i < setSize; ++i)
+        set.push_back(i);
 
+    std::vector<std::vector<unsigned> > subset;
+    std::vector<unsigned> empty;
+    subset.push_back(empty);
 
+    for (unsigned i = 0; i < set.size(); ++i) {
+        std::vector<std::vector<unsigned> > subsetTemp = subset;
+
+        for (unsigned j = 0; j < subsetTemp.size(); j++)
+            subsetTemp[j].push_back(set[i]);
+
+        for (unsigned j = 0; j < subsetTemp.size(); ++j)
+            subset.push_back(subsetTemp[j]);
+    }
+
+//    for (unsigned i = 0 ; i < subset.size(); ++i){
+//        for (unsigned j = 0 ; j < subset[i].size(); ++j){
+//            std::cout<<subset[i][j] << " ";
+//        }
+//        std::cout<<std::endl;
+//    }
+
+    return subset;
+}

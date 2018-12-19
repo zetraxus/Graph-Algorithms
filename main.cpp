@@ -1,25 +1,9 @@
 #include <fstream>
 #include "in_out/in_out.h"
 #include "generator/Generator.h"
-#include "algorithm/Algorithms.h"
+#include "algorithm/Implementation.h"
+#include "algorithm/AlgorithmLogic.h"
 
-void computeConnectedComponents(Graph* graph) {
-    DFS(graph);
-}
-
-unsigned computeDiameterGraph(Graph* graph) {
-    unsigned diameter = 0;
-    for (unsigned i = 0; i < graph->getConnectedComponentsCount(); ++i) {
-//        unsigned diameter = 0;
-        ConnectedComponent* analyzed = graph->getConnectedComponentsVector(i);
-        for (unsigned j = 0; j < graph->getConnectedComponentsSize(i); ++j) {
-            unsigned candidate = BFS(analyzed, analyzed->getVertex(j));
-            if (candidate > diameter)
-                diameter = candidate;
-        }
-    }
-    return diameter;
-}
 
 int main() {
 
@@ -31,6 +15,8 @@ int main() {
     const unsigned graphsInFile = generator->getGraphsOnStep() / 2;
     const std::vector<std::string> inputFilesNames = generator->getInputFileNames();
     const std::vector<std::string> outputFilesNames = generator->getOutputFileNames();
+    std::vector<std::vector<unsigned> > cliques;
+
     std::fstream inputFile;
     std::ofstream outputFile;
     unsigned diameter;
@@ -44,16 +30,19 @@ int main() {
         if (!outputFile.is_open()) {
             std::cerr << ERRORFILEOPEN << outputFilesNames[i] << std::endl;
         }
+
         for (int j = 0; j < graphsInFile; ++j) {
             Graph* graph = new Graph();
             read_data(graph, inputFile);
 
             computeConnectedComponents(graph);
             diameter = computeDiameterGraph(graph);
+//            computeCliques(graph);
 
             outputFile << GRAPHDESCRIPTION << j << ":" << NEWLINE;
-            outputFile << diameter << NEWLINE;
-            outputFile << graph->getConnectedComponentsCount() << NEWLINE;
+            outputFile << DIAMETER << diameter << NEWLINE;
+            outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
+            outputFile << NEWLINE;
 
             delete graph;
         }

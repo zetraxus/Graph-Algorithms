@@ -16,4 +16,7 @@ const std::string ERRORFILEOPEN = "ERROR_OPEN_FILE ";
 const std::string INPUT = "/input";
 const std::string OUTPUT = "/output";
 const std::string GRAPHDESCRIPTION = "GRAPH_";
+const std::string DIAMETER = "Graph diameter: ";
+const std::string CONNECTEDCOMPONENTS = "Connected components in graph: ";
+
 #endif //AAL_MESSAGES_H

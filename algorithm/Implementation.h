@@ -13,4 +13,6 @@ void DFSVisit(Graph* graph, Vertex* vertex, const unsigned connectedComponents);
 
 unsigned BFS(ConnectedComponent* connectedComponent, Vertex* start);
 
+const std::vector<std::vector<unsigned> > getAllSubsets(unsigned setSize);
+
 #endif //AAL_ALGORITHMS_H
