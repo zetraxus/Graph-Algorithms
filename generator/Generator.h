@@ -12,6 +12,7 @@ const unsigned GRAPHCOUNT = 200;
 const unsigned MINIMUMVERTICESCOUNT = 10;
 const unsigned GRAPHSONSTEP = 100;
 const unsigned GRAPHSTEPSIZE = 5;
+const std::string DIRECTORY = "input_files";
 
 const bool DENSE = true;
 const bool SPARSE = false;
@@ -21,12 +22,15 @@ class Generator {
     unsigned minimumVerticesCount;
     unsigned stepSize;
     unsigned graphsOnStep;
-    std::vector<std::string> fileNames;
+    std::string directory;
+
+    std::vector<std::string> inputFileNames;
+    std::vector<std::string> outputFileNames;
 
 public:
 
     Generator(unsigned graphs = GRAPHCOUNT, unsigned minimumVertices = MINIMUMVERTICESCOUNT,
-              unsigned step = GRAPHSTEPSIZE, unsigned graphsOnStep = GRAPHSONSTEP);
+              unsigned step = GRAPHSTEPSIZE, unsigned graphsOnStep = GRAPHSONSTEP, std::string directory = DIRECTORY);
 
     Graph* generateGraph(bool isDense, unsigned verticesCount);
 
@@ -40,7 +44,11 @@ public:
 
     unsigned int getGraphsOnStep() const;
 
-    const std::vector<std::string>& getFileNames() const;
+    const std::string& getDirectory() const;
+
+    const std::vector<std::string>& getInputFileNames() const;
+
+    const std::vector<std::string>& getOutputFileNames() const;
 };
 
 

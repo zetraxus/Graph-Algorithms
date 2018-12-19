@@ -36,28 +36,38 @@ void Generator::generateAll() {
     unsigned vertices = minimumVerticesCount;
 
     Graph* generated;
+    std::string inputFileName;
     std::string outputFileName;
-    std::ofstream outputFile;
+    std::ofstream inputFile;
 
     for (int i = 0; i < graphsCount; ++i) {
         if (i % graphsOnStep == 0 && i != 0)
             vertices *= stepSize;
 
         if (i % (graphsOnStep / 2) == 0) {
-            if (outputFile.is_open()) {
-                outputFile.close();
+            if (inputFile.is_open()) {
+                inputFile.close();
             }
 
-            if (i % graphsOnStep == 0)
-                outputFileName = "input_files/input" + std::to_string(vertices) + ".dense";
-            else
-                outputFileName = "input_files/input" + std::to_string(vertices) + ".sparse";
+            if (i % graphsOnStep == 0){
+                inputFileName = directory + "/input" + std::to_string(vertices) + ".dense";
+                outputFileName = directory + "/output" + std::to_string(vertices) + ".dense";
+            }
+            else{
+                inputFileName = directory + "/input" + std::to_string(vertices) + ".sparse";
+                outputFileName = directory + "/output" + std::to_string(vertices) + ".sparse";
+            }
 
-            fileNames.push_back(outputFileName);
-            outputFile.open(outputFileName);
+            std::cout << inputFileName << std::endl;
+            std::cout << outputFileName << std::endl;
 
-            if (!outputFile.is_open()) {
-                std::cerr << "ERROR_OPEN_FILE " << outputFileName << std::endl;
+            inputFileNames.push_back(inputFileName);
+            outputFileNames.push_back(outputFileName);
+
+            inputFile.open(inputFileName);
+
+            if (!inputFile.is_open()) {
+                std::cerr << "ERROR_OPEN_FILE " << inputFileName << std::endl;
             }
         }
         if (i % graphsOnStep < graphsOnStep / 2)
@@ -65,30 +75,27 @@ void Generator::generateAll() {
         else
             generated = generateGraph(SPARSE, vertices);
 
-        outputFile << generated->toString() + NEWLINE;
+        inputFile << generated->toString() + NEWLINE;
     }
-    outputFile.close();
+
+    inputFile.close();
 }
 
-Generator::Generator(unsigned graphs, unsigned minimumVertices, unsigned step, unsigned graphsOnStep) : graphsCount(
-        graphs), minimumVerticesCount(minimumVertices), stepSize(step), graphsOnStep(graphsOnStep) {}
+Generator::Generator(unsigned graphs, unsigned minimumVertices, unsigned step, unsigned graphsOnStep, std::string directoryName) : graphsCount(
+        graphs), minimumVerticesCount(minimumVertices), stepSize(step), graphsOnStep(graphsOnStep), directory(directoryName) {}
 
 unsigned int Generator::getGraphsCount() const {
     return graphsCount;
-}
-
-unsigned int Generator::getMinimumVerticesCount() const {
-    return minimumVerticesCount;
-}
-
-unsigned int Generator::getStepSize() const {
-    return stepSize;
 }
 
 unsigned int Generator::getGraphsOnStep() const {
     return graphsOnStep;
 }
 
-const std::vector<std::string>& Generator::getFileNames() const {
-    return fileNames;
+const std::vector<std::string>& Generator::getInputFileNames() const {
+    return inputFileNames;
+}
+
+const std::vector<std::string>& Generator::getOutputFileNames() const {
+    return outputFileNames;
 }

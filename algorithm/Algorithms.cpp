@@ -20,7 +20,7 @@ void DFS(Graph* graph) {
         }
     }
 
-    graph->setConnectedComponentsCount(connectedComponents + 1);
+    graph->setConnectedComponentsCount(connectedComponents);
 
     for (unsigned i = 0; i < graph->getVerticesCount(); ++i) {
         graph->addToConnectedComponentList(graph->getVertex(i), graph->getVertex(i)->getConnectedComponentID());
