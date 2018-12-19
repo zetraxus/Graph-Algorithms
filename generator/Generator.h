@@ -11,7 +11,7 @@
 const unsigned GRAPHCOUNT = 200;
 const unsigned MINIMUMVERTICESCOUNT = 10;
 const unsigned GRAPHSONSTEP = 100;
-const unsigned GRAPHSTEPSIZE = 10;
+const unsigned GRAPHSTEPSIZE = 5;
 
 const bool DENSE = true;
 const bool SPARSE = false;
@@ -21,7 +21,7 @@ class Generator {
     unsigned minimumVerticesCount;
     unsigned stepSize;
     unsigned graphsOnStep;
-    Graph** graphs;
+    std::vector<std::string> fileNames;
 
 public:
 
@@ -32,8 +32,15 @@ public:
 
     void generateAll();
 
-    Graph** getGraphs();
+    unsigned int getGraphsCount() const;
 
+    unsigned int getMinimumVerticesCount() const;
+
+    unsigned int getStepSize() const;
+
+    unsigned int getGraphsOnStep() const;
+
+    const std::vector<std::string>& getFileNames() const;
 };
 
 

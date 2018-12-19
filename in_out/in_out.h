@@ -7,7 +7,7 @@
 
 #include "../data_structure/Graph.h"
 
-void read_data(Graph* graph);
+void read_data(Graph* graph, std::fstream& inputStream);
 
 
 #endif //AAL_IN_OUT_H

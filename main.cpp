@@ -1,4 +1,5 @@
 
+#include <fstream>
 #include "in_out/in_out.h"
 #include "generator/Generator.h"
 #include "algorithm/Algorithms.h"
@@ -17,7 +18,6 @@ void computeDiameterGraph(Graph* graph) {
             if (candidate > diameter)
                 diameter = candidate;
         }
-//        std::cout << std::endl << diameter;
     }
 }
 
@@ -25,14 +25,26 @@ int main() {
 
     srand(time(NULL));
     Generator* generator = new Generator();
-
     generator->generateAll();
-//    Graph** graphs = generator->getGraphs();
-//    for (int i = 0 ; i < 20; ++i){
-//        std::cout<< graphs[i]->getVerticesCount() << " - " << graphs[i]->getEdgesCount();
-//    }
-//    Graph* graph = new Graph();
-//    read_data(graph);
+
+    unsigned files = 2* generator->getGraphsCount()/generator->getGraphsOnStep();
+    unsigned graphsInFile = generator->getGraphsOnStep()/2;
+    std::vector<std::string> inputFilesNames = generator->getFileNames();
+    std::fstream inputFile;
+    std::string temp;
+
+    for(int i = 0 ; i < files; ++i){
+        inputFile.open(inputFilesNames[i], std::ios::in | std::ios::out);
+        if(!inputFile.is_open())
+            std::cerr<< "Error in opening file " << inputFilesNames[i] << std::endl;
+        for (int j = 0; j < graphsInFile; ++j){
+            Graph* graph = new Graph();
+            read_data(graph, inputFile);
+
+        }
+        inputFile.close();
+    }
+
 //    std::cout<< graph->toString();
 
 //

@@ -6,10 +6,6 @@
 #include <fstream>
 
 
-Graph** Generator::getGraphs() {
-    return graphs;
-}
-
 Graph* Generator::generateGraph(bool isDense, unsigned verticesCount) {
     unsigned maxEdges = verticesCount * (verticesCount - 1) / 2;
     unsigned edges = rand() % (maxEdges / 4);
@@ -57,10 +53,11 @@ void Generator::generateAll() {
             else
                 outputFileName = "input_files/input" + std::to_string(vertices) + ".sparse";
 
+            fileNames.push_back(outputFileName);
             outputFile.open(outputFileName);
 
             if (!outputFile.is_open()) {
-                std::cout << "ERROR_OPEN_FILE.";
+                std::cerr << "ERROR_OPEN_FILE " << outputFileName << std::endl;
             }
         }
         if (i % graphsOnStep < graphsOnStep / 2)
@@ -69,11 +66,29 @@ void Generator::generateAll() {
             generated = generateGraph(SPARSE, vertices);
 
         outputFile << generated->toString() + NEWLINE;
-
     }
     outputFile.close();
-
 }
 
 Generator::Generator(unsigned graphs, unsigned minimumVertices, unsigned step, unsigned graphsOnStep) : graphsCount(
         graphs), minimumVerticesCount(minimumVertices), stepSize(step), graphsOnStep(graphsOnStep) {}
+
+unsigned int Generator::getGraphsCount() const {
+    return graphsCount;
+}
+
+unsigned int Generator::getMinimumVerticesCount() const {
+    return minimumVerticesCount;
+}
+
+unsigned int Generator::getStepSize() const {
+    return stepSize;
+}
+
+unsigned int Generator::getGraphsOnStep() const {
+    return graphsOnStep;
+}
+
+const std::vector<std::string>& Generator::getFileNames() const {
+    return fileNames;
+}

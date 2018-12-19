@@ -3,17 +3,19 @@
 //
 
 #include <iostream>
+#include <string>
+#include <fstream>
 #include "in_out.h"
 
-void read_data(Graph* graph) {
+void read_data(Graph* graph, std::fstream& inputStream) {
     unsigned vertices, edges, v1, v2, edgeValue;
 
-    std::cin >> vertices >> edges;
+    inputStream >> vertices >> edges;
 
     graph->setVerticesCount(vertices);
 
     for (int i = 0; i < edges; ++i) {
-        std::cin >> v1 >> v2 >> edgeValue;
+        inputStream >> v1 >> v2 >> edgeValue;
         graph->addEdge(v1, v2, edgeValue);
     }
 }
