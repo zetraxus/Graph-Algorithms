@@ -5,7 +5,7 @@
 #ifndef AAL_ALGORITHMS_H
 #define AAL_ALGORITHMS_H
 
-#include "Graph.h"
+#include "../data_structure/Graph.h"
 
 void DFS(Graph* graph);
 

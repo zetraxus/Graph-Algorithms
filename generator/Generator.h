@@ -6,7 +6,7 @@
 #define AAL_GENERATOR_H
 
 
-#include "Graph.h"
+#include "../data_structure/Graph.h"
 
 const unsigned GRAPHCOUNT = 200;
 const unsigned MINIMUMVERTICESCOUNT = 10;

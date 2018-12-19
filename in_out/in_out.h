@@ -5,7 +5,7 @@
 #ifndef AAL_IN_OUT_H
 #define AAL_IN_OUT_H
 
-#include "Graph.h"
+#include "../data_structure/Graph.h"
 
 void read_data(Graph* graph);
 

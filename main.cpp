@@ -1,7 +1,7 @@
 
-#include "in_out.h"
-#include "Generator.h"
-#include "Algorithms.h"
+#include "in_out/in_out.h"
+#include "generator/Generator.h"
+#include "algorithm/Algorithms.h"
 
 void computeConnectedComponents(Graph* graph) {
     DFS(graph);
