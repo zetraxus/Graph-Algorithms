@@ -9,7 +9,7 @@
 #include "Graph.h"
 
 const unsigned GRAPHCOUNT = 200;
-const unsigned MINIMUMVERTICESCOUNT= 10;
+const unsigned MINIMUMVERTICESCOUNT = 10;
 const unsigned GRAPHSONSTEP = 100;
 const unsigned GRAPHSTEPSIZE = 10;
 
@@ -25,7 +25,8 @@ class Generator {
 
 public:
 
-    Generator(unsigned graphs= GRAPHCOUNT, unsigned minimumVertices = MINIMUMVERTICESCOUNT, unsigned step = GRAPHSTEPSIZE, unsigned graphsOnStep= GRAPHSONSTEP);
+    Generator(unsigned graphs = GRAPHCOUNT, unsigned minimumVertices = MINIMUMVERTICESCOUNT,
+              unsigned step = GRAPHSTEPSIZE, unsigned graphsOnStep = GRAPHSONSTEP);
 
     Graph* generateGraph(bool isDense, unsigned verticesCount);
 

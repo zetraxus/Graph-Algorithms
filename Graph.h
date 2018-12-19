@@ -12,7 +12,7 @@
 
 const unsigned MAXEDGEVALUE = 100;
 const std::string SPACE = " ";
-const std::string NEWLINE ="\n";
+const std::string NEWLINE = "\n";
 
 class Graph {
 
@@ -27,6 +27,8 @@ public:
     Graph();
 
     Graph(unsigned int verticesCount, unsigned int edgesCount);
+
+    Graph(unsigned int verticesCount);
 
     void addEdge(unsigned v1, unsigned v2, unsigned value);
 
