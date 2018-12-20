@@ -12,6 +12,6 @@ void computeConnectedComponents(Graph* graph);
 
 unsigned computeDiameterGraph(Graph* graph);
 
-void computeCliques(const Graph* graph);
+std::vector< std::vector<unsigned> > computeCliques(const Graph* graph);
 
 #endif //AAL_TESTED_H

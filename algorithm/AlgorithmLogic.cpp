@@ -24,13 +24,27 @@ unsigned computeDiameterGraph(Graph* graph) {
     return diameter;
 }
 
-void computeCliques(const Graph* graph){
-//    const std::vector< std::vector<unsigned> > subsets = getAllSubsets(graph->getVerticesCount());
-//    for (unsigned i = 0 ; i < subsets.size(); ++i){
-//        for (unsigned j = 0 ; j < subsets[i].size(); ++j){
-//            std::cout<<subsets[i][j] << " ";
-//        }
-//        std::cout<<std::endl;
-//    }
-    //check all subsets
+std::vector<std::vector<unsigned> > computeCliques(const Graph* graph) {
+    const std::vector<std::vector<unsigned> > subsets = getAllSubsets(graph->getVerticesCount());
+    std::vector<std::vector<unsigned> > cliques;
+
+    bool isClique;
+    for (int i = 0; i < subsets.size(); ++i) {
+        isClique = true;
+        for (int j = 0; j < subsets[i].size(); ++j) {
+            for (int k = j + 1; k < subsets[i].size(); ++k) {
+                if (!graph->getVertex(subsets[i][j])->isNeighbour(graph->getVertex(subsets[i][k]))) {
+                    isClique = false;
+                    break;
+                }
+            }
+            if (!isClique)
+                break;
+        }
+
+        if (isClique)
+            cliques.push_back(subsets[i]);
+    }
+
+    return cliques;
 }

@@ -56,6 +56,8 @@ public:
 
     const std::vector<vuPair>& getConnectedVertex() const;
 
+    bool isNeighbour(Vertex* other) const;
+
 };
 
 #endif //AAL_VERTEX_H

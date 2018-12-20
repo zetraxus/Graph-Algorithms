@@ -37,7 +37,7 @@ int main() {
 
             computeConnectedComponents(graph);
             diameter = computeDiameterGraph(graph);
-//            computeCliques(graph);
+//            cliques = computeCliques(graph);
 
             outputFile << GRAPHDESCRIPTION << j << ":" << NEWLINE;
             outputFile << DIAMETER << diameter << NEWLINE;

@@ -50,3 +50,12 @@ void Vertex::setDistance(unsigned int distance) {
 const std::vector<vuPair>& Vertex::getConnectedVertex() const {
     return connectedVertex;
 }
+
+bool Vertex::isNeighbour(Vertex* other) const{
+    for (int i = 0 ; i < connectedVertex.size(); ++i){
+        if(connectedVertex[i].first == other)
+            return true;
+    }
+
+    return false;
+}
