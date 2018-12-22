@@ -86,7 +86,7 @@ std::string Graph::toString() {
     std::string result = std::to_string(verticesCount) + SPACE + std::to_string(edgesCount) + NEWLINE;
 
     for (int i = 0; i < verticesCount; ++i) {
-        const std::vector<vuPair>& neighbour = vertices[i]->getConnectedVertex();
+        const std::vector<vuPair>& neighbour = vertices[i]->getConnectedVertices();
         for (int j = 0; j < neighbour.size(); ++j) {
             if (neighbour[j].first->getId() > i) {
                 result += std::to_string(i) + SPACE + std::to_string(neighbour[j].first->getId()) + SPACE +

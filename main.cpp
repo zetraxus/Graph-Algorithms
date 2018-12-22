@@ -21,7 +21,7 @@ int main() {
     std::ofstream outputFile;
     unsigned diameter;
 
-    for (int i = 0; i < files; ++i) {
+    for (int i = 0; i < 2; ++i) {
         inputFile.open(inputFilesNames[i]);
         outputFile.open(outputFilesNames[i]);
 
@@ -37,7 +37,9 @@ int main() {
 
             computeConnectedComponents(graph);
             diameter = computeDiameterGraph(graph);
-//            cliques = computeCliques(graph);
+//            cliques = computeCliquesBruteForce(graph);
+            MSTonConnectedComponents(graph);
+//            MSTonGraph(graph);
 
             outputFile << GRAPHDESCRIPTION << j << ":" << NEWLINE;
             outputFile << DIAMETER << diameter << NEWLINE;

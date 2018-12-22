@@ -15,9 +15,11 @@ public:
 
     void add(Vertex* vertex);
 
-    Vertex* getVertex(unsigned index);
+    Vertex* getVertex(unsigned index) const;
 
-    unsigned getSize();
+    const unsigned getSize() const;
+
+    const std::vector<Vertex*>& getVertices() const;
 };
 
 

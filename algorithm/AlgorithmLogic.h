@@ -12,6 +12,10 @@ void computeConnectedComponents(Graph* graph);
 
 unsigned computeDiameterGraph(Graph* graph);
 
-std::vector< std::vector<unsigned> > computeCliques(const Graph* graph);
+std::vector< std::vector<unsigned> > computeCliquesBruteForce(const Graph* graph);
+
+void MSTonConnectedComponents(Graph* graph);
+
+void MSTonGraph(Graph* graph);
 
 #endif //AAL_TESTED_H

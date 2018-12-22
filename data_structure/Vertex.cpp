@@ -35,7 +35,7 @@ unsigned int Vertex::getConnectedComponentID() const {
     return connectedComponentID;
 }
 
-unsigned int Vertex::getId() const {
+unsigned Vertex::getId() const {
     return id;
 }
 
@@ -47,7 +47,7 @@ void Vertex::setDistance(unsigned int distance) {
     Vertex::distance = distance;
 }
 
-const std::vector<vuPair>& Vertex::getConnectedVertex() const {
+const std::vector<vuPair>& Vertex::getConnectedVertices() const {
     return connectedVertex;
 }
 

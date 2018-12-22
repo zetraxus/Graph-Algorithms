@@ -9,10 +9,14 @@ void ConnectedComponent::add(Vertex* vertex) {
     vertices.push_back(vertex);
 }
 
-Vertex* ConnectedComponent::getVertex(unsigned index) {
+Vertex* ConnectedComponent::getVertex(unsigned index) const{
     return vertices[index];
 }
 
-unsigned ConnectedComponent::getSize() {
+const unsigned ConnectedComponent::getSize() const{
     return vertices.size();
+}
+
+const std::vector<Vertex*>& ConnectedComponent::getVertices() const {
+    return vertices;
 }

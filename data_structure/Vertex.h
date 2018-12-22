@@ -28,7 +28,7 @@ private:
 
     unsigned connectedComponentID;
     unsigned distance; // used in BFS algorithm
-    Colour colour;
+    Colour colour; // used in BFS and DFS algorithm
 
 public:
 
@@ -48,13 +48,13 @@ public:
 
     unsigned int getConnectedComponentID() const;
 
-    unsigned int getId() const;
+    unsigned getId() const;
 
     unsigned int getDistance() const;
 
     void setDistance(unsigned int distance);
 
-    const std::vector<vuPair>& getConnectedVertex() const;
+    const std::vector<vuPair>& getConnectedVertices() const;
 
     bool isNeighbour(Vertex* other) const;
 
