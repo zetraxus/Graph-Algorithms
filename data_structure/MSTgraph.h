@@ -9,6 +9,7 @@
 #include "../algorithm/Implementation.h"
 
 class MSTgraph {
+
     std::vector<std::vector<edgeDef> > MSTonCC;
     std::vector<unsigned> isolatedVertices;
     std::vector<edgeDef> MSTonGraph;
@@ -21,11 +22,9 @@ public:
 
     void computeMSTonGraph();
 
-    const std::vector<edgeDef>& getMSTonGraph() const;
-
-    const std::vector<unsigned int>& getIsolatedVertices() const;
-
     void print() const;
+
+    unsigned getMSTValue() const;
 };
 
 

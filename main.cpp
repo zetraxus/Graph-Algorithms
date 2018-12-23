@@ -33,18 +33,20 @@ int main() {
 
         for (unsigned j = 0; j < 5; ++j) {
             Graph* graph = new Graph();
+            MSTgraph* mstGraph;
             read_data(graph, inputFile);
 
             std::cout << i << " " << j << std::endl;
             computeConnectedComponents(graph);
             diameter = computeDiameterGraph(graph);
 //            cliques = computeCliquesBruteForce(graph);
-            std::vector<std::vector<edgeDef> > MSTCC =MSTonConnectedComponents(graph);
-//            MSTonGraph(graph);
+            mstGraph = MSTonConnectedComponents(graph);
+            MSTonGraph(mstGraph);
 
             outputFile << GRAPHDESCRIPTION << j << ":" << NEWLINE;
             outputFile << DIAMETER << diameter << NEWLINE;
             outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
+            outputFile << MSTONGRAPH << mstGraph->getMSTValue() << NEWLINE;
             outputFile << NEWLINE;
 
             delete graph;

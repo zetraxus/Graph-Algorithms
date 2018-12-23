@@ -35,17 +35,17 @@ void MSTgraph::computeMSTonGraph(){
     }
 }
 
-const std::vector<edgeDef>& MSTgraph::getMSTonGraph() const {
-    return MSTonGraph;
-}
-
-const std::vector<unsigned int>& MSTgraph::getIsolatedVertices() const {
-    return isolatedVertices;
-}
-
 void MSTgraph::print() const{
     std::cout<< "MST print: " << std::endl;
     for(unsigned i = 0 ; i < MSTonGraph.size(); ++i){
         std::cout << MSTonGraph[i].second.first << " " << MSTonGraph[i].second.second << " val = " << MSTonGraph[i].first << std::endl;
     }
+}
+
+unsigned MSTgraph::getMSTValue() const{
+    unsigned mstVal = 0;
+    for (int i = 0 ; i < MSTonGraph.size(); ++i){
+        mstVal += MSTonGraph[i].first;
+    }
+    return mstVal;
 }

@@ -50,7 +50,7 @@ std::vector<std::vector<unsigned> > computeCliquesBruteForce(const Graph* graph)
     return cliques;
 }
 
-std::vector<std::vector<edgeDef> > MSTonConnectedComponents(Graph* graph){
+MSTgraph* MSTonConnectedComponents(Graph* graph){
     MSTgraph* mstGraph = new MSTgraph();
 
     std::vector<std::vector<edgeDef> > results;
@@ -61,12 +61,10 @@ std::vector<std::vector<edgeDef> > MSTonConnectedComponents(Graph* graph){
             mstGraph->addVectorToMSTonCC(MST(graph->getConnectedComponentsVector(i), graph->getVerticesCount()));
     }
 
-    mstGraph->computeMSTonGraph();
-    mstGraph->print();
-
-    return results;
+    return mstGraph;
 }
 
-std::vector<std::vector<edgeDef> > MSTonGraph(Graph* graph){
-    MST(graph);
+MSTgraph* MSTonGraph(MSTgraph* mstGraph){
+    mstGraph->computeMSTonGraph();
+    return mstGraph;
 }

@@ -18,5 +18,7 @@ const std::string OUTPUT = "/output";
 const std::string GRAPHDESCRIPTION = "GRAPH_";
 const std::string DIAMETER = "Graph diameter: ";
 const std::string CONNECTEDCOMPONENTS = "Connected components in graph: ";
+const std::string MSTONGRAPH = "MST Value: ";
+
 
 #endif //AAL_MESSAGES_H

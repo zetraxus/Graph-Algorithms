@@ -8,6 +8,7 @@
 
 #include "../data_structure/Graph.h"
 #include "Implementation.h"
+#include "../data_structure/MSTgraph.h"
 
 void computeConnectedComponents(Graph* graph);
 
@@ -15,8 +16,8 @@ unsigned computeDiameterGraph(Graph* graph);
 
 std::vector< std::vector<unsigned> > computeCliquesBruteForce(const Graph* graph);
 
-std::vector<std::vector<edgeDef> >  MSTonConnectedComponents(Graph* graph);
+MSTgraph* MSTonConnectedComponents(Graph* graph);
 
-std::vector<std::vector<edgeDef> > MSTonGraph(Graph* graph);
+MSTgraph* MSTonGraph(MSTgraph* mstGraph);
 
 #endif //AAL_TESTED_H
