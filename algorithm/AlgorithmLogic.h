@@ -14,7 +14,11 @@ void computeConnectedComponents(Graph* graph);
 
 unsigned computeDiameterGraph(Graph* graph);
 
-std::vector< std::vector<unsigned> > computeCliquesBruteForce(const Graph* graph);
+std::vector<std::vector<unsigned> > computeCliquesBruteForce(const Graph* graph);
+
+bool comparatorVertexDegree(Vertex* a, Vertex* b);
+
+std::vector<std::vector<unsigned> > computeCliquesHeuristic(Graph* graph);
 
 MSTgraph* MSTonConnectedComponents(Graph* graph);
 

@@ -15,7 +15,8 @@ int main() {
     const unsigned graphsInFile = generator->getGraphsOnStep() / 2;
     const std::vector<std::string> inputFilesNames = generator->getInputFileNames();
     const std::vector<std::string> outputFilesNames = generator->getOutputFileNames();
-    std::vector<std::vector<unsigned> > cliques;
+    std::vector<std::vector<unsigned> > cliquesBrute;
+    std::vector<std::vector<unsigned> > cliquesHeur;
 
     std::fstream inputFile;
     std::ofstream outputFile;
@@ -39,7 +40,8 @@ int main() {
             std::cout << i << " " << j << std::endl;
             computeConnectedComponents(graph);
             diameter = computeDiameterGraph(graph);
-//            cliques = computeCliquesBruteForce(graph);
+//            cliquesBrute = computeCliquesBruteForce(graph);
+            cliquesHeur = computeCliquesHeuristic(graph);
             mstGraph = MSTonConnectedComponents(graph);
             MSTonGraph(mstGraph);
 

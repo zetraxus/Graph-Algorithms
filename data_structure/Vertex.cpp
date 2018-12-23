@@ -11,7 +11,7 @@ void Vertex::addEdge(Vertex* vertex, unsigned value) {
     connectedVertex.push_back(edge);
 }
 
-unsigned long Vertex::getDegree() {
+unsigned Vertex::getDegree() {
     return connectedVertex.size();
 }
 
@@ -51,9 +51,9 @@ const std::vector<vuPair>& Vertex::getConnectedVertices() const {
     return connectedVertex;
 }
 
-bool Vertex::isNeighbour(Vertex* other) const{
-    for (int i = 0 ; i < connectedVertex.size(); ++i){
-        if(connectedVertex[i].first == other)
+bool Vertex::isNeighbour(Vertex* other) const {
+    for (int i = 0; i < connectedVertex.size(); ++i) {
+        if (connectedVertex[i].first == other)
             return true;
     }
 

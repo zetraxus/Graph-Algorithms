@@ -20,7 +20,8 @@ const std::vector<std::vector<unsigned> > getAllSubsets(unsigned setSize);
 
 std::vector<edgeDef> getEdges(ConnectedComponent* connectedComponent);
 
-void MakeSet(std::vector<unsigned >& ancestors, std::vector<unsigned>& rank, const ConnectedComponent* connectedComponent);
+void
+MakeSet(std::vector<unsigned>& ancestors, std::vector<unsigned>& rank, const ConnectedComponent* connectedComponent);
 
 void Union(unsigned xId, unsigned yId, std::vector<unsigned>& ancestors, std::vector<unsigned>& rank);
 

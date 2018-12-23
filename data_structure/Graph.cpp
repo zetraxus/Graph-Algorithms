@@ -52,7 +52,7 @@ unsigned Graph::getVerticesCount() const {
     return verticesCount;
 }
 
-Vertex* Graph::getVertex(int index) const{
+Vertex* Graph::getVertex(int index) const {
     return vertices[index];
 }
 

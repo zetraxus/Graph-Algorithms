@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <algorithm>
 #include "AlgorithmLogic.h"
 #include "Implementation.h"
 #include "../data_structure/MSTgraph.h"
@@ -50,12 +51,27 @@ std::vector<std::vector<unsigned> > computeCliquesBruteForce(const Graph* graph)
     return cliques;
 }
 
-MSTgraph* MSTonConnectedComponents(Graph* graph){
+std::vector<std::vector<unsigned> > computeCliquesHeuristic(Graph* graph) {
+    std::vector<std::vector<unsigned> > cliques;
+    std::vector<Vertex*> vertices;
+
+    for (int i = 0; i < graph->getConnectedComponentsCount(); ++i) {
+        vertices = graph->getConnectedComponentsVector(i)->getVertices();
+        std::sort(vertices.begin(), vertices.end(), [](Vertex* a, Vertex* b) {
+            return a->getDegree() < b->getDegree();
+        });
+        //TODO continue here
+    }
+
+    return cliques;
+}
+
+MSTgraph* MSTonConnectedComponents(Graph* graph) {
     MSTgraph* mstGraph = new MSTgraph();
 
     std::vector<std::vector<edgeDef> > results;
-    for(unsigned i = 0 ; i < graph->getConnectedComponentsCount(); ++i){
-        if(graph->getConnectedComponentsSize(i) == 1)
+    for (unsigned i = 0; i < graph->getConnectedComponentsCount(); ++i) {
+        if (graph->getConnectedComponentsSize(i) == 1)
             mstGraph->addToIsolatedVertices(graph->getConnectedComponentsVector(i)->getVertex(0)->getId());
         else
             mstGraph->addVectorToMSTonCC(MST(graph->getConnectedComponentsVector(i), graph->getVerticesCount()));
@@ -64,7 +80,7 @@ MSTgraph* MSTonConnectedComponents(Graph* graph){
     return mstGraph;
 }
 
-MSTgraph* MSTonGraph(MSTgraph* mstGraph){
+MSTgraph* MSTonGraph(MSTgraph* mstGraph) {
     mstGraph->computeMSTonGraph();
     return mstGraph;
 }

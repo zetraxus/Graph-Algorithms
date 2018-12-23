@@ -9,11 +9,11 @@ void ConnectedComponent::add(Vertex* vertex) {
     vertices.push_back(vertex);
 }
 
-Vertex* ConnectedComponent::getVertex(unsigned index) const{
+Vertex* ConnectedComponent::getVertex(unsigned index) const {
     return vertices[index];
 }
 
-const unsigned ConnectedComponent::getSize() const{
+const unsigned ConnectedComponent::getSize() const {
     return vertices.size();
 }
 

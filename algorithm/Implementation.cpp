@@ -73,9 +73,9 @@ unsigned BFS(ConnectedComponent* connectedComponent, Vertex* start) {
     return lastAnalysedVertexDistance;
 }
 
-const std::vector< std::vector<unsigned> > getAllSubsets(unsigned setSize) {
+const std::vector<std::vector<unsigned> > getAllSubsets(unsigned setSize) {
     std::vector<int> set;
-    for(int i = 0 ; i < setSize; ++i)
+    for (int i = 0; i < setSize; ++i)
         set.push_back(i);
 
     std::vector<std::vector<unsigned> > subset;
@@ -95,48 +95,50 @@ const std::vector< std::vector<unsigned> > getAllSubsets(unsigned setSize) {
     return subset;
 }
 
-std::vector<edgeDef> getEdges(const ConnectedComponent* connectedComponent){
+std::vector<edgeDef> getEdges(const ConnectedComponent* connectedComponent) {
     const std::vector<Vertex*> vertices = connectedComponent->getVertices();
     std::vector<edgeDef> result;
 
-    for(unsigned i = 0 ; i < vertices.size(); ++i){
+    for (unsigned i = 0; i < vertices.size(); ++i) {
         const std::vector<vuPair>& neighbours = vertices[i]->getConnectedVertices();
-        for(int j = 0 ; j < neighbours.size(); ++j){
-            if(vertices[i]->getId() < neighbours[j].first->getId())
-                result.push_back(std::make_pair(neighbours[j].second, std::make_pair(vertices[i]->getId(), neighbours[j].first->getId())));
+        for (int j = 0; j < neighbours.size(); ++j) {
+            if (vertices[i]->getId() < neighbours[j].first->getId())
+                result.push_back(std::make_pair(neighbours[j].second,
+                                                std::make_pair(vertices[i]->getId(), neighbours[j].first->getId())));
         }
     }
     return result;
 }
 
-void MakeSet(std::vector<unsigned>& ancestors, std::vector<unsigned>& rank, const ConnectedComponent* connectedComponent){
-    for(unsigned i = 0 ; i < connectedComponent->getSize(); ++i){
+void
+MakeSet(std::vector<unsigned>& ancestors, std::vector<unsigned>& rank, const ConnectedComponent* connectedComponent) {
+    for (unsigned i = 0; i < connectedComponent->getSize(); ++i) {
         ancestors[connectedComponent->getVertex(i)->getId()] = connectedComponent->getVertex(i)->getId();
         rank[connectedComponent->getVertex(i)->getId()] = DEFAULTRANK;
     }
 }
 
-void Union(unsigned xId, unsigned yId, std::vector<unsigned>& ancestors, std::vector<unsigned>& rank){
+void Union(unsigned xId, unsigned yId, std::vector<unsigned>& ancestors, std::vector<unsigned>& rank) {
     Link(FindSet(xId, ancestors), FindSet(yId, ancestors), ancestors, rank);
 }
 
-void Link(unsigned xId, unsigned yId, std::vector<unsigned>& ancestors, std::vector<unsigned>& rank){
-    if(rank[xId] > rank[yId])
+void Link(unsigned xId, unsigned yId, std::vector<unsigned>& ancestors, std::vector<unsigned>& rank) {
+    if (rank[xId] > rank[yId])
         ancestors[yId] = xId;
     else
         ancestors[xId] = yId;
-    if(rank[xId] == rank[yId])
+    if (rank[xId] == rank[yId])
         ++rank[yId];
 }
 
-unsigned FindSet(unsigned xId, std::vector<unsigned>& ancestors){
-    if(ancestors[xId] != xId) {
+unsigned FindSet(unsigned xId, std::vector<unsigned>& ancestors) {
+    if (ancestors[xId] != xId) {
         return FindSet(ancestors[xId], ancestors);
     }
     return ancestors[xId];
 }
 
-std::vector<edgeDef> MST(const ConnectedComponent* connectedComponent, unsigned graphSize){
+std::vector<edgeDef> MST(const ConnectedComponent* connectedComponent, unsigned graphSize) {
     std::vector<edgeDef> result;
 
     std::vector<edgeDef> edges = getEdges(connectedComponent);
@@ -147,8 +149,8 @@ std::vector<edgeDef> MST(const ConnectedComponent* connectedComponent, unsigned 
     std::sort(edges.begin(), edges.end());
     MakeSet(ancestors, rank, connectedComponent);
 
-    for(unsigned i = 0 ; i < edges.size(); ++i){
-        if(FindSet(edges[i].second.first, ancestors) != FindSet(edges[i].second.second, ancestors)) {
+    for (unsigned i = 0; i < edges.size(); ++i) {
+        if (FindSet(edges[i].second.first, ancestors) != FindSet(edges[i].second.second, ancestors)) {
             Union(edges[i].second.first, edges[i].second.second, ancestors, rank);
             result.push_back(edges[i]);
         }
@@ -157,6 +159,6 @@ std::vector<edgeDef> MST(const ConnectedComponent* connectedComponent, unsigned 
     return result;
 }
 
-std::vector<edgeDef> MST(Graph* graph){
+std::vector<edgeDef> MST(Graph* graph) {
 
 }

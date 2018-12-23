@@ -36,7 +36,7 @@ public:
 
     void addEdge(Vertex* vertex, unsigned value);
 
-    unsigned long getDegree();
+    unsigned getDegree();
 
     Colour getColour() const;
 
@@ -57,7 +57,6 @@ public:
     const std::vector<vuPair>& getConnectedVertices() const;
 
     bool isNeighbour(Vertex* other) const;
-
 };
 
 #endif //AAL_VERTEX_H
