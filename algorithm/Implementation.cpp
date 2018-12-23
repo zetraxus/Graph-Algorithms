@@ -128,7 +128,7 @@ void Link(unsigned xId, unsigned yId, std::vector<unsigned>& ancestors, std::vec
     if(rank[xId] == rank[yId])
         ++rank[yId];
 }
-using namespace std;
+
 unsigned FindSet(unsigned xId, std::vector<unsigned>& ancestors){
     if(ancestors[xId] != xId) {
         return FindSet(ancestors[xId], ancestors);
@@ -136,8 +136,9 @@ unsigned FindSet(unsigned xId, std::vector<unsigned>& ancestors){
     return ancestors[xId];
 }
 
-void MST(const ConnectedComponent* connectedComponent, unsigned graphSize){
-    std::vector<std::pair<unsigned, unsigned > > result;
+std::vector<edgeDef> MST(const ConnectedComponent* connectedComponent, unsigned graphSize){
+    std::vector<edgeDef> result;
+
     std::vector<edgeDef> edges = getEdges(connectedComponent);
 
     std::vector<unsigned> ancestors(graphSize);
@@ -149,11 +150,13 @@ void MST(const ConnectedComponent* connectedComponent, unsigned graphSize){
     for(unsigned i = 0 ; i < edges.size(); ++i){
         if(FindSet(edges[i].second.first, ancestors) != FindSet(edges[i].second.second, ancestors)) {
             Union(edges[i].second.first, edges[i].second.second, ancestors, rank);
-            result.push_back(std::make_pair(edges[i].second.first, edges[i].second.second));
+            result.push_back(edges[i]);
         }
     }
+
+    return result;
 }
 
-std::vector<std::pair<unsigned, unsigned > > MST(Graph* graph){
+std::vector<edgeDef> MST(Graph* graph){
 
 }

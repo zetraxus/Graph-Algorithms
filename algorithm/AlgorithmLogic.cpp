@@ -5,6 +5,7 @@
 #include <iostream>
 #include "AlgorithmLogic.h"
 #include "Implementation.h"
+#include "../data_structure/MSTgraph.h"
 
 void computeConnectedComponents(Graph* graph) {
     DFS(graph);
@@ -49,12 +50,23 @@ std::vector<std::vector<unsigned> > computeCliquesBruteForce(const Graph* graph)
     return cliques;
 }
 
-void MSTonConnectedComponents(Graph* graph){
+std::vector<std::vector<edgeDef> > MSTonConnectedComponents(Graph* graph){
+    MSTgraph* mstGraph = new MSTgraph();
+
+    std::vector<std::vector<edgeDef> > results;
     for(unsigned i = 0 ; i < graph->getConnectedComponentsCount(); ++i){
-        MST(graph->getConnectedComponentsVector(i), graph->getVerticesCount());
+        if(graph->getConnectedComponentsSize(i) == 1)
+            mstGraph->addToIsolatedVertices(graph->getConnectedComponentsVector(i)->getVertex(0)->getId());
+        else
+            mstGraph->addVectorToMSTonCC(MST(graph->getConnectedComponentsVector(i), graph->getVerticesCount()));
     }
+
+    mstGraph->computeMSTonGraph();
+    mstGraph->print();
+
+    return results;
 }
 
-void MSTonGraph(Graph* graph){
+std::vector<std::vector<edgeDef> > MSTonGraph(Graph* graph){
     MST(graph);
 }

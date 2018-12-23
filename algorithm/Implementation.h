@@ -28,10 +28,8 @@ void Link(unsigned xId, unsigned yId, std::vector<unsigned>& ancestors, std::vec
 
 unsigned FindSet(unsigned xId, std::vector<unsigned>& ancestors);
 
-//std::vector<std::pair<unsigned, unsigned> > MST(ConnectedComponent* connectedComponent);
+std::vector<edgeDef> MST(const ConnectedComponent* connectedComponent, unsigned graphSize);
 
-void MST(const ConnectedComponent* connectedComponent, unsigned graphSize);
-
-std::vector<std::pair<unsigned, unsigned > > MST(Graph* graph);
+std::vector<edgeDef> MST(Graph* graph);
 
 #endif //AAL_ALGORITHMS_H
