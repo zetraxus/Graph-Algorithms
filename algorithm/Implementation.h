@@ -6,6 +6,7 @@
 #define AAL_ALGORITHMS_H
 
 #include "../data_structure/Graph.h"
+#include "../data_structure/Clique.h"
 
 typedef std::pair<unsigned, std::pair<unsigned, unsigned> > edgeDef;
 
@@ -18,10 +19,11 @@ unsigned BFS(ConnectedComponent* connectedComponent, Vertex* start);
 
 const std::vector<std::vector<unsigned> > getAllSubsets(unsigned setSize);
 
+unsigned computeNextCliques(std::vector<Clique*>& cliques, const std::vector<Vertex*> &vertices, unsigned startId);
+
 std::vector<edgeDef> getEdges(ConnectedComponent* connectedComponent);
 
-void
-MakeSet(std::vector<unsigned>& ancestors, std::vector<unsigned>& rank, const ConnectedComponent* connectedComponent);
+void MakeSet(std::vector<unsigned>& ancestors, std::vector<unsigned>& rank, const ConnectedComponent* connectedComponent);
 
 void Union(unsigned xId, unsigned yId, std::vector<unsigned>& ancestors, std::vector<unsigned>& rank);
 
@@ -30,7 +32,5 @@ void Link(unsigned xId, unsigned yId, std::vector<unsigned>& ancestors, std::vec
 unsigned FindSet(unsigned xId, std::vector<unsigned>& ancestors);
 
 std::vector<edgeDef> MST(const ConnectedComponent* connectedComponent, unsigned graphSize);
-
-std::vector<edgeDef> MST(Graph* graph);
 
 #endif //AAL_ALGORITHMS_H

@@ -5,7 +5,10 @@
 #include "algorithm/AlgorithmLogic.h"
 
 
-int main() {
+int main(int argc, char** argv) {
+
+
+
 
     srand(time(NULL));
     Generator* generator = new Generator();
@@ -16,15 +19,15 @@ int main() {
     const std::vector<std::string> inputFilesNames = generator->getInputFileNames();
     const std::vector<std::string> outputFilesNames = generator->getOutputFileNames();
     std::vector<std::vector<unsigned> > cliquesBrute;
-    std::vector<std::vector<unsigned> > cliquesHeur;
+    std::vector<Clique*> cliquesHeur;
 
     std::fstream inputFile;
     std::ofstream outputFile;
     unsigned diameter;
 
     for (unsigned i = 0; i < 2; ++i) {
-        inputFile.open(inputFilesNames[i]);
-        outputFile.open(outputFilesNames[i]);
+        inputFile.open("cmake-build-debug/" + inputFilesNames[i]);
+        outputFile.open("cmake-build-debug/" + outputFilesNames[i]);
 
         if (!inputFile.is_open())
             std::cerr << ERRORFILEOPEN << inputFilesNames[i] << std::endl;

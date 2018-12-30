@@ -7,6 +7,7 @@
 #include "AlgorithmLogic.h"
 #include "Implementation.h"
 #include "../data_structure/MSTgraph.h"
+#include "../data_structure/Clique.h"
 
 void computeConnectedComponents(Graph* graph) {
     DFS(graph);
@@ -51,16 +52,26 @@ std::vector<std::vector<unsigned> > computeCliquesBruteForce(const Graph* graph)
     return cliques;
 }
 
-std::vector<std::vector<unsigned> > computeCliquesHeuristic(Graph* graph) {
-    std::vector<std::vector<unsigned> > cliques;
+std::vector<Clique*> computeCliquesHeuristic(Graph* graph) {
+    std::vector<Clique*> cliques;
     std::vector<Vertex*> vertices;
+    unsigned newCliqueInLastLoop = 0;
 
-    for (int i = 0; i < graph->getConnectedComponentsCount(); ++i) {
+    for (unsigned i = 0; i < graph->getConnectedComponentsCount(); ++i) {
         vertices = graph->getConnectedComponentsVector(i)->getVertices();
         std::sort(vertices.begin(), vertices.end(), [](Vertex* a, Vertex* b) {
             return a->getDegree() < b->getDegree();
         });
-        //TODO continue here
+
+        for(unsigned i = 0 ; i < vertices.size(); ++i){
+            Clique* oneElementClique = new Clique(vertices[i]);
+            cliques.push_back(oneElementClique);
+            ++newCliqueInLastLoop;
+        }
+
+        while(!newCliqueInLastLoop){
+            newCliqueInLastLoop = computeNextCliques(cliques, vertices, vertices.size() - newCliqueInLastLoop);
+        }
     }
 
     return cliques;

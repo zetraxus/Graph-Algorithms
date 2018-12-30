@@ -9,6 +9,7 @@
 #include "../data_structure/Graph.h"
 #include "Implementation.h"
 #include "../data_structure/MSTgraph.h"
+#include "../data_structure/Clique.h"
 
 void computeConnectedComponents(Graph* graph);
 
@@ -16,9 +17,7 @@ unsigned computeDiameterGraph(Graph* graph);
 
 std::vector<std::vector<unsigned> > computeCliquesBruteForce(const Graph* graph);
 
-bool comparatorVertexDegree(Vertex* a, Vertex* b);
-
-std::vector<std::vector<unsigned> > computeCliquesHeuristic(Graph* graph);
+std::vector<Clique*> computeCliquesHeuristic(Graph* graph);
 
 MSTgraph* MSTonConnectedComponents(Graph* graph);
 
