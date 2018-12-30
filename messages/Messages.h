@@ -19,6 +19,7 @@ const std::string GRAPHDESCRIPTION = "GRAPH_";
 const std::string DIAMETER = "Graph diameter: ";
 const std::string CONNECTEDCOMPONENTS = "Connected components in graph: ";
 const std::string MSTONGRAPH = "MST Value: ";
-
+const std::string TIME = " \t time[ms]: ";
+const std::string AVGTIME = " \t\t average time[ms]: ";
 
 #endif //AAL_MESSAGES_H

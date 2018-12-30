@@ -4,30 +4,44 @@
 
 #include <iostream>
 #include <algorithm>
+#include <chrono>
 #include "AlgorithmLogic.h"
 #include "Implementation.h"
 #include "../data_structure/MSTgraph.h"
 #include "../data_structure/Clique.h"
 
-void computeConnectedComponents(Graph* graph) {
+void AlgorithmLogic::computeConnectedComponents(Graph* graph) {
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     DFS(graph);
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    CCTime = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 }
 
-unsigned computeDiameterGraph(Graph* graph) {
+unsigned AlgorithmLogic::computeDiameterGraph(Graph* graph) {
     unsigned diameter = 0;
+    unsigned time = 0;
     for (unsigned i = 0; i < graph->getConnectedComponentsCount(); ++i) {
 //        unsigned diameter = 0;
         ConnectedComponent* analysed = graph->getConnectedComponentsVector(i);
+
+        std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
         for (unsigned j = 0; j < graph->getConnectedComponentsSize(i); ++j) {
             unsigned candidate = BFS(analysed, analysed->getVertex(j));
             if (candidate > diameter)
                 diameter = candidate;
         }
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+        time += std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
     }
+
+    diameterTime = time/graph->getConnectedComponentsCount();
+
     return diameter;
 }
 
-std::vector<std::vector<unsigned> > computeCliquesBruteForce(const Graph* graph) {
+std::vector<std::vector<unsigned> >AlgorithmLogic::computeCliquesBruteForce(const Graph* graph) {
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+
     const std::vector<std::vector<unsigned> > subsets = getAllSubsets(graph->getVerticesCount());
     std::vector<std::vector<unsigned> > cliques;
 
@@ -49,14 +63,18 @@ std::vector<std::vector<unsigned> > computeCliquesBruteForce(const Graph* graph)
             cliques.push_back(subsets[i]);
     }
 
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    cliqueBruteForceTime = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+
     return cliques;
 }
 
-std::vector<Clique*> computeCliquesHeuristic(Graph* graph) {
+std::vector<Clique*> AlgorithmLogic::computeCliquesHeuristic(Graph* graph) {
     std::vector<Clique*> cliques;
     std::vector<Vertex*> vertices;
     unsigned newCliqueInLastLoop = 0;
 
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     for (unsigned i = 0; i < graph->getConnectedComponentsCount(); ++i) {
         vertices = graph->getConnectedComponentsVector(i)->getVertices();
         std::sort(vertices.begin(), vertices.end(), [](Vertex* a, Vertex* b) {
@@ -74,12 +92,16 @@ std::vector<Clique*> computeCliquesHeuristic(Graph* graph) {
         }
     }
 
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    cliqueHeuristicTime = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+
     return cliques;
 }
 
-MSTgraph* MSTonConnectedComponents(Graph* graph) {
+MSTgraph* AlgorithmLogic::MSTonConnectedComponents(Graph* graph) {
     MSTgraph* mstGraph = new MSTgraph();
 
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     std::vector<std::vector<edgeDef> > results;
     for (unsigned i = 0; i < graph->getConnectedComponentsCount(); ++i) {
         if (graph->getConnectedComponentsSize(i) == 1)
@@ -88,10 +110,41 @@ MSTgraph* MSTonConnectedComponents(Graph* graph) {
             mstGraph->addVectorToMSTonCC(MST(graph->getConnectedComponentsVector(i), graph->getVerticesCount()));
     }
 
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    MSTCCTime = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+
     return mstGraph;
 }
 
-MSTgraph* MSTonGraph(MSTgraph* mstGraph) {
+MSTgraph* AlgorithmLogic::MSTonGraph(MSTgraph* mstGraph) {
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     mstGraph->computeMSTonGraph();
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    MSTGraphTime = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+
     return mstGraph;
+}
+
+unsigned int AlgorithmLogic::getCCTime() const {
+    return CCTime;
+}
+
+double AlgorithmLogic::getDiameterTime() const {
+    return diameterTime;
+}
+
+unsigned int AlgorithmLogic::getCliqueBruteForceTime() const {
+    return cliqueBruteForceTime;
+}
+
+unsigned int AlgorithmLogic::getCliqueHeuristicTime() const {
+    return cliqueHeuristicTime;
+}
+
+unsigned int AlgorithmLogic::getMSTCCTime() const {
+    return MSTCCTime;
+}
+
+unsigned int AlgorithmLogic::getMSTGraphTime() const {
+    return MSTGraphTime;
 }

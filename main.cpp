@@ -24,10 +24,12 @@ int main(int argc, char** argv) {
     std::fstream inputFile;
     std::ofstream outputFile;
     unsigned diameter;
+    MSTgraph* mstGraph;
+    AlgorithmLogic* algorithmLogic = new AlgorithmLogic();
 
-    for (unsigned i = 0; i < 2; ++i) {
-        inputFile.open("cmake-build-debug/" + inputFilesNames[i]);
-        outputFile.open("cmake-build-debug/" + outputFilesNames[i]);
+    for (unsigned i = 0; i < files; ++i) {
+        inputFile.open("cmake-build-debug/" + inputFilesNames[i]); //TODO delete cmake-build-debug
+        outputFile.open("cmake-build-debug/" + outputFilesNames[i]); //TODO delete cmake-build-debug
 
         if (!inputFile.is_open())
             std::cerr << ERRORFILEOPEN << inputFilesNames[i] << std::endl;
@@ -35,23 +37,23 @@ int main(int argc, char** argv) {
             std::cerr << ERRORFILEOPEN << outputFilesNames[i] << std::endl;
         }
 
-        for (unsigned j = 0; j < 5; ++j) {
+        for (unsigned j = 0; j < graphsInFile; ++j) {
             Graph* graph = new Graph();
-            MSTgraph* mstGraph;
+
             read_data(graph, inputFile);
 
             std::cout << i << " " << j << std::endl;
-            computeConnectedComponents(graph);
-            diameter = computeDiameterGraph(graph);
+            algorithmLogic->computeConnectedComponents(graph);
+            diameter = algorithmLogic->computeDiameterGraph(graph);
 //            cliquesBrute = computeCliquesBruteForce(graph);
-            cliquesHeur = computeCliquesHeuristic(graph);
-            mstGraph = MSTonConnectedComponents(graph);
-            MSTonGraph(mstGraph);
+            cliquesHeur = algorithmLogic->computeCliquesHeuristic(graph);
+            mstGraph = algorithmLogic->MSTonConnectedComponents(graph);
+            algorithmLogic->MSTonGraph(mstGraph);
 
             outputFile << GRAPHDESCRIPTION << j << ":" << NEWLINE;
-            outputFile << DIAMETER << diameter << NEWLINE;
+            outputFile << DIAMETER << diameter << AVGTIME << algorithmLogic->getDiameterTime() << NEWLINE;
             outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
-            outputFile << MSTONGRAPH << mstGraph->getMSTValue() << NEWLINE;
+            outputFile << MSTONGRAPH << mstGraph->getMSTValue() << TIME << algorithmLogic->getMSTCCTime() + algorithmLogic->getMSTGraphTime() << NEWLINE;
             outputFile << NEWLINE;
 
             delete graph;
