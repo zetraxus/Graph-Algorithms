@@ -25,8 +25,7 @@ private:
 public:
     void inputFromFileExecute();
     void inputFromCommandLineExecute();
-    void generateInputExecute();
-    void generateInputAndMeasureTimeExecute();
+    void generateInputExecute(bool timeMeasure);
 
     void execute();
     void setMode(Mode mode);

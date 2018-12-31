@@ -20,11 +20,7 @@ void ProgramLogic::inputFromCommandLineExecute(){
 
 }
 
-void ProgramLogic::generateInputExecute(){
-
-}
-
-void ProgramLogic::generateInputAndMeasureTimeExecute(){
+void ProgramLogic::generateInputExecute(bool timeMeasure){
     srand(time(NULL));
     Generator* generator = new Generator();
     generator->generateAll();
@@ -65,11 +61,20 @@ void ProgramLogic::generateInputAndMeasureTimeExecute(){
             mstGraph = algorithmLogic->MSTonConnectedComponents(graph);
             algorithmLogic->MSTonGraph(mstGraph);
 
-            outputFile << GRAPHDESCRIPTION << j << ":" << NEWLINE;
-            outputFile << DIAMETER << diameter << AVGTIME << algorithmLogic->getDiameterTime() << NEWLINE;
-            outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
-            outputFile << MSTONGRAPH << mstGraph->getMSTValue() << TIME << algorithmLogic->getMSTCCTime() + algorithmLogic->getMSTGraphTime() << NEWLINE;
-            outputFile << NEWLINE;
+            if(timeMeasure){
+                outputFile << GRAPHDESCRIPTION << j << ":" << NEWLINE;
+                outputFile << DIAMETER << diameter << AVGTIME << algorithmLogic->getDiameterTime() << NEWLINE;
+                outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
+                outputFile << MSTONGRAPH << mstGraph->getMSTValue() << TIME << algorithmLogic->getMSTCCTime() + algorithmLogic->getMSTGraphTime() << NEWLINE;
+                outputFile << NEWLINE;
+            }
+            else{
+                outputFile << GRAPHDESCRIPTION << j << ":" << NEWLINE;
+                outputFile << DIAMETER << diameter << NEWLINE;
+                outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
+                outputFile << MSTONGRAPH << mstGraph->getMSTValue();
+                outputFile << NEWLINE;
+            }
 
             delete graph;
         }
@@ -84,9 +89,9 @@ void ProgramLogic::execute(){
     else if(mode == inputFromCommandLine)
         inputFromCommandLineExecute();
     else if(mode == generateInput)
-        generateInputExecute();
+        generateInputExecute(false);
     else
-        generateInputAndMeasureTimeExecute();
+        generateInputExecute(true);
 }
 
 void ProgramLogic::setMode(Mode mode) {
