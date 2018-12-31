@@ -1,14 +1,47 @@
 #include <fstream>
+#include <getopt.h>
+#include <algorithm>
 #include "in_out/in_out.h"
 #include "generator/Generator.h"
 #include "algorithm/Implementation.h"
 #include "algorithm/AlgorithmLogic.h"
 
-
 int main(int argc, char** argv) {
 
+    bool inputFromFile, inputFromCommandLine, generateInput, generateInputAndMeasureTime;
+    inputFromFile = inputFromCommandLine = generateInput = generateInputAndMeasureTime = false;
+    char* fileName = nullptr;
+    int opt;
+    opterr = 0;
+    unsigned options = 0;
 
+    while((opt=getopt(argc, argv, "abcd:")) != -1){
+        switch (opt){
+            case 'a':
+                fileName = optarg;
+                inputFromFile = true;
+                break;
+            case 'b':
+                inputFromCommandLine = true;
+                break;
+            case 'c':
+                generateInput = true;
+                break;
+            case 'd':
+                generateInputAndMeasureTime = true;
+                break;
+            case '?':
+                std::cerr << "Uknown option: " << char(optopt) << std::endl;
+                break;
+        }
 
+        ++options;
+    }
+
+    if(options != 1){
+        std::cerr << options << " " << BADFLAGS;
+        return 0;
+    }
 
     srand(time(NULL));
     Generator* generator = new Generator();
