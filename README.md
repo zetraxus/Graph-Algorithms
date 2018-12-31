@@ -20,15 +20,15 @@
 
 ### Input format
 
-n m
-Vi Vj IJvalue
-...
-Vx Vy XYvalue
+n m  
+Vi Vj IJvalue  
+...  
+Vx Vy XYvalue  
 
-where:
-n = Vertices count
-m = Edges count
-Vi, Vj = Vertices indexes
+where:  
+n = Vertices count  
+m = Edges count  
+Vi, Vj = Vertices indexes  
 IJvalue = Value of edge between i-vertex and j-vertex
 
 ### Algorithms
