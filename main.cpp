@@ -1,37 +1,36 @@
 #include <fstream>
 #include <getopt.h>
-#include <algorithm>
-#include "in_out/in_out.h"
-#include "generator/Generator.h"
-#include "algorithm/Implementation.h"
-#include "algorithm/AlgorithmLogic.h"
+#include <iostream>
+#include "messages/Messages.h"
+#include "program_logic/ProgramLogic.h"
+
 
 int main(int argc, char** argv) {
-
-    bool inputFromFile, inputFromCommandLine, generateInput, generateInputAndMeasureTime;
-    inputFromFile = inputFromCommandLine = generateInput = generateInputAndMeasureTime = false;
-    char* fileName = nullptr;
+    ProgramLogic* programme = new ProgramLogic();
     int opt;
     opterr = 0;
     unsigned options = 0;
 
-    while((opt=getopt(argc, argv, "abcd:")) != -1){
+    while((opt=getopt(argc, argv, "a:bcd")) != -1){
         switch (opt){
             case 'a':
-                fileName = optarg;
-                inputFromFile = true;
+                programme->setMode(ProgramLogic::Mode::inputFromFile);
+                programme->setFileName(optarg);
                 break;
             case 'b':
-                inputFromCommandLine = true;
+                programme->setMode(ProgramLogic::Mode::inputFromCommandLine);
                 break;
             case 'c':
-                generateInput = true;
+                programme->setMode(ProgramLogic::Mode::generateInput);
                 break;
             case 'd':
-                generateInputAndMeasureTime = true;
+                programme->setMode(ProgramLogic::Mode::generateInputAndMeasureTime);
                 break;
             case '?':
-                std::cerr << "Uknown option: " << char(optopt) << std::endl;
+                if(optopt == 'a')
+                    std::cerr << "Option 'a' requires an argument (file name)" << NEWLINE;
+                else
+                    std::cerr << "Uknown option: " << char(optopt) << NEWLINE;
                 break;
         }
 
@@ -39,61 +38,10 @@ int main(int argc, char** argv) {
     }
 
     if(options != 1){
-        std::cerr << options << " " << BADFLAGS;
+        std::cerr << BADFLAGS << NEWLINE;
         return 0;
     }
 
-    srand(time(NULL));
-    Generator* generator = new Generator();
-    generator->generateAll();
-
-    const unsigned files = 2 * generator->getGraphsCount() / generator->getGraphsOnStep();
-    const unsigned graphsInFile = generator->getGraphsOnStep() / 2;
-    const std::vector<std::string> inputFilesNames = generator->getInputFileNames();
-    const std::vector<std::string> outputFilesNames = generator->getOutputFileNames();
-    std::vector<std::vector<unsigned> > cliquesBrute;
-    std::vector<Clique*> cliquesHeur;
-
-    std::fstream inputFile;
-    std::ofstream outputFile;
-    unsigned diameter;
-    MSTgraph* mstGraph;
-    AlgorithmLogic* algorithmLogic = new AlgorithmLogic();
-
-    for (unsigned i = 0; i < files; ++i) {
-        inputFile.open("cmake-build-debug/" + inputFilesNames[i]); //TODO delete cmake-build-debug
-        outputFile.open("cmake-build-debug/" + outputFilesNames[i]); //TODO delete cmake-build-debug
-
-        if (!inputFile.is_open())
-            std::cerr << ERRORFILEOPEN << inputFilesNames[i] << std::endl;
-        if (!outputFile.is_open()) {
-            std::cerr << ERRORFILEOPEN << outputFilesNames[i] << std::endl;
-        }
-
-        for (unsigned j = 0; j < graphsInFile; ++j) {
-            Graph* graph = new Graph();
-
-            read_data(graph, inputFile);
-
-            std::cout << i << " " << j << std::endl;
-            algorithmLogic->computeConnectedComponents(graph);
-            diameter = algorithmLogic->computeDiameterGraph(graph);
-//            cliquesBrute = computeCliquesBruteForce(graph);
-            cliquesHeur = algorithmLogic->computeCliquesHeuristic(graph);
-            mstGraph = algorithmLogic->MSTonConnectedComponents(graph);
-            algorithmLogic->MSTonGraph(mstGraph);
-
-            outputFile << GRAPHDESCRIPTION << j << ":" << NEWLINE;
-            outputFile << DIAMETER << diameter << AVGTIME << algorithmLogic->getDiameterTime() << NEWLINE;
-            outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
-            outputFile << MSTONGRAPH << mstGraph->getMSTValue() << TIME << algorithmLogic->getMSTCCTime() + algorithmLogic->getMSTGraphTime() << NEWLINE;
-            outputFile << NEWLINE;
-
-            delete graph;
-        }
-        inputFile.close();
-        outputFile.close();
-    }
-
+    programme->execute();
     return 0;
 }
