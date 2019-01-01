@@ -27,11 +27,14 @@ int main(int argc, char** argv) {
                 programme->setMode(ProgramLogic::Mode::generateInputAndMeasureTime);
                 break;
             case '?':
-                if(optopt == 'a')
+                if(optopt == 'a'){
                     std::cerr << "Option 'a' requires an argument (file name)" << NEWLINE;
-                else
+                    return 1;
+                }
+                else{
                     std::cerr << "Uknown option: " << char(optopt) << NEWLINE;
-                break;
+                    return 1;
+                }
         }
 
         ++options;
@@ -39,7 +42,7 @@ int main(int argc, char** argv) {
 
     if(options != 1){
         std::cerr << BADFLAGS << NEWLINE;
-        return 0;
+        return 1;
     }
 
     programme->execute();

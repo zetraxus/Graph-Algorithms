@@ -7,6 +7,7 @@
 
 
 #include <string>
+#include "../algorithm/AlgorithmLogic.h"
 
 class ProgramLogic {
 
@@ -21,6 +22,7 @@ public:
 private:
     const char* fileName;
     Mode mode;
+    void run(AlgorithmLogic*& algorithmLogic, Graph*& graph, unsigned &diameter, std::vector<Clique*>& cliquesHeur, MSTgraph*& mstGraph);
 
 public:
     void inputFromFileExecute();

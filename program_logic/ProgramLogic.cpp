@@ -5,7 +5,7 @@
 #include "ProgramLogic.h"
 #include <algorithm>
 #include <fstream>
-#include "../in_out/in_out.h"
+#include "../in_out/InOut.h"
 #include "../generator/Generator.h"
 #include "../algorithm/Implementation.h"
 #include "../algorithm/AlgorithmLogic.h"
@@ -13,10 +13,30 @@
 #include "../data_structure/MSTgraph.h"
 
 void ProgramLogic::inputFromFileExecute(){
+    unsigned diameter;
+    MSTgraph* mstGraph;
+    std::vector<Clique*> cliquesHeur;
+    AlgorithmLogic* algorithmLogic = new AlgorithmLogic();
 
+    std::fstream inputFile;
+    std::ofstream outputFile;
+    std::string outputFileName(fileName);
+    outputFileName.append(".out");
+
+    if(openFiles(inputFile, outputFile, fileName, outputFileName)){
+        Graph* graph = new Graph();
+
+        readData(graph, inputFile);
+        run(algorithmLogic, graph, diameter, cliquesHeur, mstGraph);
+        printResults(outputFile, 0, diameter, algorithmLogic, graph, mstGraph, false);
+
+        delete graph;
+    }
 }
 
 void ProgramLogic::inputFromCommandLineExecute(){
+    Graph* graph = new Graph(); //TODO
+    readData(graph);
 
 }
 
@@ -39,48 +59,22 @@ void ProgramLogic::generateInputExecute(bool timeMeasure){
     AlgorithmLogic* algorithmLogic = new AlgorithmLogic();
 
     for (unsigned i = 0; i < files; ++i) {
-        inputFile.open("cmake-build-debug/" + inputFilesNames[i]); //TODO delete cmake-build-debug
-        outputFile.open("cmake-build-debug/" + outputFilesNames[i]); //TODO delete cmake-build-debug
-
-        if (!inputFile.is_open())
-            std::cerr << ERRORFILEOPEN << inputFilesNames[i] << std::endl;
-        if (!outputFile.is_open()) {
-            std::cerr << ERRORFILEOPEN << outputFilesNames[i] << std::endl;
-        }
+        openFiles(inputFile, outputFile, "cmake-build-debug/" + inputFilesNames[i], "cmake-build-debug/" + outputFilesNames[i]); //TODO delete cmake-build-debug
 
         for (unsigned j = 0; j < graphsInFile; ++j) {
             Graph* graph = new Graph();
 
-            read_data(graph, inputFile);
-
-            std::cout << i << " " << j << std::endl;
-            algorithmLogic->computeConnectedComponents(graph);
-            diameter = algorithmLogic->computeDiameterGraph(graph);
-//            cliquesBrute = computeCliquesBruteForce(graph);
-            cliquesHeur = algorithmLogic->computeCliquesHeuristic(graph);
-            mstGraph = algorithmLogic->MSTonConnectedComponents(graph);
-            algorithmLogic->MSTonGraph(mstGraph);
-
-            if(timeMeasure){
-                outputFile << GRAPHDESCRIPTION << j << ":" << NEWLINE;
-                outputFile << DIAMETER << diameter << AVGTIME << algorithmLogic->getDiameterTime() << NEWLINE;
-                outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
-                outputFile << MSTONGRAPH << mstGraph->getMSTValue() << TIME << algorithmLogic->getMSTCCTime() + algorithmLogic->getMSTGraphTime() << NEWLINE;
-                outputFile << NEWLINE;
-            }
-            else{
-                outputFile << GRAPHDESCRIPTION << j << ":" << NEWLINE;
-                outputFile << DIAMETER << diameter << NEWLINE;
-                outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
-                outputFile << MSTONGRAPH << mstGraph->getMSTValue();
-                outputFile << NEWLINE;
-            }
+            readData(graph, inputFile);
+            run(algorithmLogic, graph, diameter, cliquesHeur, mstGraph);
+            printResults(outputFile, j, diameter, algorithmLogic, graph, mstGraph, timeMeasure);
 
             delete graph;
         }
         inputFile.close();
         outputFile.close();
     }
+
+    delete algorithmLogic;
 }
 
 void ProgramLogic::execute(){
@@ -100,4 +94,13 @@ void ProgramLogic::setMode(Mode mode) {
 
 void ProgramLogic::setFileName(const char* fileName) {
     ProgramLogic::fileName = fileName;
+}
+
+void ProgramLogic::run(AlgorithmLogic*& algorithmLogic, Graph*& graph, unsigned &diameter, std::vector<Clique*>& cliquesHeur, MSTgraph*& mstGraph){
+    algorithmLogic->computeConnectedComponents(graph);
+    diameter = algorithmLogic->computeDiameterGraph(graph);
+//            cliquesBrute = computeCliquesBruteForce(graph);
+    cliquesHeur = algorithmLogic->computeCliquesHeuristic(graph);
+    mstGraph = algorithmLogic->MSTonConnectedComponents(graph);
+    algorithmLogic->MSTonGraph(mstGraph);
 }
