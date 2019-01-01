@@ -6,9 +6,6 @@
 #include <algorithm>
 #include <chrono>
 #include "AlgorithmLogic.h"
-#include "Implementation.h"
-#include "../data_structure/MSTgraph.h"
-#include "../data_structure/Clique.h"
 
 void AlgorithmLogic::computeConnectedComponents(Graph* graph) {
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
@@ -34,12 +31,12 @@ unsigned AlgorithmLogic::computeDiameterGraph(Graph* graph) {
         time += std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
     }
 
-    diameterTime = time/graph->getConnectedComponentsCount();
+    diameterTime = time / graph->getConnectedComponentsCount();
 
     return diameter;
 }
 
-std::vector<std::vector<unsigned> >AlgorithmLogic::computeCliquesBruteForce(const Graph* graph) {
+std::vector<std::vector<unsigned> > AlgorithmLogic::computeCliquesBruteForce(const Graph* graph) {
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
     const std::vector<std::vector<unsigned> > subsets = getAllSubsets(graph->getVerticesCount());
@@ -81,13 +78,13 @@ std::vector<Clique*> AlgorithmLogic::computeCliquesHeuristic(Graph* graph) {
             return a->getDegree() < b->getDegree();
         });
 
-        for(unsigned i = 0 ; i < vertices.size(); ++i){
+        for (unsigned i = 0; i < vertices.size(); ++i) {
             Clique* oneElementClique = new Clique(vertices[i]);
             cliques.push_back(oneElementClique);
             ++newCliqueInLastLoop;
         }
 
-        while(!newCliqueInLastLoop){
+        while (!newCliqueInLastLoop) {
             newCliqueInLastLoop = computeNextCliques(cliques, vertices, vertices.size() - newCliqueInLastLoop);
         }
     }

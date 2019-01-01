@@ -2,8 +2,6 @@
 // Created by adam on 07.12.18.
 //
 #include <queue>
-#include <climits>
-#include <algorithm>
 #include "Implementation.h"
 
 const unsigned DEFAULTRANK = 0;
@@ -95,7 +93,7 @@ const std::vector<std::vector<unsigned> > getAllSubsets(unsigned setSize) {
     return subset;
 }
 
-unsigned computeNextCliques(std::vector<Clique*>& cliques, const std::vector<Vertex*> &vertices, unsigned startId){
+unsigned computeNextCliques(std::vector<Clique*>& cliques, const std::vector<Vertex*>& vertices, unsigned startId) {
 //    for()
 }
 
@@ -108,13 +106,15 @@ std::vector<edgeDef> getEdges(const ConnectedComponent* connectedComponent) {
         const std::vector<vuPair>& neighbours = vertices[i]->getConnectedVertices();
         for (int j = 0; j < neighbours.size(); ++j) {
             if (vertices[i]->getId() < neighbours[j].first->getId())
-                result.push_back(std::make_pair(neighbours[j].second, std::make_pair(vertices[i]->getId(), neighbours[j].first->getId())));
+                result.push_back(std::make_pair(neighbours[j].second,
+                                                std::make_pair(vertices[i]->getId(), neighbours[j].first->getId())));
         }
     }
     return result;
 }
 
-void MakeSet(std::vector<unsigned>& ancestors, std::vector<unsigned>& rank, const ConnectedComponent* connectedComponent) {
+void
+MakeSet(std::vector<unsigned>& ancestors, std::vector<unsigned>& rank, const ConnectedComponent* connectedComponent) {
     for (unsigned i = 0; i < connectedComponent->getSize(); ++i) {
         ancestors[connectedComponent->getVertex(i)->getId()] = connectedComponent->getVertex(i)->getId();
         rank[connectedComponent->getVertex(i)->getId()] = DEFAULTRANK;

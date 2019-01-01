@@ -12,7 +12,7 @@
 class ProgramLogic {
 
 public:
-    enum Mode{
+    enum Mode {
         inputFromFile,
         inputFromCommandLine,
         generateInput,
@@ -22,15 +22,20 @@ public:
 private:
     const char* fileName;
     Mode mode;
-    void run(AlgorithmLogic*& algorithmLogic, Graph*& graph, unsigned &diameter, std::vector<Clique*>& cliquesHeur, MSTgraph*& mstGraph);
+
+    void run(AlgorithmLogic*& algorithmLogic, Graph*& graph, unsigned& diameter, std::vector<Clique*>& cliquesHeur, MSTgraph*& mstGraph);
 
 public:
     void inputFromFileExecute();
+
     void inputFromCommandLineExecute();
+
     void generateInputExecute(bool timeMeasure);
 
     void execute();
+
     void setMode(Mode mode);
+
     void setFileName(const char* fileName);
 };
 

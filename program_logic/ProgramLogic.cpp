@@ -3,16 +3,11 @@
 //
 
 #include "ProgramLogic.h"
-#include <algorithm>
 #include <fstream>
+#include "../generator/Generator.h"
 #include "../in_out/InOut.h"
-#include "../generator/Generator.h"
-#include "../algorithm/Implementation.h"
-#include "../algorithm/AlgorithmLogic.h"
-#include "../generator/Generator.h"
-#include "../data_structure/MSTgraph.h"
 
-void ProgramLogic::inputFromFileExecute(){
+void ProgramLogic::inputFromFileExecute() {
     unsigned diameter;
     MSTgraph* mstGraph;
     std::vector<Clique*> cliquesHeur;
@@ -23,7 +18,7 @@ void ProgramLogic::inputFromFileExecute(){
     std::string outputFileName(fileName);
     outputFileName.append(".out");
 
-    if(openFiles(inputFile, outputFile, fileName, outputFileName)){
+    if (openFiles(inputFile, outputFile, fileName, outputFileName)) {
         Graph* graph = new Graph();
 
         readData(graph, inputFile);
@@ -36,7 +31,7 @@ void ProgramLogic::inputFromFileExecute(){
     delete algorithmLogic;
 }
 
-void ProgramLogic::inputFromCommandLineExecute(){
+void ProgramLogic::inputFromCommandLineExecute() {
     unsigned diameter;
     MSTgraph* mstGraph;
     std::vector<Clique*> cliquesHeur;
@@ -52,7 +47,7 @@ void ProgramLogic::inputFromCommandLineExecute(){
     delete algorithmLogic;
 }
 
-void ProgramLogic::generateInputExecute(bool timeMeasure){
+void ProgramLogic::generateInputExecute(bool timeMeasure) {
     srand(time(NULL));
     Generator* generator = new Generator();
     generator->generateAll();
@@ -71,7 +66,8 @@ void ProgramLogic::generateInputExecute(bool timeMeasure){
     AlgorithmLogic* algorithmLogic = new AlgorithmLogic();
 
     for (unsigned i = 0; i < files; ++i) {
-        if(openFiles(inputFile, outputFile, "cmake-build-debug/" + inputFilesNames[i], "cmake-build-debug/" + outputFilesNames[i])){ //TODO delete cmake-build-debug
+        if (openFiles(inputFile, outputFile, "cmake-build-debug/" + inputFilesNames[i],
+                      "cmake-build-debug/" + outputFilesNames[i])) { //TODO delete cmake-build-debug
             for (unsigned j = 0; j < graphsInFile; ++j) {
                 Graph* graph = new Graph();
 
@@ -89,12 +85,12 @@ void ProgramLogic::generateInputExecute(bool timeMeasure){
     delete algorithmLogic;
 }
 
-void ProgramLogic::execute(){
-    if(mode == inputFromFile)
+void ProgramLogic::execute() {
+    if (mode == inputFromFile)
         inputFromFileExecute();
-    else if(mode == inputFromCommandLine)
+    else if (mode == inputFromCommandLine)
         inputFromCommandLineExecute();
-    else if(mode == generateInput)
+    else if (mode == generateInput)
         generateInputExecute(false);
     else
         generateInputExecute(true);
@@ -108,7 +104,7 @@ void ProgramLogic::setFileName(const char* fileName) {
     ProgramLogic::fileName = fileName;
 }
 
-void ProgramLogic::run(AlgorithmLogic*& algorithmLogic, Graph*& graph, unsigned &diameter, std::vector<Clique*>& cliquesHeur, MSTgraph*& mstGraph){
+void ProgramLogic::run(AlgorithmLogic*& algorithmLogic, Graph*& graph, unsigned& diameter, std::vector<Clique*>& cliquesHeur, MSTgraph*& mstGraph) {
     algorithmLogic->computeConnectedComponents(graph);
     diameter = algorithmLogic->computeDiameterGraph(graph);
 //            cliquesBrute = computeCliquesBruteForce(graph);

@@ -11,7 +11,7 @@
 #include "../data_structure/MSTgraph.h"
 #include "../data_structure/Clique.h"
 
-class AlgorithmLogic{
+class AlgorithmLogic {
     unsigned CCTime;
     double diameterTime;
     unsigned cliqueBruteForceTime;
@@ -24,7 +24,7 @@ public:
 
     unsigned computeDiameterGraph(Graph* graph); // return value: diameter & average execution time
 
-    std::vector<std::vector<unsigned> >computeCliquesBruteForce(const Graph* graph); // return value: cliques & execution time
+    std::vector<std::vector<unsigned> > computeCliquesBruteForce(const Graph* graph); // return value: cliques & execution time
 
     std::vector<Clique*> computeCliquesHeuristic(Graph* graph); // return value: cliques & execution time
 
@@ -44,7 +44,6 @@ public:
 
     unsigned int getMSTGraphTime() const;
 };
-
 
 
 #endif //AAL_TESTED_H
