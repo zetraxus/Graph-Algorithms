@@ -32,12 +32,24 @@ void ProgramLogic::inputFromFileExecute(){
 
         delete graph;
     }
+
+    delete algorithmLogic;
 }
 
 void ProgramLogic::inputFromCommandLineExecute(){
-    Graph* graph = new Graph(); //TODO
-    readData(graph);
+    unsigned diameter;
+    MSTgraph* mstGraph;
+    std::vector<Clique*> cliquesHeur;
+    AlgorithmLogic* algorithmLogic = new AlgorithmLogic();
 
+    Graph* graph = new Graph();
+
+    readData(graph);
+    run(algorithmLogic, graph, diameter, cliquesHeur, mstGraph);
+    printResults(diameter, algorithmLogic, graph, mstGraph);
+
+    delete graph;
+    delete algorithmLogic;
 }
 
 void ProgramLogic::generateInputExecute(bool timeMeasure){
@@ -59,19 +71,19 @@ void ProgramLogic::generateInputExecute(bool timeMeasure){
     AlgorithmLogic* algorithmLogic = new AlgorithmLogic();
 
     for (unsigned i = 0; i < files; ++i) {
-        openFiles(inputFile, outputFile, "cmake-build-debug/" + inputFilesNames[i], "cmake-build-debug/" + outputFilesNames[i]); //TODO delete cmake-build-debug
+        if(openFiles(inputFile, outputFile, "cmake-build-debug/" + inputFilesNames[i], "cmake-build-debug/" + outputFilesNames[i])){ //TODO delete cmake-build-debug
+            for (unsigned j = 0; j < graphsInFile; ++j) {
+                Graph* graph = new Graph();
 
-        for (unsigned j = 0; j < graphsInFile; ++j) {
-            Graph* graph = new Graph();
+                readData(graph, inputFile);
+                run(algorithmLogic, graph, diameter, cliquesHeur, mstGraph);
+                printResults(outputFile, j, diameter, algorithmLogic, graph, mstGraph, timeMeasure);
 
-            readData(graph, inputFile);
-            run(algorithmLogic, graph, diameter, cliquesHeur, mstGraph);
-            printResults(outputFile, j, diameter, algorithmLogic, graph, mstGraph, timeMeasure);
-
-            delete graph;
+                delete graph;
+            }
+            inputFile.close();
+            outputFile.close();
         }
-        inputFile.close();
-        outputFile.close();
     }
 
     delete algorithmLogic;

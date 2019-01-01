@@ -51,6 +51,13 @@ void printResults(std::ofstream& outputFile, const unsigned index, const unsigne
     }
 }
 
+void printResults(const unsigned diameter, AlgorithmLogic*& algorithmLogic, Graph*& graph, MSTgraph*& mstGraph){
+    std::cout << NEWLINE << DIAMETER << diameter << NEWLINE;
+    std::cout << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
+    std::cout << MSTONGRAPH << mstGraph->getMSTValue();
+    std::cout << NEWLINE << NEWLINE;
+}
+
 bool openFiles(std::fstream& inputFile, std::ofstream& outputFile, std::string inFileName, std::string outFileName){
         inputFile.open(inFileName);
         outputFile.open(outFileName);
