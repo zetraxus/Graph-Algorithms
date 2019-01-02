@@ -9,6 +9,7 @@
 #include <iostream>
 #include "Vertex.h"
 #include "ConnectedComponent.h"
+#include "GraphStatisticsTimes.h"
 
 const unsigned MAXEDGEVALUE = 100;
 
@@ -19,6 +20,8 @@ class Graph {
 
     std::vector<Vertex*> vertices;
     std::vector<ConnectedComponent*> connectedComponentsVector;
+
+    GraphStatisticsTimes times;
 
 public:
 
@@ -47,6 +50,8 @@ public:
     unsigned getConnectedComponentsSize(unsigned index) const;
 
     ConnectedComponent* getConnectedComponentsVector(unsigned index) const;
+
+    GraphStatisticsTimes& getTimes();
 
     std::string toString();
 };

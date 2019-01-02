@@ -111,5 +111,5 @@ void ProgramLogic::run(AlgorithmLogic*& algorithmLogic, Graph*& graph, unsigned&
 //    cliquesBrute = computeCliquesBruteForce(graph);
     cliquesHeur = algorithmLogic->computeCliquesHeuristic(graph);
     mstGraph = algorithmLogic->MSTonConnectedComponents(graph);
-    algorithmLogic->MSTonGraph(mstGraph);
+    algorithmLogic->MSTonGraph(mstGraph, graph);
 }

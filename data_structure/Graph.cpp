@@ -97,3 +97,7 @@ std::string Graph::toString() {
 
     return result;
 }
+
+GraphStatisticsTimes& Graph::getTimes() {
+    return times;
+}
