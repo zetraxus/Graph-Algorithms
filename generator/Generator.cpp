@@ -42,7 +42,7 @@ void Generator::generateAll() {
 
     for (int i = 0; i < graphsCount; ++i) {
         if (i % graphsOnStep == 0 && i != 0)
-            vertices *= stepSize;
+            vertices += stepSize;
 
         if (i % (graphsOnStep / 2) == 0) {
             if (inputFile.is_open()) {

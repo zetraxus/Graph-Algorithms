@@ -9,10 +9,10 @@
 #include "../data_structure/Graph.h"
 #include "../messages/Messages.h"
 
-const unsigned GRAPHCOUNT = 200;
-const unsigned MINIMUMVERTICESCOUNT = 10;
+const unsigned GRAPHCOUNT = 1000;
+const unsigned MINIMUMVERTICESCOUNT = 100;
 const unsigned GRAPHSONSTEP = 100;
-const unsigned GRAPHSTEPSIZE = 5;
+const unsigned GRAPHSTEPSIZE = MINIMUMVERTICESCOUNT/2;
 
 const bool DENSE = true;
 const bool SPARSE = false;

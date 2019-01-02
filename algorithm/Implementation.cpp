@@ -2,6 +2,8 @@
 // Created by adam on 07.12.18.
 //
 #include <queue>
+#include <climits>
+#include <algorithm>
 #include "Implementation.h"
 
 const unsigned DEFAULTRANK = 0;

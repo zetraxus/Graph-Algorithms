@@ -51,7 +51,7 @@ void ProgramLogic::generateInputExecute(bool timeMeasure) {
     srand(time(NULL));
     Generator* generator = new Generator();
     generator->generateAll();
-
+    std::cout<< "wygenerowane" << NEWLINE;
     const unsigned files = 2 * generator->getGraphsCount() / generator->getGraphsOnStep();
     const unsigned graphsInFile = generator->getGraphsOnStep() / 2;
     const std::vector<std::string> inputFilesNames = generator->getInputFileNames();
@@ -69,6 +69,7 @@ void ProgramLogic::generateInputExecute(bool timeMeasure) {
         if (openFiles(inputFile, outputFile, "cmake-build-debug/" + inputFilesNames[i],
                       "cmake-build-debug/" + outputFilesNames[i])) { //TODO delete cmake-build-debug
             for (unsigned j = 0; j < graphsInFile; ++j) {
+                std::cout << i << " " << j << NEWLINE;
                 Graph* graph = new Graph();
 
                 readData(graph, inputFile);
@@ -107,7 +108,7 @@ void ProgramLogic::setFileName(const char* fileName) {
 void ProgramLogic::run(AlgorithmLogic*& algorithmLogic, Graph*& graph, unsigned& diameter, std::vector<Clique*>& cliquesHeur, MSTgraph*& mstGraph) {
     algorithmLogic->computeConnectedComponents(graph);
     diameter = algorithmLogic->computeDiameterGraph(graph);
-//            cliquesBrute = computeCliquesBruteForce(graph);
+//    cliquesBrute = computeCliquesBruteForce(graph);
     cliquesHeur = algorithmLogic->computeCliquesHeuristic(graph);
     mstGraph = algorithmLogic->MSTonConnectedComponents(graph);
     algorithmLogic->MSTonGraph(mstGraph);
