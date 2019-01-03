@@ -36,7 +36,7 @@ void readData(Graph* graph) {
 void printResults(std::ofstream& outputFile, const unsigned index, const unsigned diameter, AlgorithmLogic*& algorithmLogic, Graph*& graph, MSTgraph*& mstGraph, bool time) {
     if (time) {
         outputFile << GRAPHDESCRIPTION << index << ":" << NEWLINE;
-        outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
+        outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << SPACE << TIMEMICROSECONDS  << graph->getTimes().getCCTime() << SPACE << TIMEMILLISECONDS << graph->getTimes().getCCTime()/1000 << NEWLINE;
         outputFile << DIAMETER << diameter << TIMEMICROSECONDS << graph->getTimes().getDiameterTime() << SPACE << TIMEMILLISECONDS << graph->getTimes().getDiameterTime()/1000<< NEWLINE;
         outputFile << MSTONGRAPH << mstGraph->getMSTValue() << TIMEMICROSECONDS << graph->getTimes().getMSTTime() << SPACE << TIMEMILLISECONDS << graph->getTimes().getMSTTime()/1000<< NEWLINE;
         outputFile << NEWLINE << NEWLINE;

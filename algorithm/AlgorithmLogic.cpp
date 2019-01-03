@@ -119,7 +119,7 @@ MSTgraph* AlgorithmLogic::MSTonGraph(MSTgraph* mstGraph, Graph*& graph) {
     mstGraph->computeMSTonGraph();
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
-    graph->getTimes().setMSTCCTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
+    graph->getTimes().setMSTGraphTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
 
     return mstGraph;
 }
