@@ -21,7 +21,7 @@ class Graph {
     std::vector<Vertex*> vertices;
     std::vector<ConnectedComponent*> connectedComponentsVector;
 
-    GraphStatisticsTimes times;
+    GraphStatisticsTimes time;
 
 public:
 
@@ -51,7 +51,7 @@ public:
 
     ConnectedComponent* getConnectedComponentsVector(unsigned index) const;
 
-    GraphStatisticsTimes& getTimes();
+    GraphStatisticsTimes& getTime();
 
     std::string toString();
 };

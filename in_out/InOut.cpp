@@ -33,12 +33,15 @@ void readData(Graph* graph) {
     }
 }
 
-void printResults(std::ofstream& outputFile, const unsigned index, const unsigned diameter, AlgorithmLogic*& algorithmLogic, Graph*& graph, MSTgraph*& mstGraph, bool time) {
+void printResults(std::ofstream& outputFile, const unsigned index, const unsigned diameter, Graph*& graph, MSTgraph*& mstGraph, bool time) {
     if (time) {
         outputFile << GRAPHDESCRIPTION << index << ":" << NEWLINE;
-        outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << SPACE << TIMEMICROSECONDS  << graph->getTimes().getCCTime() << SPACE << TIMEMILLISECONDS << graph->getTimes().getCCTime()/1000 << NEWLINE;
-        outputFile << DIAMETER << diameter << TIMEMICROSECONDS << graph->getTimes().getDiameterTime() << SPACE << TIMEMILLISECONDS << graph->getTimes().getDiameterTime()/1000<< NEWLINE;
-        outputFile << MSTONGRAPH << mstGraph->getMSTValue() << TIMEMICROSECONDS << graph->getTimes().getMSTTime() << SPACE << TIMEMILLISECONDS << graph->getTimes().getMSTTime()/1000<< NEWLINE;
+        outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << SPACE << TIMEMICROSECONDS  << graph->getTime().getCCTime() << SPACE << TIMEMILLISECONDS <<
+                                                                                                                                                                              graph->getTime().getCCTime()/1000 << NEWLINE;
+        outputFile << DIAMETER << diameter << TIMEMICROSECONDS << graph->getTime().getDiameterTime() << SPACE << TIMEMILLISECONDS <<
+                                                                                                                                   graph->getTime().getDiameterTime()/1000<< NEWLINE;
+        outputFile << MSTONGRAPH << mstGraph->getMSTValue() << TIMEMICROSECONDS << graph->getTime().getMSTTime() << SPACE << TIMEMILLISECONDS <<
+                                                                                                                                               graph->getTime().getMSTTime()/1000<< NEWLINE;
         outputFile << NEWLINE << NEWLINE;
     } else {
         outputFile << GRAPHDESCRIPTION << index << ":" << NEWLINE;
@@ -49,11 +52,20 @@ void printResults(std::ofstream& outputFile, const unsigned index, const unsigne
     }
 }
 
-void printResults(const unsigned diameter, AlgorithmLogic*& algorithmLogic, Graph*& graph, MSTgraph*& mstGraph) {
+void printResults(const unsigned diameter, Graph*& graph, MSTgraph*& mstGraph) {
     std::cout << NEWLINE << DIAMETER << diameter << NEWLINE;
     std::cout << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
     std::cout << MSTONGRAPH << mstGraph->getMSTValue();
     std::cout << NEWLINE << NEWLINE;
+}
+
+void printMeasuringTime(std::ofstream& timeFile, std::vector<unsigned> time, unsigned graphsInFile, std::string description){
+    timeFile << description << NEWLINE;
+    timeFile << CC + SPACE << time[0]/graphsInFile << TIMEMICROSECONDS << NEWLINE;
+    timeFile << DI + SPACE << time[1]/graphsInFile << TIMEMICROSECONDS << NEWLINE;
+    timeFile << MSTK + SPACE << time[2]/graphsInFile << TIMEMICROSECONDS << NEWLINE;
+    timeFile << MSTP + SPACE << time[3]/graphsInFile << TIMEMICROSECONDS << NEWLINE << NEWLINE;
+
 }
 
 bool openFiles(std::fstream& inputFile, std::ofstream& outputFile, std::string inFileName, std::string outFileName) {
@@ -66,6 +78,15 @@ bool openFiles(std::fstream& inputFile, std::ofstream& outputFile, std::string i
     }
     if (!outputFile.is_open()) {
         std::cerr << ERROROPENFILE << outFileName << NEWLINE;
+        return false;
+    }
+    return true;
+}
+
+bool openFile(std::ofstream& file, std::string fileName){
+    file.open(fileName);
+    if(!file.is_open()){
+        std::cerr << ERROROPENFILE << fileName << NEWLINE;
         return false;
     }
     return true;

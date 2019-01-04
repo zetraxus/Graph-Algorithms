@@ -23,7 +23,7 @@ void ProgramLogic::inputFromFileExecute() {
 
         readData(graph, inputFile);
         run(algorithmLogic, graph, diameter, cliquesHeur, mstGraph);
-        printResults(outputFile, 0, diameter, algorithmLogic, graph, mstGraph, false);
+        printResults(outputFile, 0, diameter, graph, mstGraph, false);
 
         delete graph;
     }
@@ -41,7 +41,7 @@ void ProgramLogic::inputFromCommandLineExecute() {
 
     readData(graph);
     run(algorithmLogic, graph, diameter, cliquesHeur, mstGraph);
-    printResults(diameter, algorithmLogic, graph, mstGraph);
+    printResults(diameter, graph, mstGraph);
 
     delete graph;
     delete algorithmLogic;
@@ -56,16 +56,24 @@ void ProgramLogic::generateInputExecute(bool timeMeasure) {
     const unsigned graphsInFile = generator->getGraphsOnStep() / 2;
     const std::vector<std::string> inputFilesNames = generator->getInputFileNames();
     const std::vector<std::string> outputFilesNames = generator->getOutputFileNames();
+    const std::vector<std::string>& descriptions = generator->getFilesDescriptions();
     std::vector<std::vector<unsigned> > cliquesBrute;
     std::vector<Clique*> cliquesHeur;
+    std::vector<unsigned> time(4); // cc + diameter + mst kruskal + mst prima
 
     std::fstream inputFile;
-    std::ofstream outputFile;
+    std::ofstream outputFile, timeFile;
     unsigned diameter;
     MSTgraph* mstGraph;
     AlgorithmLogic* algorithmLogic = new AlgorithmLogic();
 
-    for (unsigned i = 0; i < files; ++i) {
+    if(timeMeasure && !openFile(timeFile, DIRECTORYINPUTFILES + "/results"))
+        return;
+
+    for (unsigned i = 0; i < 4; ++i) {
+        for(unsigned t: time)
+            t = 0;
+
         if (openFiles(inputFile, outputFile, inputFilesNames[i], outputFilesNames[i])) {
             for (unsigned j = 0; j < graphsInFile; ++j) {
                 std::cout << i << " " << j << NEWLINE;
@@ -73,14 +81,26 @@ void ProgramLogic::generateInputExecute(bool timeMeasure) {
 
                 readData(graph, inputFile);
                 run(algorithmLogic, graph, diameter, cliquesHeur, mstGraph);
-                printResults(outputFile, j, diameter, algorithmLogic, graph, mstGraph, timeMeasure);
+                printResults(outputFile, j, diameter, graph, mstGraph, timeMeasure);
+
+                time[0] += graph->getTime().getCCTime();
+                time[1] += graph->getTime().getDiameterTime();
+                time[2] += graph->getTime().getMSTTime();
+                // + time[3] algorithm prima
 
                 delete graph;
             }
+
+            if(timeMeasure)
+                printMeasuringTime(timeFile, time, graphsInFile, descriptions[i]);
+
             inputFile.close();
             outputFile.close();
         }
     }
+
+    if(timeMeasure)
+        timeFile.close();
 
     delete algorithmLogic;
 }

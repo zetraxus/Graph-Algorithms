@@ -11,7 +11,7 @@ void AlgorithmLogic::computeConnectedComponents(Graph* graph) {
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     DFS(graph);
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-    graph->getTimes().setCCTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
+    graph->getTime().setCCTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
 }
 
 unsigned AlgorithmLogic::computeDiameterGraph(Graph* graph) {
@@ -31,7 +31,7 @@ unsigned AlgorithmLogic::computeDiameterGraph(Graph* graph) {
         time += std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
     }
 
-    graph->getTimes().setDiameterTime(time);
+    graph->getTime().setDiameterTime(time);
 
     return diameter;
 }
@@ -62,7 +62,7 @@ std::vector<std::vector<unsigned> > AlgorithmLogic::computeCliquesBruteForce(Gra
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
-    graph->getTimes().setCliqueBruteForceTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
+    graph->getTime().setCliqueBruteForceTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
 
     return cliques;
 }
@@ -91,7 +91,7 @@ std::vector<Clique*> AlgorithmLogic::computeCliquesHeuristic(Graph* graph) {
     }
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-    graph->getTimes().setCliqueHeuristicTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
+    graph->getTime().setCliqueHeuristicTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
 
     return cliques;
 }
@@ -109,7 +109,7 @@ MSTgraph* AlgorithmLogic::MSTonConnectedComponents(Graph* graph) {
     }
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-    graph->getTimes().setMSTCCTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
+    graph->getTime().setMSTCCTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
 
     return mstGraph;
 }
@@ -119,7 +119,7 @@ MSTgraph* AlgorithmLogic::MSTonGraph(MSTgraph* mstGraph, Graph*& graph) {
     mstGraph->computeMSTonGraph();
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
-    graph->getTimes().setMSTGraphTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
+    graph->getTime().setMSTGraphTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
 
     return mstGraph;
 }

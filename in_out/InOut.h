@@ -12,10 +12,14 @@ void readData(Graph* graph, std::fstream& inputStream);
 
 void readData(Graph* graph);
 
-void printResults(std::ofstream& outputFile, const unsigned index, const unsigned diameter, AlgorithmLogic*& algorithmLogic, Graph*& graph, MSTgraph*& mstGraph, bool time);
+void printResults(std::ofstream& outputFile, const unsigned index, const unsigned diameter, Graph*& graph, MSTgraph*& mstGraph, bool time);
 
-void printResults(const unsigned diameter, AlgorithmLogic*& algorithmLogic, Graph*& graph, MSTgraph*& mstGraph);
+void printResults(const unsigned diameter, Graph*& graph, MSTgraph*& mstGraph);
+
+void printMeasuringTime(std::ofstream& timeFile, std::vector<unsigned> time, unsigned graphsInFile, std::string description);
 
 bool openFiles(std::fstream& inputFile, std::ofstream& outputFile, std::string inFileName, std::string outFileName);
+
+bool openFile(std::ofstream& file, std::string fileName);
 
 #endif //AAL_IN_OUT_H

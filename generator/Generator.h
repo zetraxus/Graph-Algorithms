@@ -26,6 +26,9 @@ class Generator {
 
     std::vector<std::string> inputFileNames;
     std::vector<std::string> outputFileNames;
+    std::vector<std::string> filesDescriptions;
+
+    unsigned maxEdgesCount(unsigned verticesCount) const;
 
 public:
 
@@ -50,6 +53,8 @@ public:
     const std::vector<std::string>& getInputFileNames() const;
 
     const std::vector<std::string>& getOutputFileNames() const;
+
+    const std::vector<std::string>& getFilesDescriptions() const;
 };
 
 

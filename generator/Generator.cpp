@@ -5,19 +5,22 @@
 #include "Generator.h"
 #include <fstream>
 
+unsigned Generator::maxEdgesCount(unsigned verticesCount) const{
+    return verticesCount * (verticesCount - 1) / 2;
+}
 
 Graph* Generator::generateGraph(bool isDense, unsigned verticesCount) {
-    unsigned maxEdges = verticesCount * (verticesCount - 1) / 2;
+    unsigned maxEdges = maxEdgesCount(verticesCount);
     unsigned edges = rand() % (maxEdges / 4);
 
     if (isDense == true)
         edges += maxEdges * 3 / 4;
-    Graph* newGraph = new Graph(verticesCount);
+    auto* newGraph = new Graph(verticesCount);
 
     std::vector<std::pair<unsigned, unsigned> > temp;
     for (unsigned i = 0; i < verticesCount; ++i) {
         for (unsigned j = i + 1; j < verticesCount; ++j) {
-            temp.push_back(std::make_pair(i, j));
+            temp.emplace_back(i, j);
         }
     }
 
@@ -38,6 +41,7 @@ void Generator::generateAll() {
     Graph* generated;
     std::string inputFileName;
     std::string outputFileName;
+    std::string fileDescription;
     std::ofstream inputFile;
 
     for (int i = 0; i < graphsCount; ++i) {
@@ -52,9 +56,11 @@ void Generator::generateAll() {
             if (i % graphsOnStep == 0) {
                 inputFileName = directory + INPUT + std::to_string(vertices) + FNEXTENSTIONDENSE;
                 outputFileName = directory + OUTPUT + std::to_string(vertices) + FNEXTENSTIONDENSE;
+                fileDescription = VERTICES + "= " + std::to_string(vertices) + SPACE + EDGES + "= " + std::to_string(3 * maxEdgesCount(vertices)/4) + "-" + std::to_string(maxEdgesCount(vertices));
             } else {
                 inputFileName = directory + INPUT + std::to_string(vertices) + FNEXTENSTIONSPARSE;
                 outputFileName = directory + OUTPUT + std::to_string(vertices) + FNEXTENSTIONSPARSE;
+                fileDescription = VERTICES + "= " + std::to_string(vertices) + SPACE + EDGES + "= " + std::to_string(0) + "-" + std::to_string(maxEdgesCount(vertices)/4);
             }
 
             std::cout << inputFileName << std::endl;
@@ -62,12 +68,12 @@ void Generator::generateAll() {
 
             inputFileNames.push_back(inputFileName);
             outputFileNames.push_back(outputFileName);
+            filesDescriptions.push_back(fileDescription);
 
-            std::string tescik = inputFileName;
-            inputFile.open(tescik);
+            inputFile.open(inputFileName);
 
             if (!inputFile.is_open()) {
-                std::cerr << "test " << ERROROPENFILE << inputFileName << std::endl;
+                std::cerr << ERROROPENFILE << inputFileName << std::endl;
             }
         }
         if (i % graphsOnStep < graphsOnStep / 2)
@@ -81,10 +87,14 @@ void Generator::generateAll() {
     inputFile.close();
 }
 
+const std::vector<std::string>& Generator::getFilesDescriptions() const {
+    return filesDescriptions;
+}
+
 Generator::Generator(unsigned graphs, unsigned minimumVertices, unsigned step, unsigned graphsOnStep,
                      std::string directoryName) : graphsCount(
         graphs), minimumVerticesCount(minimumVertices), stepSize(step), graphsOnStep(graphsOnStep),
-                                                  directory(directoryName) {}
+                                                  directory(std::move(std::move(directoryName))) {}
 
 unsigned int Generator::getGraphsCount() const {
     return graphsCount;
