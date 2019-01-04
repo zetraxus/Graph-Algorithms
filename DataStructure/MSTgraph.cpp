@@ -17,7 +17,7 @@ void MSTgraph::addToIsolatedVertices(unsigned vertexId) {
 }
 
 void MSTgraph::computeMSTonGraph() {
-    for (int i = 1; i < MSTonCC.size(); ++i) {
+    for (unsigned i = 1; i < MSTonCC.size(); ++i) {
         edgeDef newEdge = std::make_pair(MINEDGEVALUE, std::make_pair(MSTonCC[i - 1][0].second.first, MSTonCC[i][0].second.first));
         MSTonGraph.push_back(newEdge);
     }
@@ -43,7 +43,7 @@ void MSTgraph::print() const {
 
 unsigned MSTgraph::getMSTValue() const {
     unsigned mstVal = 0;
-    for (int i = 0; i < MSTonGraph.size(); ++i) {
+    for (unsigned i = 0; i < MSTonGraph.size(); ++i) {
         mstVal += MSTonGraph[i].first;
     }
     return mstVal;

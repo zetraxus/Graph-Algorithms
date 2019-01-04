@@ -46,10 +46,10 @@ std::vector<std::vector<unsigned> > AlgorithmLogic::computeCliquesBruteForce(Gra
     std::vector<std::vector<unsigned> > cliques;
 
     bool isClique;
-    for (int i = 0; i < subsets.size(); ++i) {
+    for (unsigned i = 0; i < subsets.size(); ++i) {
         isClique = true;
-        for (int j = 0; j < subsets[i].size(); ++j) {
-            for (int k = j + 1; k < subsets[i].size(); ++k) {
+        for (unsigned j = 0; j < subsets[i].size(); ++j) {
+            for (unsigned k = j + 1; k < subsets[i].size(); ++k) {
                 if (!graph->getVertex(subsets[i][j])->isNeighbour(graph->getVertex(subsets[i][k]))) {
                     isClique = false;
                     break;
@@ -88,9 +88,9 @@ std::vector<Clique*> AlgorithmLogic::computeCliquesHeuristic(Graph* graph) {
             ++newCliqueInLastLoop;
         }
 
-        while (!newCliqueInLastLoop) {
-            newCliqueInLastLoop = computeNextCliques(cliques, vertices, vertices.size() - newCliqueInLastLoop);
-        }
+//        while (!newCliqueInLastLoop) {
+//            newCliqueInLastLoop = computeNextCliques(cliques, vertices, vertices.size() - newCliqueInLastLoop);
+//        }
     }
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();

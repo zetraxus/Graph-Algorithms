@@ -25,7 +25,7 @@ Graph* Generator::generateGraph(bool isDense, unsigned verticesCount) {
         }
     }
 
-    for (int i = 0; i < edges; ++i) {
+    for (unsigned i = 0; i < edges; ++i) {
         unsigned newEdgeIndex = rand() % (edges - i);
         unsigned value = (rand() % MAXEDGEVALUE) + 1;
 
@@ -45,7 +45,7 @@ void Generator::generateAll() {
     std::string fileDescription;
     std::ofstream inputFile;
 
-    for (int i = 0; i < graphsCount; ++i) {
+    for (unsigned i = 0; i < graphsCount; ++i) {
         if (i % graphsOnStep == 0 && i != 0)
             vertices += stepSize;
 

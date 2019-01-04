@@ -14,7 +14,7 @@ void readData(Graph* graph, std::fstream& inputStream) {
 
     graph->setVerticesCount(vertices);
 
-    for (int i = 0; i < edges; ++i) {
+    for (unsigned i = 0; i < edges; ++i) {
         inputStream >> v1 >> v2 >> edgeValue;
         graph->addEdge(v1, v2, edgeValue);
     }
@@ -27,7 +27,7 @@ void readData(Graph* graph) {
 
     graph->setVerticesCount(vertices);
 
-    for (int i = 0; i < edges; ++i) {
+    for (unsigned i = 0; i < edges; ++i) {
         std::cin >> v1 >> v2 >> edgeValue;
         graph->addEdge(v1, v2, edgeValue);
     }

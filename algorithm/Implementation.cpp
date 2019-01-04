@@ -42,7 +42,7 @@ void DFSVisit(Graph* graph, Vertex* vertex, unsigned connectedComponents) {
 }
 
 unsigned BFS(ConnectedComponent* connectedComponent, Vertex* start) {
-    for (int i = 0; i < connectedComponent->getSize(); ++i) {
+    for (unsigned i = 0; i < connectedComponent->getSize(); ++i) {
         connectedComponent->getVertex(i)->setDistance(UINT_MAX);
         connectedComponent->getVertex(i)->setColour(Vertex::WHITE);
     }
@@ -57,7 +57,7 @@ unsigned BFS(ConnectedComponent* connectedComponent, Vertex* start) {
     while (!queue.empty()) {
         analysed = queue.front();
 
-        for (int i = 0; i < analysed->getDegree(); ++i) {
+        for (unsigned i = 0; i < analysed->getDegree(); ++i) {
             if (analysed->getNeighbour(i)->getColour() == Vertex::WHITE) {
                 analysed->getNeighbour(i)->setColour(Vertex::GREY);
                 analysed->getNeighbour(i)->setDistance(analysed->getDistance() + 1);
@@ -75,7 +75,7 @@ unsigned BFS(ConnectedComponent* connectedComponent, Vertex* start) {
 
 const std::vector<std::vector<unsigned> > getAllSubsets(unsigned setSize) {
     std::vector<int> set;
-    for (int i = 0; i < setSize; ++i)
+    for (unsigned i = 0; i < setSize; ++i)
         set.push_back(i);
 
     std::vector<std::vector<unsigned> > subset;
@@ -95,7 +95,7 @@ const std::vector<std::vector<unsigned> > getAllSubsets(unsigned setSize) {
     return subset;
 }
 
-unsigned computeNextCliques(std::vector<Clique*>& cliques, const std::vector<Vertex*>& vertices, unsigned startId) {
+void computeNextCliques(std::vector<Clique*>& cliques, const std::vector<Vertex*>& vertices, unsigned startId) {
 //    for()
 }
 
@@ -106,7 +106,7 @@ std::vector<edgeDef> getEdges(const ConnectedComponent* connectedComponent) {
 
     for (unsigned i = 0; i < vertices.size(); ++i) {
         const std::vector<vuPair>& neighbours = vertices[i]->getConnectedVertices();
-        for (int j = 0; j < neighbours.size(); ++j) {
+        for (unsigned j = 0; j < neighbours.size(); ++j) {
             if (vertices[i]->getId() < neighbours[j].first->getId())
                 result.push_back(std::make_pair(neighbours[j].second, std::make_pair(vertices[i]->getId(), neighbours[j].first->getId())));
         }

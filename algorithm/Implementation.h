@@ -21,7 +21,7 @@ unsigned BFS(ConnectedComponent* connectedComponent, Vertex* start);
 
 const std::vector<std::vector<unsigned> > getAllSubsets(unsigned setSize);
 
-unsigned computeNextCliques(std::vector<Clique*>& cliques, const std::vector<Vertex*>& vertices, unsigned startId);
+void computeNextCliques(std::vector<Clique*>& cliques, const std::vector<Vertex*>& vertices, unsigned startId);
 
 std::vector<edgeDef> getEdges(ConnectedComponent* connectedComponent);
 

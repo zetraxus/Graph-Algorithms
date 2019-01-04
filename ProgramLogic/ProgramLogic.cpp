@@ -73,13 +73,12 @@ void ProgramLogic::generateInputExecute(bool timeMeasure) {
     if(timeMeasure && !openFile(timeFile, DIRECTORYINPUTFILES + "/results"))
         return;
 
-    for (unsigned i = 0; i < 4; ++i) {
+    for (unsigned i = 0; i < files; ++i) {
         for(unsigned i = 0 ; i < time.size(); ++i)
             time[i] = 0;
 
         if (openFiles(inputFile, outputFile, inputFilesNames[i], outputFilesNames[i])) {
             for (unsigned j = 0; j < graphsInFile; ++j) {
-                std::cout << i << " " << j << NEWLINE;
                 Graph* graph = new Graph();
 
                 readData(graph, inputFile);

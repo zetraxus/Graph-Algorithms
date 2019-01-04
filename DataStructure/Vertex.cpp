@@ -52,7 +52,7 @@ const std::vector<vuPair>& Vertex::getConnectedVertices() const {
 }
 
 bool Vertex::isNeighbour(Vertex* other) const {
-    for (int i = 0; i < connectedVertex.size(); ++i) {
+    for (unsigned i = 0; i < connectedVertex.size(); ++i) {
         if (connectedVertex[i].first == other)
             return true;
     }

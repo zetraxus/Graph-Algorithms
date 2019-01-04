@@ -14,7 +14,7 @@ Graph::Graph(unsigned int verticesCount) : verticesCount(verticesCount) {
     edgesCount = 0;
     vertices.resize(verticesCount);
 
-    for (int i = 0; i < verticesCount; ++i) {
+    for (unsigned i = 0; i < verticesCount; ++i) {
         vertices[i] = new Vertex(i);
     }
 }
@@ -33,7 +33,7 @@ void Graph::setVerticesCount(unsigned verticesCount) {
     this->verticesCount = verticesCount;
     vertices.resize(verticesCount);
 
-    for (int i = 0; i < verticesCount; ++i) {
+    for (unsigned i = 0; i < verticesCount; ++i) {
         vertices[i] = new Vertex(i);
     }
 }
@@ -58,7 +58,7 @@ Vertex* Graph::getVertex(int index) const {
 
 void Graph::setConnectedComponentsCount(unsigned connectedComponentsCount) {
     connectedComponentsVector.resize(connectedComponentsCount);
-    for (int i = 0; i < connectedComponentsCount; ++i)
+    for (unsigned i = 0; i < connectedComponentsCount; ++i)
         connectedComponentsVector[i] = new ConnectedComponent();
 }
 
@@ -85,9 +85,9 @@ unsigned int Graph::getEdgesCount() const {
 std::string Graph::toString() {
     std::string result = std::to_string(verticesCount) + SPACE + std::to_string(edgesCount) + NEWLINE;
 
-    for (int i = 0; i < verticesCount; ++i) {
+    for (unsigned i = 0; i < verticesCount; ++i) {
         const std::vector<vuPair>& neighbour = vertices[i]->getConnectedVertices();
-        for (int j = 0; j < neighbour.size(); ++j) {
+        for (unsigned j = 0; j < neighbour.size(); ++j) {
             if (neighbour[j].first->getId() > i) {
                 result += std::to_string(i) + SPACE + std::to_string(neighbour[j].first->getId()) + SPACE +
                           std::to_string(neighbour[j].second) + NEWLINE;
