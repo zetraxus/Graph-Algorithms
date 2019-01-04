@@ -51,7 +51,7 @@ void ProgramLogic::generateInputExecute(bool timeMeasure) {
     srand(time(NULL));
     Generator* generator = new Generator();
     generator->generateAll();
-    std::cout<< "wygenerowane" << NEWLINE;
+
     const unsigned files = 2 * generator->getGraphsCount() / generator->getGraphsOnStep();
     const unsigned graphsInFile = generator->getGraphsOnStep() / 2;
     const std::vector<std::string> inputFilesNames = generator->getInputFileNames();
@@ -66,8 +66,7 @@ void ProgramLogic::generateInputExecute(bool timeMeasure) {
     AlgorithmLogic* algorithmLogic = new AlgorithmLogic();
 
     for (unsigned i = 0; i < files; ++i) {
-        if (openFiles(inputFile, outputFile, "cmake-build-debug/" + inputFilesNames[i],
-                      "cmake-build-debug/" + outputFilesNames[i])) { //TODO delete cmake-build-debug
+        if (openFiles(inputFile, outputFile, inputFilesNames[i], outputFilesNames[i])) {
             for (unsigned j = 0; j < graphsInFile; ++j) {
                 std::cout << i << " " << j << NEWLINE;
                 Graph* graph = new Graph();

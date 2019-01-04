@@ -61,11 +61,11 @@ bool openFiles(std::fstream& inputFile, std::ofstream& outputFile, std::string i
     outputFile.open(outFileName);
 
     if (!inputFile.is_open()) {
-        std::cerr << ERRORFILEOPEN << inFileName << NEWLINE;
+        std::cerr << ERROROPENFILE << inFileName << NEWLINE;
         return false;
     }
     if (!outputFile.is_open()) {
-        std::cerr << ERRORFILEOPEN << outFileName << NEWLINE;
+        std::cerr << ERROROPENFILE << outFileName << NEWLINE;
         return false;
     }
     return true;

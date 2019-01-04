@@ -63,11 +63,11 @@ void Generator::generateAll() {
             inputFileNames.push_back(inputFileName);
             outputFileNames.push_back(outputFileName);
 
-            std::string tescik = "cmake-build-debug/" + inputFileName;
+            std::string tescik = inputFileName;
             inputFile.open(tescik);
 
             if (!inputFile.is_open()) {
-                std::cerr << "test " << ERRORFILEOPEN << inputFileName << std::endl;
+                std::cerr << "test " << ERROROPENFILE << inputFileName << std::endl;
             }
         }
         if (i % graphsOnStep < graphsOnStep / 2)

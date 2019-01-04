@@ -1,11 +1,13 @@
 #include <fstream>
 #include <getopt.h>
 #include <iostream>
+#include <sys/stat.h>
 #include "messages/Messages.h"
 #include "program_logic/ProgramLogic.h"
 
 
 int main(int argc, char** argv) {
+
     ProgramLogic* programme = new ProgramLogic();
     int opt;
     opterr = 0;
