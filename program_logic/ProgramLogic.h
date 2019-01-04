@@ -23,7 +23,7 @@ private:
     const char* fileName;
     Mode mode;
 
-    void run(AlgorithmLogic*& algorithmLogic, Graph*& graph, unsigned& diameter, std::vector<Clique*>& cliquesHeur, MSTgraph*& mstGraph);
+    void run(AlgorithmLogic*& algorithmLogic, Graph*& graph, unsigned& diameter, std::vector<Clique*>& cliquesHeur, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim);
 
 public:
     void inputFromFileExecute();

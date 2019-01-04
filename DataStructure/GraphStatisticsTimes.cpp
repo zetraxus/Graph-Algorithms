@@ -36,12 +36,12 @@ void GraphStatisticsTimes::setCliqueHeuristicTime(unsigned int cliqueHeuristicTi
     GraphStatisticsTimes::cliqueHeuristicTime = cliqueHeuristicTime;
 }
 
-unsigned int GraphStatisticsTimes::getMSTCCTime() const {
-    return MSTCCTime;
+void GraphStatisticsTimes::setMSTCCKruskalTime(unsigned int MSTCCKruskalTime) {
+    GraphStatisticsTimes::MSTCCKruskalTime = MSTCCKruskalTime;
 }
 
-void GraphStatisticsTimes::setMSTCCTime(unsigned int MSTCCTime) {
-    GraphStatisticsTimes::MSTCCTime = MSTCCTime;
+void GraphStatisticsTimes::setMSTCCPrimTime(unsigned int MSTCCPrimTime) {
+    GraphStatisticsTimes::MSTCCPrimTime = MSTCCPrimTime;
 }
 
 unsigned int GraphStatisticsTimes::getMSTGraphTime() const {
@@ -52,6 +52,10 @@ void GraphStatisticsTimes::setMSTGraphTime(unsigned int MSTGraphTime) {
     GraphStatisticsTimes::MSTGraphTime = MSTGraphTime;
 }
 
-unsigned GraphStatisticsTimes::getMSTTime(){
-    return MSTGraphTime + MSTCCTime;
+unsigned int GraphStatisticsTimes::getMSTCCKruskalTime() const {
+    return MSTCCKruskalTime;
+}
+
+unsigned int GraphStatisticsTimes::getMSTCCPrimTime() const {
+    return MSTCCPrimTime;
 }

@@ -11,7 +11,8 @@ class GraphStatisticsTimes {
     double diameterTime;
     unsigned cliqueBruteForceTime;
     unsigned cliqueHeuristicTime;
-    unsigned MSTCCTime;
+    unsigned MSTCCKruskalTime;
+    unsigned MSTCCPrimTime;
     unsigned MSTGraphTime;
 
 public:
@@ -31,15 +32,17 @@ public:
 
     void setCliqueHeuristicTime(unsigned int cliqueHeuristicTime);
 
-    unsigned int getMSTCCTime() const;
+    void setMSTCCKruskalTime(unsigned int MSTCCKruskalTime);
 
-    void setMSTCCTime(unsigned int MSTCCTime);
+    void setMSTCCPrimTime(unsigned int MSTCCPrimTime);
 
     unsigned int getMSTGraphTime() const;
 
     void setMSTGraphTime(unsigned int MSTGraphTime);
 
-    unsigned getMSTTime();
+    unsigned int getMSTCCKruskalTime() const;
+
+    unsigned int getMSTCCPrimTime() const;
 };
 
 

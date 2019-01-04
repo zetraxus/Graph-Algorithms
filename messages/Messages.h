@@ -25,8 +25,8 @@ const std::string CC = "CC";
 const std::string DI = "DI";
 const std::string MSTK = "MSTK";
 const std::string MSTP = "MSTP";
-const std::string TIMEMILLISECONDS = " time[milliseconds]: ";
-const std::string TIMEMICROSECONDS = " time[microseconds]: ";
+const std::string TIMEMILLISECONDS = " time[ms]: ";
+const std::string TIMEMICROSECONDS = " time[μs]: ";
 const std::string BADFLAGS = "You should set one flag (a,b,c or d)";
 
 #endif //AAL_MESSAGES_H

@@ -5,8 +5,9 @@
 #ifndef AAL_ALGORITHMS_H
 #define AAL_ALGORITHMS_H
 
-#include "../data_structure/Graph.h"
-#include "../data_structure/Clique.h"
+
+#include "../DataStructure/Graph.h"
+#include "../DataStructure/Clique.h"
 
 typedef std::pair<unsigned, std::pair<unsigned, unsigned> > edgeDef;
 

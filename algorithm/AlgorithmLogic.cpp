@@ -6,6 +6,9 @@
 #include <algorithm>
 #include <chrono>
 #include "AlgorithmLogic.h"
+#include "../DataStructure/MSTgraph.h"
+#include "../DataStructure/Graph.h"
+#include "../DataStructure/Clique.h"
 
 void AlgorithmLogic::computeConnectedComponents(Graph* graph) {
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
@@ -96,7 +99,7 @@ std::vector<Clique*> AlgorithmLogic::computeCliquesHeuristic(Graph* graph) {
     return cliques;
 }
 
-MSTgraph* AlgorithmLogic::MSTonConnectedComponents(Graph* graph) {
+MSTgraph* AlgorithmLogic::MSTonConnectedComponentsKruskal(Graph* graph) {
     MSTgraph* mstGraph = new MSTgraph();
 
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
@@ -109,7 +112,25 @@ MSTgraph* AlgorithmLogic::MSTonConnectedComponents(Graph* graph) {
     }
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-    graph->getTime().setMSTCCTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
+    graph->getTime().setMSTCCKruskalTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
+
+    return mstGraph;
+}
+
+MSTgraph* AlgorithmLogic::MSTonConnectedComponentsPrim(Graph* graph){
+    MSTgraph* mstGraph = new MSTgraph();
+
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
+//    std::vector<std::vector<edgeDef> > results;
+//    for (unsigned i = 0; i < graph->getConnectedComponentsCount(); ++i) {
+//        if (graph->getConnectedComponentsSize(i) == 1)
+//            mstGraph->addToIsolatedVertices(graph->getConnectedComponentsVector(i)->getVertex(0)->getId());
+////        else
+////            mstGraph->addVectorToMSTonCC(MST(graph->getConnectedComponentsVector(i), graph->getVerticesCount()));
+//    }
+
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    graph->getTime().setMSTCCPrimTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
 
     return mstGraph;
 }

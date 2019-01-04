@@ -5,9 +5,8 @@
 #ifndef AAL_GENERATOR_H
 #define AAL_GENERATOR_H
 
-
-#include "../data_structure/Graph.h"
 #include "../messages/Messages.h"
+#include "../DataStructure/Graph.h"
 
 const unsigned GRAPHCOUNT = 300;
 const unsigned MINIMUMVERTICESCOUNT = 100;

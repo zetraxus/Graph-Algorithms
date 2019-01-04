@@ -5,27 +5,28 @@
 #ifndef AAL_TESTED_H
 #define AAL_TESTED_H
 
-
-#include "../data_structure/Graph.h"
 #include "Implementation.h"
-#include "../data_structure/MSTgraph.h"
-#include "../data_structure/Clique.h"
+#include "../DataStructure/Graph.h"
+#include "../DataStructure/Clique.h"
+#include "../DataStructure/MSTgraph.h"
 
 class AlgorithmLogic {
 
 public:
 
-    void computeConnectedComponents(Graph* graph); // return value: execution time
+    void computeConnectedComponents(Graph* graph);
 
-    unsigned computeDiameterGraph(Graph* graph); // return value: diameter & average execution time
+    unsigned computeDiameterGraph(Graph* graph);
 
-    std::vector<std::vector<unsigned> > computeCliquesBruteForce(Graph* graph); // return value: cliques & execution time
+    std::vector<std::vector<unsigned> > computeCliquesBruteForce(Graph* graph);
 
-    std::vector<Clique*> computeCliquesHeuristic(Graph* graph); // return value: cliques & execution time
+    std::vector<Clique*> computeCliquesHeuristic(Graph* graph);
 
-    MSTgraph* MSTonConnectedComponents(Graph* graph); // return value: MST & execution time
+    MSTgraph* MSTonConnectedComponentsKruskal(Graph* graph);
 
-    MSTgraph* MSTonGraph(MSTgraph* mstGraph, Graph*& graph); // return value: MST & execution time
+    MSTgraph* MSTonConnectedComponentsPrim(Graph* graph);
+
+    MSTgraph* MSTonGraph(MSTgraph* mstGraph, Graph*& graph);
 };
 
 

@@ -3,6 +3,7 @@
 //
 
 #include "Generator.h"
+#include "../DataStructure/Graph.h"
 #include <fstream>
 
 unsigned Generator::maxEdgesCount(unsigned verticesCount) const{

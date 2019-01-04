@@ -33,29 +33,26 @@ void readData(Graph* graph) {
     }
 }
 
-void printResults(std::ofstream& outputFile, const unsigned index, const unsigned diameter, Graph*& graph, MSTgraph*& mstGraph, bool time) {
+void printResults(std::ofstream& outputFile, const unsigned index, const unsigned diameter, Graph*& graph, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim, bool time) {
     if (time) {
         outputFile << GRAPHDESCRIPTION << index << ":" << NEWLINE;
-        outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << SPACE << TIMEMICROSECONDS  << graph->getTime().getCCTime() << SPACE << TIMEMILLISECONDS <<
-                                                                                                                                                                              graph->getTime().getCCTime()/1000 << NEWLINE;
-        outputFile << DIAMETER << diameter << TIMEMICROSECONDS << graph->getTime().getDiameterTime() << SPACE << TIMEMILLISECONDS <<
-                                                                                                                                   graph->getTime().getDiameterTime()/1000<< NEWLINE;
-        outputFile << MSTONGRAPH << mstGraph->getMSTValue() << TIMEMICROSECONDS << graph->getTime().getMSTTime() << SPACE << TIMEMILLISECONDS <<
-                                                                                                                                               graph->getTime().getMSTTime()/1000<< NEWLINE;
+        outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << SPACE << TIMEMICROSECONDS  << graph->getTime().getCCTime() << SPACE << TIMEMILLISECONDS << graph->getTime().getCCTime()/1000 << NEWLINE;
+        outputFile << DIAMETER << diameter << TIMEMICROSECONDS << graph->getTime().getDiameterTime() << SPACE << TIMEMILLISECONDS << graph->getTime().getDiameterTime()/1000<< NEWLINE;
+        outputFile << MSTONGRAPH << mstGraphKruskal->getMSTValue() << TIMEMICROSECONDS << graph->getTime().getMSTCCKruskalTime() + graph->getTime().getMSTGraphTime() << SPACE << TIMEMILLISECONDS << (graph->getTime().getMSTCCKruskalTime() + graph->getTime().getMSTGraphTime())/1000 << NEWLINE;
         outputFile << NEWLINE << NEWLINE;
     } else {
         outputFile << GRAPHDESCRIPTION << index << ":" << NEWLINE;
         outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
         outputFile << DIAMETER << diameter << NEWLINE;
-        outputFile << MSTONGRAPH << mstGraph->getMSTValue();
+        outputFile << MSTONGRAPH << mstGraphKruskal->getMSTValue();
         outputFile << NEWLINE << NEWLINE;
     }
 }
 
-void printResults(const unsigned diameter, Graph*& graph, MSTgraph*& mstGraph) {
+void printResults(const unsigned diameter, Graph*& graph, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim) {
     std::cout << NEWLINE << DIAMETER << diameter << NEWLINE;
     std::cout << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
-    std::cout << MSTONGRAPH << mstGraph->getMSTValue();
+    std::cout << MSTONGRAPH << mstGraphKruskal->getMSTValue();
     std::cout << NEWLINE << NEWLINE;
 }
 

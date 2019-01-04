@@ -3,13 +3,14 @@
 //
 
 #include "ProgramLogic.h"
+#include "../InOut/InOut.h"
+#include "../Generator/Generator.h"
 #include <fstream>
-#include "../generator/Generator.h"
-#include "../in_out/InOut.h"
 
 void ProgramLogic::inputFromFileExecute() {
     unsigned diameter;
-    MSTgraph* mstGraph;
+    MSTgraph* mstGraphKruskal;
+    MSTgraph* mstGraphPrim;
     std::vector<Clique*> cliquesHeur;
     AlgorithmLogic* algorithmLogic = new AlgorithmLogic();
 
@@ -22,8 +23,8 @@ void ProgramLogic::inputFromFileExecute() {
         Graph* graph = new Graph();
 
         readData(graph, inputFile);
-        run(algorithmLogic, graph, diameter, cliquesHeur, mstGraph);
-        printResults(outputFile, 0, diameter, graph, mstGraph, false);
+        run(algorithmLogic, graph, diameter, cliquesHeur, mstGraphKruskal, mstGraphPrim);
+        printResults(outputFile, 0, diameter, graph, mstGraphKruskal, mstGraphPrim, false);
 
         delete graph;
     }
@@ -33,15 +34,16 @@ void ProgramLogic::inputFromFileExecute() {
 
 void ProgramLogic::inputFromCommandLineExecute() {
     unsigned diameter;
-    MSTgraph* mstGraph;
+    MSTgraph* mstGraphKruskal;
+    MSTgraph* mstGraphPrim;
     std::vector<Clique*> cliquesHeur;
     AlgorithmLogic* algorithmLogic = new AlgorithmLogic();
 
     Graph* graph = new Graph();
 
     readData(graph);
-    run(algorithmLogic, graph, diameter, cliquesHeur, mstGraph);
-    printResults(diameter, graph, mstGraph);
+    run(algorithmLogic, graph, diameter, cliquesHeur, mstGraphKruskal, mstGraphPrim);
+    printResults(diameter, graph, mstGraphKruskal, mstGraphPrim);
 
     delete graph;
     delete algorithmLogic;
@@ -64,15 +66,16 @@ void ProgramLogic::generateInputExecute(bool timeMeasure) {
     std::fstream inputFile;
     std::ofstream outputFile, timeFile;
     unsigned diameter;
-    MSTgraph* mstGraph;
+    MSTgraph* mstGraphKruskal;
+    MSTgraph* mstGraphPrim;
     AlgorithmLogic* algorithmLogic = new AlgorithmLogic();
 
     if(timeMeasure && !openFile(timeFile, DIRECTORYINPUTFILES + "/results"))
         return;
 
     for (unsigned i = 0; i < 4; ++i) {
-        for(unsigned t: time)
-            t = 0;
+        for(unsigned i = 0 ; i < time.size(); ++i)
+            time[i] = 0;
 
         if (openFiles(inputFile, outputFile, inputFilesNames[i], outputFilesNames[i])) {
             for (unsigned j = 0; j < graphsInFile; ++j) {
@@ -80,14 +83,16 @@ void ProgramLogic::generateInputExecute(bool timeMeasure) {
                 Graph* graph = new Graph();
 
                 readData(graph, inputFile);
-                run(algorithmLogic, graph, diameter, cliquesHeur, mstGraph);
-                printResults(outputFile, j, diameter, graph, mstGraph, timeMeasure);
+                run(algorithmLogic, graph, diameter, cliquesHeur, mstGraphKruskal, mstGraphPrim);
+                printResults(outputFile, j, diameter, graph, mstGraphKruskal, mstGraphPrim, timeMeasure);
 
                 time[0] += graph->getTime().getCCTime();
                 time[1] += graph->getTime().getDiameterTime();
-                time[2] += graph->getTime().getMSTTime();
+                time[2] += graph->getTime().getMSTCCKruskalTime() + graph->getTime().getMSTGraphTime();
                 // + time[3] algorithm prima
 
+                delete mstGraphKruskal;
+                delete mstGraphPrim;
                 delete graph;
             }
 
@@ -124,11 +129,13 @@ void ProgramLogic::setFileName(const char* fileName) {
     ProgramLogic::fileName = fileName;
 }
 
-void ProgramLogic::run(AlgorithmLogic*& algorithmLogic, Graph*& graph, unsigned& diameter, std::vector<Clique*>& cliquesHeur, MSTgraph*& mstGraph) {
+void ProgramLogic::run(AlgorithmLogic*& algorithmLogic, Graph*& graph, unsigned& diameter, std::vector<Clique*>& cliquesHeur, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim) {
     algorithmLogic->computeConnectedComponents(graph);
     diameter = algorithmLogic->computeDiameterGraph(graph);
 //    cliquesBrute = computeCliquesBruteForce(graph);
     cliquesHeur = algorithmLogic->computeCliquesHeuristic(graph);
-    mstGraph = algorithmLogic->MSTonConnectedComponents(graph);
-    algorithmLogic->MSTonGraph(mstGraph, graph);
+    mstGraphKruskal = algorithmLogic->MSTonConnectedComponentsKruskal(graph);
+    algorithmLogic->MSTonGraph(mstGraphKruskal, graph);
+    mstGraphPrim = algorithmLogic->MSTonConnectedComponentsPrim(graph);
+    algorithmLogic->MSTonGraph(mstGraphPrim, graph);
 }
