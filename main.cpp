@@ -2,8 +2,8 @@
 #include <getopt.h>
 #include <iostream>
 #include <sys/stat.h>
-#include "messages/Messages.h"
-#include "program_logic/ProgramLogic.h"
+#include "Messages/Messages.h"
+#include "ProgramLogic/ProgramLogic.h"
 
 
 int main(int argc, char** argv) {

@@ -108,15 +108,13 @@ std::vector<edgeDef> getEdges(const ConnectedComponent* connectedComponent) {
         const std::vector<vuPair>& neighbours = vertices[i]->getConnectedVertices();
         for (int j = 0; j < neighbours.size(); ++j) {
             if (vertices[i]->getId() < neighbours[j].first->getId())
-                result.push_back(std::make_pair(neighbours[j].second,
-                                                std::make_pair(vertices[i]->getId(), neighbours[j].first->getId())));
+                result.push_back(std::make_pair(neighbours[j].second, std::make_pair(vertices[i]->getId(), neighbours[j].first->getId())));
         }
     }
     return result;
 }
 
-void
-MakeSet(std::vector<unsigned>& ancestors, std::vector<unsigned>& rank, const ConnectedComponent* connectedComponent) {
+void MakeSet(std::vector<unsigned>& ancestors, std::vector<unsigned>& rank, const ConnectedComponent* connectedComponent) {
     for (unsigned i = 0; i < connectedComponent->getSize(); ++i) {
         ancestors[connectedComponent->getVertex(i)->getId()] = connectedComponent->getVertex(i)->getId();
         rank[connectedComponent->getVertex(i)->getId()] = DEFAULTRANK;
@@ -143,7 +141,7 @@ unsigned FindSet(unsigned xId, std::vector<unsigned>& ancestors) {
     return ancestors[xId];
 }
 
-std::vector<edgeDef> MST(const ConnectedComponent* connectedComponent, unsigned graphSize) {
+std::vector<edgeDef> MSTKruskal(const ConnectedComponent* connectedComponent, unsigned graphSize) {
     std::vector<edgeDef> result;
 
     std::vector<edgeDef> edges = getEdges(connectedComponent);
@@ -159,6 +157,56 @@ std::vector<edgeDef> MST(const ConnectedComponent* connectedComponent, unsigned 
             Union(edges[i].second.first, edges[i].second.second, ancestors, rank);
             result.push_back(edges[i]);
         }
+    }
+
+    return result;
+}
+
+std::vector<edgeDef> MSTPrim(const ConnectedComponent* connectedComponent, unsigned graphSize){ // TODO NEED TO FIXED THIS METHOD
+    std::vector<edgeDef> result;
+    std::vector<bool> vertices(graphSize, false);
+
+    unsigned edges = connectedComponent->getSize() - 1;
+
+    auto comp = [] (edgeDefPrim &a, edgeDefPrim &b){ return a.first > b.first; };
+    std::priority_queue<edgeDef, std::vector<edgeDefPrim>, decltype(comp)> priorityQueue(comp);
+
+    Vertex* start = connectedComponent->getVertex(0);
+    const std::vector<vuPair>& neighbours = start->getConnectedVertices();
+
+    for(const vuPair vupair : neighbours){
+        priorityQueue.push(std::make_pair(vupair.second, std::make_pair(start, vupair.first)));
+    }
+
+    vertices[start->getId()] = true;
+    edgeDefPrim analysed;
+    edgeDef nextMSTEdge;
+
+    while(!priorityQueue.empty() && edges){
+        analysed = priorityQueue.top();
+        priorityQueue.pop();
+
+        if(vertices[analysed.second.first->getId()] == false){
+            result.push_back(std::make_pair(analysed.first, std::make_pair(analysed.second.first->getId(), analysed.second.second->getId())));
+            vertices[analysed.second.first->getId()] = true;
+
+            const std::vector<vuPair>& neighbours = analysed.second.first->getConnectedVertices();
+            for(const vuPair vupair : neighbours){
+                if(vertices[vupair.first->getId()] == false)
+                    priorityQueue.push(std::make_pair(vupair.second, std::make_pair(analysed.second.first, vupair.first)));
+            }
+            --edges;
+        } else if(vertices[analysed.second.second->getId()] == false){
+            result.push_back(std::make_pair(analysed.first, std::make_pair(analysed.second.first->getId(), analysed.second.second->getId())));
+                vertices[analysed.second.second->getId()] = true;
+
+                const std::vector<vuPair>& neighbours = analysed.second.second->getConnectedVertices();
+                for(const vuPair vupair : neighbours){
+                    if(vertices[vupair.first->getId()] == false)
+                        priorityQueue.push(std::make_pair(vupair.second, std::make_pair(analysed.second.second, vupair.first)));
+                }
+                --edges;
+            }
     }
 
     return result;

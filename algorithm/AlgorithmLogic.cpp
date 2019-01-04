@@ -108,7 +108,7 @@ MSTgraph* AlgorithmLogic::MSTonConnectedComponentsKruskal(Graph* graph) {
         if (graph->getConnectedComponentsSize(i) == 1)
             mstGraph->addToIsolatedVertices(graph->getConnectedComponentsVector(i)->getVertex(0)->getId());
         else
-            mstGraph->addVectorToMSTonCC(MST(graph->getConnectedComponentsVector(i), graph->getVerticesCount()));
+            mstGraph->addVectorToMSTonCC(MSTKruskal(graph->getConnectedComponentsVector(i), graph->getVerticesCount()));
     }
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
@@ -121,13 +121,13 @@ MSTgraph* AlgorithmLogic::MSTonConnectedComponentsPrim(Graph* graph){
     MSTgraph* mstGraph = new MSTgraph();
 
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-//    std::vector<std::vector<edgeDef> > results;
-//    for (unsigned i = 0; i < graph->getConnectedComponentsCount(); ++i) {
-//        if (graph->getConnectedComponentsSize(i) == 1)
-//            mstGraph->addToIsolatedVertices(graph->getConnectedComponentsVector(i)->getVertex(0)->getId());
-////        else
-////            mstGraph->addVectorToMSTonCC(MST(graph->getConnectedComponentsVector(i), graph->getVerticesCount()));
-//    }
+    std::vector<std::vector<edgeDef> > results;
+    for (unsigned i = 0; i < graph->getConnectedComponentsCount(); ++i) {
+        if (graph->getConnectedComponentsSize(i) == 1)
+            mstGraph->addToIsolatedVertices(graph->getConnectedComponentsVector(i)->getVertex(0)->getId());
+        else
+            mstGraph->addVectorToMSTonCC(MSTPrim(graph->getConnectedComponentsVector(i), graph->getVerticesCount())); // naruszenie ochrony pamieci
+    }
 
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     graph->getTime().setMSTCCPrimTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());

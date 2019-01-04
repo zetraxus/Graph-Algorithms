@@ -3,7 +3,7 @@
 //
 
 #include "Graph.h"
-#include "../messages/Messages.h"
+#include "../Messages/Messages.h"
 
 Graph::Graph() {
     verticesCount = 0;

@@ -89,7 +89,7 @@ void ProgramLogic::generateInputExecute(bool timeMeasure) {
                 time[0] += graph->getTime().getCCTime();
                 time[1] += graph->getTime().getDiameterTime();
                 time[2] += graph->getTime().getMSTCCKruskalTime() + graph->getTime().getMSTGraphTime();
-                // + time[3] algorithm prima
+                time[3] += graph->getTime().getMSTCCPrimTime() + graph->getTime().getMSTGraphTime();
 
                 delete mstGraphKruskal;
                 delete mstGraphPrim;

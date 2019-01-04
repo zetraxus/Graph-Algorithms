@@ -5,7 +5,7 @@
 #ifndef AAL_GENERATOR_H
 #define AAL_GENERATOR_H
 
-#include "../messages/Messages.h"
+#include "../Messages/Messages.h"
 #include "../DataStructure/Graph.h"
 
 const unsigned GRAPHCOUNT = 300;

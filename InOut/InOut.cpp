@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include "InOut.h"
-#include "../messages/Messages.h"
+#include "../Messages/Messages.h"
 
 void readData(Graph* graph, std::fstream& inputStream) {
     unsigned vertices, edges, v1, v2, edgeValue;
@@ -39,6 +39,7 @@ void printResults(std::ofstream& outputFile, const unsigned index, const unsigne
         outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << SPACE << TIMEMICROSECONDS  << graph->getTime().getCCTime() << SPACE << TIMEMILLISECONDS << graph->getTime().getCCTime()/1000 << NEWLINE;
         outputFile << DIAMETER << diameter << TIMEMICROSECONDS << graph->getTime().getDiameterTime() << SPACE << TIMEMILLISECONDS << graph->getTime().getDiameterTime()/1000<< NEWLINE;
         outputFile << MSTONGRAPH << mstGraphKruskal->getMSTValue() << TIMEMICROSECONDS << graph->getTime().getMSTCCKruskalTime() + graph->getTime().getMSTGraphTime() << SPACE << TIMEMILLISECONDS << (graph->getTime().getMSTCCKruskalTime() + graph->getTime().getMSTGraphTime())/1000 << NEWLINE;
+        outputFile << MSTONGRAPH << mstGraphPrim->getMSTValue() << TIMEMICROSECONDS << graph->getTime().getMSTCCPrimTime() + graph->getTime().getMSTGraphTime() << SPACE << TIMEMILLISECONDS << (graph->getTime().getMSTCCPrimTime() + graph->getTime().getMSTGraphTime())/1000 << NEWLINE;
         outputFile << NEWLINE << NEWLINE;
     } else {
         outputFile << GRAPHDESCRIPTION << index << ":" << NEWLINE;
@@ -52,8 +53,9 @@ void printResults(std::ofstream& outputFile, const unsigned index, const unsigne
 void printResults(const unsigned diameter, Graph*& graph, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim) {
     std::cout << NEWLINE << DIAMETER << diameter << NEWLINE;
     std::cout << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
-    std::cout << MSTONGRAPH << mstGraphKruskal->getMSTValue();
-    std::cout << NEWLINE << NEWLINE;
+    std::cout << MSTONGRAPH << mstGraphKruskal->getMSTValue() << NEWLINE;
+    std::cout << MSTONGRAPH << mstGraphPrim->getMSTValue() << NEWLINE << NEWLINE;
+    mstGraphPrim->print();
 }
 
 void printMeasuringTime(std::ofstream& timeFile, std::vector<unsigned> time, unsigned graphsInFile, std::string description){

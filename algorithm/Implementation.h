@@ -10,6 +10,7 @@
 #include "../DataStructure/Clique.h"
 
 typedef std::pair<unsigned, std::pair<unsigned, unsigned> > edgeDef;
+typedef std::pair<unsigned, std::pair<Vertex*, Vertex*> > edgeDefPrim;
 
 
 void DFS(Graph* graph);
@@ -32,6 +33,8 @@ void Link(unsigned xId, unsigned yId, std::vector<unsigned>& ancestors, std::vec
 
 unsigned FindSet(unsigned xId, std::vector<unsigned>& ancestors);
 
-std::vector<edgeDef> MST(const ConnectedComponent* connectedComponent, unsigned graphSize);
+std::vector<edgeDef> MSTKruskal(const ConnectedComponent* connectedComponent, unsigned graphSize);
+
+std::vector<edgeDef> MSTPrim(const ConnectedComponent* connectedComponent, unsigned graphSize);
 
 #endif //AAL_ALGORITHMS_H
