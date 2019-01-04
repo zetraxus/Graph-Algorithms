@@ -64,9 +64,6 @@ void Generator::generateAll() {
                 fileDescription = VERTICES + "= " + std::to_string(vertices) + SPACE + EDGES + "= " + std::to_string(0) + "-" + std::to_string(maxEdgesCount(vertices)/4);
             }
 
-            std::cout << inputFileName << std::endl;
-            std::cout << outputFileName << std::endl;
-
             inputFileNames.push_back(inputFileName);
             outputFileNames.push_back(outputFileName);
             filesDescriptions.push_back(fileDescription);
@@ -92,10 +89,7 @@ const std::vector<std::string>& Generator::getFilesDescriptions() const {
     return filesDescriptions;
 }
 
-Generator::Generator(unsigned graphs, unsigned minimumVertices, unsigned step, unsigned graphsOnStep,
-                     std::string directoryName) : graphsCount(
-        graphs), minimumVerticesCount(minimumVertices), stepSize(step), graphsOnStep(graphsOnStep),
-                                                  directory(std::move(std::move(directoryName))) {}
+Generator::Generator(unsigned graphs, unsigned minimumVertices, unsigned step, unsigned graphsOnStep, std::string directoryName) : graphsCount(graphs), minimumVerticesCount(minimumVertices), stepSize(step), graphsOnStep(graphsOnStep), directory(std::move(std::move(directoryName))) {}
 
 unsigned int Generator::getGraphsCount() const {
     return graphsCount;

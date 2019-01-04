@@ -14,7 +14,6 @@ class Clique {
 
 public:
     Clique(Vertex* vertex);
-
 };
 
 

@@ -37,8 +37,6 @@ public:
 
     unsigned getVerticesCount() const;
 
-    unsigned int getEdgesCount() const;
-
     Vertex* getVertex(int index) const;
 
     void setConnectedComponentsCount(unsigned connectedComponents);

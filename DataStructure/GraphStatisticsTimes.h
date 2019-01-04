@@ -8,7 +8,7 @@
 
 class GraphStatisticsTimes {
     unsigned CCTime;
-    double diameterTime;
+    unsigned diameterTime;
     unsigned cliqueBruteForceTime;
     unsigned cliqueHeuristicTime;
     unsigned MSTCCKruskalTime;
@@ -20,15 +20,11 @@ public:
 
     void setCCTime(unsigned int CCTime);
 
-    double getDiameterTime() const;
+    unsigned getDiameterTime() const;
 
-    void setDiameterTime(double diameterTime);
-
-    unsigned int getCliqueBruteForceTime() const;
+    void setDiameterTime(unsigned diameterTime);
 
     void setCliqueBruteForceTime(unsigned int cliqueBruteForceTime);
-
-    unsigned int getCliqueHeuristicTime() const;
 
     void setCliqueHeuristicTime(unsigned int cliqueHeuristicTime);
 

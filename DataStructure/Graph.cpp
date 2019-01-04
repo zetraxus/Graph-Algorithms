@@ -78,10 +78,6 @@ ConnectedComponent* Graph::getConnectedComponentsVector(unsigned index) const {
     return connectedComponentsVector[index];
 }
 
-unsigned int Graph::getEdgesCount() const {
-    return edgesCount;
-}
-
 std::string Graph::toString() {
     std::string result = std::to_string(verticesCount) + SPACE + std::to_string(edgesCount) + NEWLINE;
 

@@ -8,7 +8,7 @@
 #include "../Messages/Messages.h"
 #include "../DataStructure/Graph.h"
 
-const unsigned GRAPHCOUNT = 300;
+const unsigned GRAPHCOUNT = 2000;
 const unsigned MINIMUMVERTICESCOUNT = 100;
 const unsigned GRAPHSONSTEP = 100;
 const unsigned GRAPHSTEPSIZE = MINIMUMVERTICESCOUNT/2;
@@ -31,9 +31,7 @@ class Generator {
 
 public:
 
-    Generator(unsigned graphs = GRAPHCOUNT, unsigned minimumVertices = MINIMUMVERTICESCOUNT,
-              unsigned step = GRAPHSTEPSIZE, unsigned graphsOnStep = GRAPHSONSTEP,
-              std::string directory = DIRECTORYINPUTFILES);
+    Generator(unsigned graphs = GRAPHCOUNT, unsigned minimumVertices = MINIMUMVERTICESCOUNT, unsigned step = GRAPHSTEPSIZE, unsigned graphsOnStep = GRAPHSONSTEP, std::string directory = DIRECTORYINPUTFILES);
 
     Graph* generateGraph(bool isDense, unsigned verticesCount);
 
@@ -41,13 +39,7 @@ public:
 
     unsigned int getGraphsCount() const;
 
-    unsigned int getMinimumVerticesCount() const;
-
-    unsigned int getStepSize() const;
-
     unsigned int getGraphsOnStep() const;
-
-    const std::string& getDirectory() const;
 
     const std::vector<std::string>& getInputFileNames() const;
 

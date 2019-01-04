@@ -12,24 +12,16 @@ void GraphStatisticsTimes::setCCTime(unsigned int CCTime) {
     GraphStatisticsTimes::CCTime = CCTime;
 }
 
-double GraphStatisticsTimes::getDiameterTime() const {
+unsigned GraphStatisticsTimes::getDiameterTime() const {
     return diameterTime;
 }
 
-void GraphStatisticsTimes::setDiameterTime(double diameterTime) {
+void GraphStatisticsTimes::setDiameterTime(unsigned diameterTime) {
     GraphStatisticsTimes::diameterTime = diameterTime;
-}
-
-unsigned int GraphStatisticsTimes::getCliqueBruteForceTime() const {
-    return cliqueBruteForceTime;
 }
 
 void GraphStatisticsTimes::setCliqueBruteForceTime(unsigned int cliqueBruteForceTime) {
     GraphStatisticsTimes::cliqueBruteForceTime = cliqueBruteForceTime;
-}
-
-unsigned int GraphStatisticsTimes::getCliqueHeuristicTime() const {
-    return cliqueHeuristicTime;
 }
 
 void GraphStatisticsTimes::setCliqueHeuristicTime(unsigned int cliqueHeuristicTime) {
