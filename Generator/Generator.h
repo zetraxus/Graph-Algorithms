@@ -8,7 +8,7 @@
 #include "../Messages/Messages.h"
 #include "../DataStructure/Graph.h"
 
-const unsigned GRAPHCOUNT = 2000;
+const unsigned GRAPHCOUNT = 1200;
 const unsigned MINIMUMVERTICESCOUNT = 100;
 const unsigned GRAPHSONSTEP = 100;
 const unsigned GRAPHSTEPSIZE = MINIMUMVERTICESCOUNT/2;

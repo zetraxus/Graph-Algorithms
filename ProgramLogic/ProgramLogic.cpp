@@ -74,6 +74,7 @@ void ProgramLogic::generateInputExecute(bool timeMeasure) {
         return;
 
     for (unsigned i = 0; i < files; ++i) {
+        std::cout << i << "/" << files <<std::endl;
         for(unsigned i = 0 ; i < time.size(); ++i)
             time[i] = 0;
 
