@@ -6,7 +6,7 @@
 #define AAL_MSTGRAPH_H
 
 
-#include "../algorithm/Implementation.h"
+#include "../Algorithm/Implementation.h"
 
 class MSTgraph {
 

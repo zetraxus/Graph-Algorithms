@@ -11,7 +11,6 @@ void ProgramLogic::inputFromFileExecute() {
     unsigned diameter;
     MSTgraph* mstGraphKruskal;
     MSTgraph* mstGraphPrim;
-    std::vector<Clique*> cliquesHeur;
     AlgorithmLogic* algorithmLogic = new AlgorithmLogic();
 
     std::fstream inputFile;
@@ -23,7 +22,7 @@ void ProgramLogic::inputFromFileExecute() {
         Graph* graph = new Graph();
 
         readData(graph, inputFile);
-        run(algorithmLogic, graph, diameter, cliquesHeur, mstGraphKruskal, mstGraphPrim);
+        run(algorithmLogic, graph, diameter, mstGraphKruskal, mstGraphPrim);
         printResults(outputFile, 0, diameter, graph, mstGraphKruskal, mstGraphPrim, false);
 
         delete graph;
@@ -36,13 +35,12 @@ void ProgramLogic::inputFromCommandLineExecute() {
     unsigned diameter;
     MSTgraph* mstGraphKruskal;
     MSTgraph* mstGraphPrim;
-    std::vector<Clique*> cliquesHeur;
     AlgorithmLogic* algorithmLogic = new AlgorithmLogic();
 
     Graph* graph = new Graph();
 
     readData(graph);
-    run(algorithmLogic, graph, diameter, cliquesHeur, mstGraphKruskal, mstGraphPrim);
+    run(algorithmLogic, graph, diameter, mstGraphKruskal, mstGraphPrim);
     printResults(diameter, graph, mstGraphKruskal, mstGraphPrim);
 
     delete graph;
@@ -60,7 +58,6 @@ void ProgramLogic::generateInputExecute(bool timeMeasure) {
     const std::vector<std::string> outputFilesNames = generator->getOutputFileNames();
     const std::vector<std::string>& descriptions = generator->getFilesDescriptions();
     std::vector<std::vector<unsigned> > cliquesBrute;
-    std::vector<Clique*> cliquesHeur;
     std::vector<unsigned> time(4); // cc + diameter + mst kruskal + mst prima
 
     std::fstream inputFile;
@@ -75,15 +72,15 @@ void ProgramLogic::generateInputExecute(bool timeMeasure) {
 
     for (unsigned i = 0; i < files; ++i) {
         std::cout << i+1 << "/" << files <<std::endl;
-        for(unsigned i = 0 ; i < time.size(); ++i)
-            time[i] = 0;
+        for(unsigned j = 0 ; j < time.size(); ++j)
+            time[j] = 0;
 
         if (openFiles(inputFile, outputFile, inputFilesNames[i], outputFilesNames[i])) {
             for (unsigned j = 0; j < graphsInFile; ++j) {
                 Graph* graph = new Graph();
 
                 readData(graph, inputFile);
-                run(algorithmLogic, graph, diameter, cliquesHeur, mstGraphKruskal, mstGraphPrim);
+                run(algorithmLogic, graph, diameter, mstGraphKruskal, mstGraphPrim);
                 printResults(outputFile, j, diameter, graph, mstGraphKruskal, mstGraphPrim, timeMeasure);
 
                 time[0] += graph->getTime().getCCTime();
@@ -129,11 +126,9 @@ void ProgramLogic::setFileName(const char* fileName) {
     ProgramLogic::fileName = fileName;
 }
 
-void ProgramLogic::run(AlgorithmLogic*& algorithmLogic, Graph*& graph, unsigned& diameter, std::vector<Clique*>& cliquesHeur, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim) {
+void ProgramLogic::run(AlgorithmLogic*& algorithmLogic, Graph*& graph, unsigned& diameter, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim) {
     algorithmLogic->computeConnectedComponents(graph);
     diameter = algorithmLogic->computeDiameterGraph(graph);
-//    cliquesBrute = computeCliquesBruteForce(graph);
-    cliquesHeur = algorithmLogic->computeCliquesHeuristic(graph);
     mstGraphKruskal = algorithmLogic->MSTonConnectedComponentsKruskal(graph);
     algorithmLogic->MSTonGraph(mstGraphKruskal, graph);
     mstGraphPrim = algorithmLogic->MSTonConnectedComponentsPrim(graph);

@@ -7,21 +7,17 @@
 
 
 #include "../DataStructure/Graph.h"
-#include "../DataStructure/Clique.h"
-
 typedef std::pair<unsigned, std::pair<unsigned, unsigned> > edgeDef;
 typedef std::pair<unsigned, std::pair<Vertex*, Vertex*> > edgeDefPrim;
 
 
 void DFS(Graph* graph);
 
-void DFSVisit(Graph* graph, Vertex* vertex, const unsigned connectedComponents);
+void DFSVisit(Graph* graph, Vertex* vertex, unsigned connectedComponents);
 
 unsigned BFS(ConnectedComponent* connectedComponent, Vertex* start);
 
 const std::vector<std::vector<unsigned> > getAllSubsets(unsigned setSize);
-
-void computeNextCliques(std::vector<Clique*>& cliques, const std::vector<Vertex*>& vertices, unsigned startId);
 
 std::vector<edgeDef> getEdges(ConnectedComponent* connectedComponent);
 

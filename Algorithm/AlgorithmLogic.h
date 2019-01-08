@@ -7,7 +7,6 @@
 
 #include "Implementation.h"
 #include "../DataStructure/Graph.h"
-#include "../DataStructure/Clique.h"
 #include "../DataStructure/MSTgraph.h"
 
 class AlgorithmLogic {
@@ -19,8 +18,6 @@ public:
     unsigned computeDiameterGraph(Graph* graph);
 
     std::vector<std::vector<unsigned> > computeCliquesBruteForce(Graph* graph);
-
-    std::vector<Clique*> computeCliquesHeuristic(Graph* graph);
 
     MSTgraph* MSTonConnectedComponentsKruskal(Graph* graph);
 

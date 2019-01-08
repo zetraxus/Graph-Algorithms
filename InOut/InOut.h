@@ -5,7 +5,7 @@
 #ifndef AAL_IN_OUT_H
 #define AAL_IN_OUT_H
 
-#include "../algorithm/AlgorithmLogic.h"
+#include "../Algorithm/AlgorithmLogic.h"
 
 void readData(Graph* graph, std::fstream& inputStream);
 

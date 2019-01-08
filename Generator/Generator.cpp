@@ -12,11 +12,8 @@ unsigned Generator::maxEdgesCount(unsigned verticesCount) const{
 
 Graph* Generator::generateGraph(bool isDense, unsigned verticesCount) {
     unsigned maxEdges = maxEdgesCount(verticesCount);
-//    unsigned edges = rand() % (maxEdges / 4);
-//    if (isDense == true)
-//        edges += maxEdges * 3 / 4;
-
     unsigned edges;
+
     isDense ? edges = maxEdges * 3/4 : edges = maxEdges / 4;
 
     Graph* newGraph = new Graph(verticesCount);

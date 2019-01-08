@@ -95,11 +95,6 @@ const std::vector<std::vector<unsigned> > getAllSubsets(unsigned setSize) {
     return subset;
 }
 
-void computeNextCliques(std::vector<Clique*>& cliques, const std::vector<Vertex*>& vertices, unsigned startId) {
-//    for()
-}
-
-
 std::vector<edgeDef> getEdges(const ConnectedComponent* connectedComponent) {
     const std::vector<Vertex*> vertices = connectedComponent->getVertices();
     std::vector<edgeDef> result;
@@ -162,7 +157,7 @@ std::vector<edgeDef> MSTKruskal(const ConnectedComponent* connectedComponent, un
     return result;
 }
 
-std::vector<edgeDef> MSTPrim(const ConnectedComponent* connectedComponent, unsigned graphSize){ // TODO NEED TO FIXED THIS METHOD
+std::vector<edgeDef> MSTPrim(const ConnectedComponent* connectedComponent, unsigned graphSize){
     std::vector<edgeDef> result;
     std::vector<bool> vertices(graphSize, false);
 

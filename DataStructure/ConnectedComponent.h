@@ -17,7 +17,7 @@ public:
 
     Vertex* getVertex(unsigned index) const;
 
-    const unsigned getSize() const;
+    unsigned getSize() const;
 
     const std::vector<Vertex*>& getVertices() const;
 };

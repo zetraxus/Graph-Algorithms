@@ -27,8 +27,8 @@ private:
     std::vector<vuPair> connectedVertex;
 
     unsigned connectedComponentID;
-    unsigned distance; // used in BFS algorithm
-    Colour colour; // used in BFS and DFS algorithm
+    unsigned distance; // used in BFS Algorithm
+    Colour colour; // used in BFS and DFS Algorithm
 
 public:
 

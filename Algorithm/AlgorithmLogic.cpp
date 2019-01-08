@@ -8,7 +8,6 @@
 #include "AlgorithmLogic.h"
 #include "../DataStructure/MSTgraph.h"
 #include "../DataStructure/Graph.h"
-#include "../DataStructure/Clique.h"
 
 void AlgorithmLogic::computeConnectedComponents(Graph* graph) {
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
@@ -21,7 +20,6 @@ unsigned AlgorithmLogic::computeDiameterGraph(Graph* graph) {
     unsigned diameter = 0;
     unsigned time = 0;
     for (unsigned i = 0; i < graph->getConnectedComponentsCount(); ++i) {
-//        unsigned diameter = 0;
         ConnectedComponent* analysed = graph->getConnectedComponentsVector(i);
 
         std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
@@ -66,35 +64,6 @@ std::vector<std::vector<unsigned> > AlgorithmLogic::computeCliquesBruteForce(Gra
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
     graph->getTime().setCliqueBruteForceTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
-
-    return cliques;
-}
-
-std::vector<Clique*> AlgorithmLogic::computeCliquesHeuristic(Graph* graph) {
-    std::vector<Clique*> cliques;
-    std::vector<Vertex*> vertices;
-    unsigned newCliqueInLastLoop = 0;
-
-    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
-    for (unsigned i = 0; i < graph->getConnectedComponentsCount(); ++i) {
-        vertices = graph->getConnectedComponentsVector(i)->getVertices();
-        std::sort(vertices.begin(), vertices.end(), [](Vertex* a, Vertex* b) {
-            return a->getDegree() < b->getDegree();
-        });
-
-        for (unsigned i = 0; i < vertices.size(); ++i) {
-            Clique* oneElementClique = new Clique(vertices[i]);
-            cliques.push_back(oneElementClique);
-            ++newCliqueInLastLoop;
-        }
-
-//        while (!newCliqueInLastLoop) {
-//            newCliqueInLastLoop = computeNextCliques(cliques, vertices, vertices.size() - newCliqueInLastLoop);
-//        }
-    }
-
-    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-    graph->getTime().setCliqueHeuristicTime(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
 
     return cliques;
 }

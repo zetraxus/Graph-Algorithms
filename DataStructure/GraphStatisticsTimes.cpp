@@ -24,10 +24,6 @@ void GraphStatisticsTimes::setCliqueBruteForceTime(unsigned int cliqueBruteForce
     GraphStatisticsTimes::cliqueBruteForceTime = cliqueBruteForceTime;
 }
 
-void GraphStatisticsTimes::setCliqueHeuristicTime(unsigned int cliqueHeuristicTime) {
-    GraphStatisticsTimes::cliqueHeuristicTime = cliqueHeuristicTime;
-}
-
 void GraphStatisticsTimes::setMSTCCKruskalTime(unsigned int MSTCCKruskalTime) {
     GraphStatisticsTimes::MSTCCKruskalTime = MSTCCKruskalTime;
 }

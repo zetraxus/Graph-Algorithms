@@ -64,7 +64,6 @@ void printMeasuringTime(std::ofstream& timeFile, std::vector<unsigned> time, uns
     timeFile << DI + SPACE << time[1]/graphsInFile << TIMEMICROSECONDS << NEWLINE;
     timeFile << MSTK + SPACE << time[2]/graphsInFile << TIMEMICROSECONDS << NEWLINE;
     timeFile << MSTP + SPACE << time[3]/graphsInFile << TIMEMICROSECONDS << NEWLINE << NEWLINE;
-
 }
 
 bool openFiles(std::fstream& inputFile, std::ofstream& outputFile, std::string inFileName, std::string outFileName) {

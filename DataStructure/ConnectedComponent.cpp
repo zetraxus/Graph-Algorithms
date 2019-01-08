@@ -13,7 +13,7 @@ Vertex* ConnectedComponent::getVertex(unsigned index) const {
     return vertices[index];
 }
 
-const unsigned ConnectedComponent::getSize() const {
+unsigned ConnectedComponent::getSize() const {
     return vertices.size();
 }
 
