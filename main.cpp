@@ -47,5 +47,7 @@ int main(int argc, char** argv) {
     }
 
     programme->execute();
+
+    delete programme;
     return 0;
 }

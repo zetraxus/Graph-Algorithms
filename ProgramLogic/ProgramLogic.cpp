@@ -25,6 +25,8 @@ void ProgramLogic::inputFromFileExecute() {
         run(algorithmLogic, graph, diameter, mstGraphKruskal, mstGraphPrim);
         printResults(outputFile, 0, diameter, graph, mstGraphKruskal, mstGraphPrim, false);
 
+        delete mstGraphKruskal;
+        delete mstGraphPrim;
         delete graph;
     }
 
@@ -43,6 +45,8 @@ void ProgramLogic::inputFromCommandLineExecute() {
     run(algorithmLogic, graph, diameter, mstGraphKruskal, mstGraphPrim);
     printResults(diameter, graph, mstGraphKruskal, mstGraphPrim);
 
+    delete mstGraphKruskal;
+    delete mstGraphPrim;
     delete graph;
     delete algorithmLogic;
 }
@@ -104,6 +108,7 @@ void ProgramLogic::generateInputExecute(bool timeMeasure) {
     if(timeMeasure)
         timeFile.close();
 
+    delete generator;
     delete algorithmLogic;
 }
 
