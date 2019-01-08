@@ -12,11 +12,14 @@ unsigned Generator::maxEdgesCount(unsigned verticesCount) const{
 
 Graph* Generator::generateGraph(bool isDense, unsigned verticesCount) {
     unsigned maxEdges = maxEdgesCount(verticesCount);
-    unsigned edges = rand() % (maxEdges / 4);
+//    unsigned edges = rand() % (maxEdges / 4);
+//    if (isDense == true)
+//        edges += maxEdges * 3 / 4;
 
-    if (isDense == true)
-        edges += maxEdges * 3 / 4;
-    auto* newGraph = new Graph(verticesCount);
+    unsigned edges;
+    isDense ? edges = maxEdges * 3/4 : edges = maxEdges / 4;
+
+    Graph* newGraph = new Graph(verticesCount);
 
     std::vector<std::pair<unsigned, unsigned> > temp;
     for (unsigned i = 0; i < verticesCount; ++i) {
@@ -57,11 +60,11 @@ void Generator::generateAll() {
             if (i % graphsOnStep == 0) {
                 inputFileName = directory + INPUT + std::to_string(vertices) + FNEXTENSTIONDENSE;
                 outputFileName = directory + OUTPUT + std::to_string(vertices) + FNEXTENSTIONDENSE;
-                fileDescription = VERTICES + "= " + std::to_string(vertices) + SPACE + EDGES + "= " + std::to_string(3 * maxEdgesCount(vertices)/4) + "-" + std::to_string(maxEdgesCount(vertices));
+                fileDescription = VERTICES + "= " + std::to_string(vertices) + SPACE + EDGES + "= " + std::to_string(3 * maxEdgesCount(vertices)/4);
             } else {
                 inputFileName = directory + INPUT + std::to_string(vertices) + FNEXTENSTIONSPARSE;
                 outputFileName = directory + OUTPUT + std::to_string(vertices) + FNEXTENSTIONSPARSE;
-                fileDescription = VERTICES + "= " + std::to_string(vertices) + SPACE + EDGES + "= " + std::to_string(0) + "-" + std::to_string(maxEdgesCount(vertices)/4);
+                fileDescription = VERTICES + "= " + std::to_string(vertices) + SPACE + EDGES + "= " + std::to_string(maxEdgesCount(vertices)/4);
             }
 
             inputFileNames.push_back(inputFileName);
