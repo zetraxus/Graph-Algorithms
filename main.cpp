@@ -1,7 +1,6 @@
 #include <fstream>
 #include <getopt.h>
 #include <iostream>
-#include <sys/stat.h>
 #include "Messages/Messages.h"
 #include "ProgramLogic/ProgramLogic.h"
 

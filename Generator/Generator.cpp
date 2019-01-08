@@ -5,6 +5,7 @@
 #include "Generator.h"
 #include "../DataStructure/Graph.h"
 #include <fstream>
+#include <sys/stat.h>
 
 unsigned Generator::maxEdgesCount(unsigned verticesCount) const{
     return verticesCount * (verticesCount - 1) / 2;
@@ -37,6 +38,11 @@ Graph* Generator::generateGraph(bool isDense, unsigned verticesCount) {
 }
 
 void Generator::generateAll() {
+    if(mkdir(DIRECTORYINPUTFILES.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)){
+        std::cout << ERRORCREATEDIRECTORY + DIRECTORYINPUTFILES << NEWLINE;
+        exit(0);
+    }
+
     unsigned vertices = minimumVerticesCount;
 
     Graph* generated;

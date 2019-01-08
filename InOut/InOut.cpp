@@ -33,7 +33,7 @@ void readData(Graph* graph) {
     }
 }
 
-void printResults(std::ofstream& outputFile, const unsigned index, const unsigned diameter, Graph*& graph, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim, bool time) {
+void printResults(std::ofstream& outputFile, unsigned index, unsigned diameter, Graph*& graph, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim, bool time) {
     if (time) {
         outputFile << GRAPHDESCRIPTION << index << ":" << NEWLINE;
         outputFile << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << SPACE << TIMEMICROSECONDS  << graph->getTime().getCCTime() << SPACE << TIMEMILLISECONDS << graph->getTime().getCCTime()/1000 << NEWLINE;
@@ -50,7 +50,7 @@ void printResults(std::ofstream& outputFile, const unsigned index, const unsigne
     }
 }
 
-void printResults(const unsigned diameter, Graph*& graph, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim) {
+void printResults(unsigned diameter, Graph*& graph, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim) {
     std::cout << NEWLINE << DIAMETER << diameter << NEWLINE;
     std::cout << CONNECTEDCOMPONENTS << graph->getConnectedComponentsCount() << NEWLINE;
     std::cout << MSTONGRAPH << mstGraphKruskal->getMSTValue() << NEWLINE;

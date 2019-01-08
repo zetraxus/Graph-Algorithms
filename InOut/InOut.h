@@ -11,9 +11,9 @@ void readData(Graph* graph, std::fstream& inputStream);
 
 void readData(Graph* graph);
 
-void printResults(std::ofstream& outputFile, const unsigned index, const unsigned diameter, Graph*& graph, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim, bool time);
+void printResults(std::ofstream& outputFile, unsigned index, unsigned diameter, Graph*& graph, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim, bool time);
 
-void printResults(const unsigned diameter, Graph*& graph, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim);
+void printResults(unsigned diameter, Graph*& graph, MSTgraph*& mstGraphKruskal, MSTgraph*& mstGraphPrim);
 
 void printMeasuringTime(std::ofstream& timeFile, std::vector<unsigned> time, unsigned graphsInFile, std::string description);
 

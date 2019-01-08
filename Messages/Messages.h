@@ -15,6 +15,7 @@ const std::string FNEXTENSTIONSPARSE = ".sparse";
 const std::string VERTICES = "vertices";
 const std::string EDGES = "edges";
 const std::string ERROROPENFILE = "ERROR_OPEN_FILE ";
+const std::string ERRORCREATEDIRECTORY = "ERROR_CREATE_DIRECTORY ";
 const std::string INPUT = "/input";
 const std::string OUTPUT = "/output";
 const std::string GRAPHDESCRIPTION = "GRAPH_";
